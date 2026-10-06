@@ -5,7 +5,7 @@ const faq = z.object({ q: z.string(), a: z.string() });
 const lang = z.enum(['en', 'ar']);
 
 const services = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/services' }),
+  loader: glob({ pattern: '**/*.md', base: './src/content/services', generateId: ({ entry }) => entry.replace(/\.md$/, '') }),
   schema: z.object({
     lang,
     slug: z.string(),
@@ -28,7 +28,7 @@ const services = defineCollection({
 });
 
 const guide = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/guide' }),
+  loader: glob({ pattern: '**/*.md', base: './src/content/guide', generateId: ({ entry }) => entry.replace(/\.md$/, '') }),
   schema: z.object({
     lang,
     slug: z.string(),
