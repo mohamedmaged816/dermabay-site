@@ -1,0 +1,30 @@
+# DermaBay Aesthetic Clinic
+
+> Dermatology, laser, skin and hair clinic in New Giza, Cairo, Egypt. The first skin & hair clinic in New Giza. Located inside Meditown, NewGiza Health Park, Building 2, Clinic 203, off the Cairo–Alexandria Desert Road. Serves New Giza, Sheikh Zayed, 6th of October, Palm Hills and West Cairo. Bookings by WhatsApp or phone: +20 128 890 9990. Instagram: @dermabay.eg. Google Maps rating 4.3 (4 reviews, Oct 2026). Patient-facing content is available in English (/) and Egyptian Arabic (/ar/).
+
+## Services
+- Laser hair removal (dermatologist-supervised, settings adjusted for Egyptian skin tones; typically 6–8 sessions): /services/laser-hair-removal/
+- Fractional laser for acne scars and texture (Tetra Pro; typically 3–5 sessions): /services/fractional-laser-scars/
+- Skin boosters and hydration: /services/skin-boosters/
+- Pigmentation and melasma treatment plans: /services/pigmentation-melasma/
+- Non-surgical rejuvenation: /services/non-surgical-rejuvenation/
+- Acne and medical dermatology (acne, eczema, psoriasis): /services/acne-medical-dermatology/
+- Hair loss diagnosis and treatment: /services/hair-loss/
+- Laser skin rejuvenation: /services/laser-skin-rejuvenation/
+
+## Location
+- Dermatologist in New Giza (address, parking, hours, areas served): /new-giza-dermatologist/
+- Contact: /contact/
+
+## Skin Guide (patient education)
+- /guide/is-laser-hair-removal-safe-in-summer/
+- /guide/how-many-laser-hair-removal-sessions/
+- /guide/melasma-after-pregnancy/
+- /guide/fractional-laser-acne-scars/
+- /guide/skin-boosters-vs-fillers/
+- /guide/when-to-see-a-dermatologist-for-hair-loss/
+
+## Policies
+- Every treatment starts with a consultation; patients receive a written plan with sessions and price.
+- Before/after images are published only with written patient consent.
+- Privacy: /privacy/
