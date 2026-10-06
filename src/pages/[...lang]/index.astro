@@ -1,0 +1,81 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import Hero from '@/components/Hero.astro';
+import Summary from '@/components/Summary.astro';
+import ServiceCard from '@/components/ServiceCard.astro';
+import ReviewStrip from '@/components/ReviewStrip.astro';
+import Map from '@/components/Map.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import { langPaths, localizePath, type Lang } from '@/i18n/utils';
+import { t } from '@/i18n/ui';
+import { clinic } from '@/data/clinic';
+import { offer } from '@/data/offers';
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props as { lang: Lang };
+const T = t(lang);
+const services = (await getCollection('services', (e) => e.data.lang === lang)).sort((a, b) => a.data.order - b.data.order);
+const guides = (await getCollection('guide', (e) => e.data.lang === lang)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
+const summary = lang === 'ar'
+  ? `ديرما باي عيادة جلدية وشعر وليزر في ميديتاون، نيو جيزة هيلث بارك (مبنى 2، عيادة 203)، بتخدم نيو جيزة والشيخ زايد و6 أكتوبر. الحجز على واتساب ${clinic.phoneDisplay}.`
+  : `DermaBay is a dermatology, hair and laser clinic at Meditown, NewGiza Health Park (Building 2, Clinic 203), serving New Giza, Sheikh Zayed and 6th of October. Book on WhatsApp at ${clinic.phoneDisplay}.`;
+const title = lang === 'ar' ? 'ديرما باي | عيادة جلدية وليزر في نيو جيزة' : 'DermaBay | Dermatology & Laser Clinic in New Giza';
+const description = lang === 'ar'
+  ? 'أول عيادة جلدية وشعر في نيو جيزة، ميديتاون. ليزر، علاج التصبغات، نضارة البشرة، وجلدية طبية. احجز على واتساب.'
+  : 'The first skin & hair clinic in New Giza, Meditown. Laser hair removal, pigmentation, skin boosters and medical dermatology. Book on WhatsApp.';
+---
+<Base {lang} {title} {description}>
+  <Hero {lang} eyebrow={T('home_eyebrow')} title={T('home_h1')} sub={T('home_sub')} secondaryHref={localizePath('services', lang)} secondaryLabel={T('see_all_services')} />
+  <Summary {lang} text={summary} />
+
+  <section class="container-x mt-20">
+    <h2 class="font-display text-3xl text-olive sm:text-4xl">{T('home_services_title')}</h2>
+    <p class="mt-2 max-w-2xl text-ink/70">{T('home_services_sub')}</p>
+    <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {services.slice(0, 4).map((s) => <ServiceCard {lang} slug={s.data.slug} title={s.data.title} description={s.data.description} icon={s.data.icon} />)}
+    </div>
+    <a href={localizePath('services', lang)} class="btn-ghost mt-6">{T('see_all_services')}</a>
+  </section>
+
+  {offer.active && (
+    <section class="container-x mt-20">
+      <a href={localizePath('offers', lang)} class="block rounded-3xl border border-gold bg-cream-deep/70 p-8 transition hover:shadow-md">
+        <p class="eyebrow">{T('offers_title')}</p>
+        <h2 class="font-display mt-2 text-3xl text-olive">{offer.title[lang]}</h2>
+        <p class="mt-2 max-w-2xl text-ink/80">{offer.body[lang]}</p>
+      </a>
+    </section>
+  )}
+
+  <section class="container-x mt-20 grid gap-6 md:grid-cols-3">
+    {(T('home_why') as [string, string][]).map(([h, p]) => (
+      <div class="rounded-2xl border border-olive/10 p-6">
+        <h3 class="font-display text-2xl text-olive">{h}</h3>
+        <p class="mt-2 text-ink/75">{p}</p>
+      </div>
+    ))}
+  </section>
+
+  <ReviewStrip {lang} />
+
+  {guides.length > 0 && (
+    <section class="container-x mt-20">
+      <h2 class="font-display text-3xl text-olive">{T('home_guide_title')}</h2>
+      <div class="mt-6 grid gap-5 md:grid-cols-3">
+        {guides.map((g) => (
+          <a href={localizePath(`guide/${g.data.slug}`, lang)} class="rounded-2xl border border-olive/10 bg-white/60 p-6 hover:border-gold">
+            <h3 class="font-display text-xl text-olive">{g.data.title}</h3>
+            <p class="mt-2 text-sm text-ink/75">{g.data.description}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <section class="container-x mt-20">
+    <h2 class="font-display text-3xl text-olive">{T('nav_location')}</h2>
+    <div class="mt-6"><Map {lang} /></div>
+  </section>
+
+  <CtaBand {lang} />
+</Base>

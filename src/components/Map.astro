@@ -1,0 +1,17 @@
+---
+import type { Lang } from '@/i18n/utils';
+import { t } from '@/i18n/ui';
+import { clinic } from '@/data/clinic';
+const { lang } = Astro.props as { lang: Lang };
+const q = encodeURIComponent('DermaBay Aesthetic Clinic, Meditown, NewGiza Health Park');
+const src = clinic.geo
+  ? `https://www.google.com/maps?q=${clinic.geo.lat},${clinic.geo.lng}&z=16&output=embed`
+  : `https://www.google.com/maps?q=${q}&z=15&output=embed`;
+---
+<div class="overflow-hidden rounded-2xl border border-olive/10">
+  <iframe title="Map" src={src} width="100%" height="320" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="border:0"></iframe>
+  <div class="flex items-center justify-between gap-3 bg-white/60 p-3 text-sm">
+    <span class="text-ink/70">{clinic.address[lang].line1}, {clinic.address[lang].line2}</span>
+    <a href={clinic.mapsUrl} target="_blank" rel="noopener" class="font-semibold text-olive hover:underline">{t(lang)('directions')}</a>
+  </div>
+</div>

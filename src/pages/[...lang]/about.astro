@@ -1,0 +1,38 @@
+---
+import Base from '@/layouts/Base.astro';
+import Hero from '@/components/Hero.astro';
+import Summary from '@/components/Summary.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { langPaths, localizePath, type Lang } from '@/i18n/utils';
+import { t } from '@/i18n/ui';
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props as { lang: Lang };
+const T = t(lang);
+const title = lang === 'ar' ? 'عن ديرما باي' : 'About DermaBay';
+const description = lang === 'ar' ? 'ديرما باي: أول عيادة جلدية وشعر في نيو جيزة. طب أولاً، أجهزة معتمدة، وخطة واضحة لكل عميل.' : 'DermaBay: the first skin and hair clinic in New Giza. Medicine first, certified devices, and a clear plan for every patient.';
+const summary = lang === 'ar'
+  ? 'ديرما باي عيادة جلدية وتجميل وشعر اتأسست في ميديتاون، نيو جيزة، عشان تخدم غرب القاهرة بمستوى طبي محترم من غير مبالغة. كل علاج بيبدأ بتشخيص، وكل خطة بتتكتب بعدد الجلسات والسعر.'
+  : 'DermaBay is a dermatology, aesthetic and hair clinic founded at Meditown, New Giza, to serve West Cairo with a proper medical standard and no hype. Every treatment starts with a diagnosis, and every plan is written down with sessions and price.';
+const blocks: [string, string][] = lang === 'ar' ? [
+  ['الطب قبل الجهاز', 'عندنا أجهزة ليزر وفراكشنال حديثة (منها Tetra Pro)، بس الجهاز مش هو اللي بيعالج. التشخيص الصح وإعدادات مناسبة لبشرتك هما اللي بيفرقوا، وده اللي بنركز عليه.'],
+  ['صراحة في التوقعات', 'لو علاج مش هيديك نتيجة، هنقولك. لو محتاج 6 جلسات مش 3، هنقولك من الأول. سمعتنا في نيو جيزة أهم من أي حجز.'],
+  ['نظافة ومعايير', 'تعقيم بين كل عميل، أدوات استخدام واحد حيث يلزم، ومتابعة بعد الجلسة على واتساب.'],
+  ['فريق العيادة', 'صفحة تعريفية بأطباء العيادة وشهاداتهم جاية قريب.'],
+] : [
+  ['Medicine before machines', 'We run modern laser and fractional devices (including Tetra Pro), but the device is not what treats you. The right diagnosis and settings matched to your skin are what make the difference, and that is what we focus on.'],
+  ['Honest expectations', "If a treatment won't give you a result, we say so. If you need 6 sessions rather than 3, you hear it on day one. Our reputation in New Giza matters more than any single booking."],
+  ['Hygiene and standards', 'Sterilisation between every patient, single-use consumables where required, and WhatsApp follow-up after each session.'],
+  ['The clinic team', 'A page introducing our doctors and their credentials is coming soon.'],
+];
+const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, { name: T('nav_about'), href: localizePath('about', lang) }];
+---
+<Base {lang} {title} {description}>
+  <Breadcrumbs items={crumbs} />
+  <Hero {lang} compact title={T('about_title')} sub={description} />
+  <Summary {lang} text={summary} />
+  <section class="container-x mt-14 grid gap-6 md:grid-cols-2">
+    {blocks.map(([h, p]) => <div class="rounded-2xl border border-olive/10 bg-white/60 p-6"><h2 class="font-display text-2xl text-olive">{h}</h2><p class="mt-2 leading-relaxed text-ink/80">{p}</p></div>)}
+  </section>
+  <CtaBand {lang} />
+</Base>

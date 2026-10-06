@@ -1,0 +1,54 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import Summary from '@/components/Summary.astro';
+import FAQ from '@/components/FAQ.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { localizePath, type Lang } from '@/i18n/utils';
+import { t } from '@/i18n/ui';
+import { articleSchema, breadcrumbSchema, faqSchema } from '@/lib/schema';
+
+export async function getStaticPaths() {
+  const all = await getCollection('guide');
+  return all.map((entry) => ({ params: { lang: entry.data.lang === 'en' ? undefined : 'ar', slug: entry.data.slug }, props: { entry, lang: entry.data.lang as Lang } }));
+}
+const { entry, lang } = Astro.props;
+const d = entry.data;
+const T = t(lang);
+const site = Astro.site!.toString().replace(/\/$/, '');
+const url = site + localizePath(`guide/${d.slug}`, lang);
+const { Content } = await render(entry);
+const service = d.service ? await getEntry('services', `${lang}/${d.service}`) : null;
+const crumbs = [
+  { name: T('breadcrumb_home'), href: localizePath('/', lang) },
+  { name: T('nav_guide'), href: localizePath('guide', lang) },
+  { name: d.title, href: localizePath(`guide/${d.slug}`, lang) },
+];
+const jsonLd: Record<string, any>[] = [
+  articleSchema({ headline: d.title, description: d.description, url, datePublished: d.date.toISOString().slice(0, 10), lang }, site),
+  breadcrumbSchema(crumbs.map((c) => ({ name: c.name, url: site + c.href }))),
+];
+if (d.faqs.length) jsonLd.push(faqSchema(d.faqs));
+const fmt = new Intl.DateTimeFormat(lang === 'ar' ? 'ar-EG' : 'en-GB', { dateStyle: 'long' });
+---
+<Base {lang} title={d.title} description={d.description} {jsonLd} waService={service?.data.title}>
+  <Breadcrumbs items={crumbs} />
+  <article class="container-x max-w-3xl pt-8">
+    <p class="eyebrow">{T('nav_guide')} · {fmt.format(d.date)}</p>
+    <h1 class="font-display mt-3 text-4xl leading-tight text-olive sm:text-5xl">{d.title}</h1>
+  </article>
+  <div class="mt-8"><Summary {lang} text={d.summary} /></div>
+  <article class="container-x prose-clinic mt-8 max-w-3xl"><Content /></article>
+  {service && (
+    <div class="container-x mt-10 max-w-3xl">
+      <a href={localizePath(`services/${service.data.slug}`, lang)} class="block rounded-2xl border border-gold bg-cream-deep/60 p-5 hover:shadow-md">
+        <p class="eyebrow">{T('nav_services')}</p>
+        <p class="font-display mt-1 text-2xl text-olive">{service.data.title}</p>
+        <p class="mt-1 text-sm text-ink/75">{service.data.description}</p>
+      </a>
+    </div>
+  )}
+  {d.faqs.length > 0 && <FAQ {lang} faqs={d.faqs} />}
+  <CtaBand {lang} service={service?.data.title} />
+</Base>

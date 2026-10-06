@@ -1,0 +1,35 @@
+---
+import { localizePath, type Lang } from '@/i18n/utils';
+import { t } from '@/i18n/ui';
+import LanguageSwitch from './LanguageSwitch.astro';
+import WhatsAppButton from './WhatsAppButton.astro';
+import { clinic } from '@/data/clinic';
+const { lang } = Astro.props as { lang: Lang };
+const T = t(lang);
+const nav: [string, string][] = [
+  ['services', T('nav_services')], ['results', T('nav_results')], ['offers', T('nav_offers')], ['guide', T('nav_guide')], ['new-giza-dermatologist', T('nav_location')], ['contact', T('nav_contact')],
+];
+---
+<header class="sticky top-0 z-40 border-b border-olive/10 bg-cream/90 backdrop-blur">
+  <div class="container-x flex h-16 items-center justify-between gap-4">
+    <a href={localizePath('/', lang)} class="flex items-center gap-2" aria-label={clinic.name}>
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M3 20a11 11 0 0 1 22 0" fill="none" stroke="#C2A566" stroke-width="2"/><path d="M7 20a7 7 0 0 1 14 0" fill="none" stroke="#3E4939" stroke-width="2"/></svg>
+      <span class="font-display text-xl font-semibold text-olive">{lang === 'ar' ? clinic.nameAr : clinic.shortName}</span>
+    </a>
+    <nav class="hidden items-center gap-6 text-sm font-semibold text-olive lg:flex" aria-label="Main">
+      {nav.map(([slug, label]) => <a href={localizePath(slug, lang)} class="hover:text-gold-deep">{label}</a>)}
+    </nav>
+    <div class="flex items-center gap-2">
+      <LanguageSwitch {lang} />
+      <span class="hidden sm:block"><WhatsAppButton {lang} small /></span>
+      <details class="relative lg:hidden">
+        <summary class="list-none cursor-pointer rounded-full border border-olive/30 p-2 text-olive" aria-label="Menu">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+        </summary>
+        <nav class="absolute end-0 mt-2 w-56 rounded-2xl border border-olive/10 bg-cream p-2 shadow-lg" aria-label="Mobile">
+          {nav.map(([slug, label]) => <a href={localizePath(slug, lang)} class="block rounded-xl px-3 py-2 font-semibold text-olive hover:bg-cream-deep">{label}</a>)}
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>

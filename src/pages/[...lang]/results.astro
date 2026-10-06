@@ -1,0 +1,21 @@
+---
+import Base from '@/layouts/Base.astro';
+import Hero from '@/components/Hero.astro';
+import BeforeAfter from '@/components/BeforeAfter.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { langPaths, localizePath, type Lang } from '@/i18n/utils';
+import { t } from '@/i18n/ui';
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props as { lang: Lang };
+const T = t(lang);
+const title = lang === 'ar' ? 'نتايج قبل وبعد' : 'Before and after results';
+const description = lang === 'ar' ? 'نتايج حقيقية لعملاء ديرما باي في نيو جيزة: ليزر، تصبغات، ندبات، نضارة. بموافقة مكتوبة.' : 'Real DermaBay patient results in New Giza: laser, pigmentation, scars and skin quality. Shared with written consent.';
+const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, { name: T('nav_results'), href: localizePath('results', lang) }];
+---
+<Base {lang} {title} {description}>
+  <Breadcrumbs items={crumbs} />
+  <Hero {lang} compact title={T('results_title')} sub={T('results_sub')} />
+  <section class="container-x"><BeforeAfter {lang} /></section>
+  <CtaBand {lang} />
+</Base>

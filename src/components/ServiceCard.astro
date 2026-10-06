@@ -1,0 +1,10 @@
+---
+import { localizePath, type Lang } from '@/i18n/utils';
+import Icon from './Icon.astro';
+const { lang, slug, title, description, icon } = Astro.props as { lang: Lang; slug: string; title: string; description: string; icon: string };
+---
+<a href={localizePath(`services/${slug}`, lang)} class="group flex flex-col gap-3 rounded-2xl border border-olive/10 bg-white/60 p-6 transition hover:-translate-y-0.5 hover:border-gold hover:shadow-md">
+  <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-cream-deep text-olive"><Icon name={icon} /></span>
+  <h3 class="font-display text-2xl text-olive">{title}</h3>
+  <p class="text-sm leading-relaxed text-ink/75">{description}</p>
+</a>

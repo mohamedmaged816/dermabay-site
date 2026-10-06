@@ -1,0 +1,11 @@
+---
+import type { Lang } from '@/i18n/utils';
+import { t } from '@/i18n/ui';
+const { lang, text } = Astro.props as { lang: Lang; text: string };
+---
+<div class="container-x">
+  <div class="rounded-2xl border-s-4 border-gold bg-cream-deep/60 p-5 sm:p-6" data-summary>
+    <p class="eyebrow">{t(lang)('summary_label')}</p>
+    <p class="mt-2 text-lg leading-relaxed text-ink">{text}</p>
+  </div>
+</div>

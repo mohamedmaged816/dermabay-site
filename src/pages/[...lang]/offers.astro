@@ -1,0 +1,31 @@
+---
+import Base from '@/layouts/Base.astro';
+import Hero from '@/components/Hero.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import { langPaths, localizePath, type Lang } from '@/i18n/utils';
+import { t } from '@/i18n/ui';
+import { offer } from '@/data/offers';
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props as { lang: Lang };
+const T = t(lang);
+const title = lang === 'ar' ? 'عروض ديرما باي الحالية' : 'Current DermaBay offers';
+const description = lang === 'ar' ? 'العرض الحالي في عيادة ديرما باي نيو جيزة. عرض واحد واضح، والسعر بيتأكد على واتساب قبل الحجز.' : 'The current offer at DermaBay New Giza. One clear offer, price confirmed on WhatsApp before you book.';
+const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, { name: T('nav_offers'), href: localizePath('offers', lang) }];
+---
+<Base {lang} {title} {description} waService={offer.title[lang]}>
+  <Breadcrumbs items={crumbs} />
+  <Hero {lang} compact title={T('offers_title')} sub={T('offers_sub')} service={offer.title[lang]} />
+  {offer.active && (
+    <section class="container-x">
+      <div class="rounded-3xl border border-gold bg-cream-deep/70 p-8 sm:p-12">
+        <h2 class="font-display text-3xl text-olive sm:text-4xl">{offer.title[lang]}</h2>
+        <p class="mt-4 max-w-2xl text-lg text-ink/85">{offer.body[lang]}</p>
+        <p class="mt-4 text-sm text-ink/60">{offer.terms[lang]}</p>
+        <div class="mt-6"><WhatsAppButton {lang} service={offer.title[lang]} /></div>
+      </div>
+    </section>
+  )}
+  <CtaBand {lang} service={offer.title[lang]} />
+</Base>

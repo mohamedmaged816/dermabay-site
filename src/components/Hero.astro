@@ -1,0 +1,22 @@
+---
+import type { Lang } from '@/i18n/utils';
+import WhatsAppButton from './WhatsAppButton.astro';
+interface Props { lang: Lang; eyebrow?: string; title: string; sub?: string; service?: string; secondaryHref?: string; secondaryLabel?: string; compact?: boolean; }
+const { lang, eyebrow, title, sub, service, secondaryHref, secondaryLabel, compact = false } = Astro.props;
+---
+<section class={`relative overflow-hidden ${compact ? 'py-14' : 'py-20 sm:py-28'}`}>
+  <svg class="pointer-events-none absolute -top-24 end-[-10%] h-[520px] w-[520px] opacity-40" viewBox="0 0 400 400" aria-hidden="true">
+    <path d="M20 320a180 180 0 0 1 360 0" fill="none" stroke="#C2A566" stroke-width="1.5"/>
+    <path d="M70 320a130 130 0 0 1 260 0" fill="none" stroke="#C2A566" stroke-width="1.5"/>
+    <path d="M120 320a80 80 0 0 1 160 0" fill="none" stroke="#3E4939" stroke-width="1.5"/>
+  </svg>
+  <div class="container-x relative max-w-3xl">
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h1 class={`font-display mt-3 text-olive ${compact ? 'text-4xl sm:text-5xl' : 'text-5xl leading-[1.05] sm:text-6xl'}`}>{title}</h1>
+    {sub && <p class="mt-5 max-w-2xl text-lg leading-relaxed text-ink/80">{sub}</p>}
+    <div class="mt-8 flex flex-wrap gap-3">
+      <WhatsAppButton {lang} {service} />
+      {secondaryHref && <a href={secondaryHref} class="btn-ghost">{secondaryLabel}</a>}
+    </div>
+  </div>
+</section>

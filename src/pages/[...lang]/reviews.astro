@@ -1,0 +1,22 @@
+---
+import Base from '@/layouts/Base.astro';
+import Hero from '@/components/Hero.astro';
+import ReviewStrip from '@/components/ReviewStrip.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { langPaths, localizePath, type Lang } from '@/i18n/utils';
+import { t } from '@/i18n/ui';
+import { clinic } from '@/data/clinic';
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props as { lang: Lang };
+const T = t(lang);
+const title = lang === 'ar' ? 'آراء عملاء ديرما باي' : 'DermaBay patient reviews';
+const description = lang === 'ar' ? 'اقرأ آراء عملاء ديرما باي على جوجل، واترك رأيك لو زرتنا. عيادة جلدية وليزر في نيو جيزة.' : 'Read DermaBay patient reviews from Google, and leave yours if you have visited us. Dermatology and laser clinic in New Giza.';
+const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, { name: T('nav_reviews'), href: localizePath('reviews', lang) }];
+---
+<Base {lang} {title} {description}>
+  <Breadcrumbs items={crumbs} />
+  <Hero {lang} compact title={T('reviews_title')} sub={T('reviews_sub')} secondaryHref={clinic.reviewUrl} secondaryLabel={T('review_us')} />
+  <ReviewStrip {lang} limit={12} />
+  <CtaBand {lang} />
+</Base>

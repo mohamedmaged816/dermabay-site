@@ -1,0 +1,100 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import Hero from '@/components/Hero.astro';
+import Summary from '@/components/Summary.astro';
+import FAQ from '@/components/FAQ.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import BeforeAfter from '@/components/BeforeAfter.astro';
+import { localizePath, type Lang } from '@/i18n/utils';
+import { t } from '@/i18n/ui';
+import { breadcrumbSchema, faqSchema, procedureSchema } from '@/lib/schema';
+
+export async function getStaticPaths() {
+  const all = await getCollection('services');
+  return all.map((entry) => ({
+    params: { lang: entry.data.lang === 'en' ? undefined : 'ar', slug: entry.data.slug },
+    props: { entry, lang: entry.data.lang as Lang },
+  }));
+}
+const { entry, lang } = Astro.props;
+const d = entry.data;
+const T = t(lang);
+const site = Astro.site!.toString().replace(/\/$/, '');
+const url = site + localizePath(`services/${d.slug}`, lang);
+const { Content } = await render(entry);
+const related = await getCollection('guide', (g) => g.data.lang === lang && d.related.includes(g.data.slug));
+const crumbs = [
+  { name: T('breadcrumb_home'), href: localizePath('/', lang) },
+  { name: T('nav_services'), href: localizePath('services', lang) },
+  { name: d.title, href: localizePath(`services/${d.slug}`, lang) },
+];
+const jsonLd = [
+  procedureSchema({ name: d.title, description: d.description, url }, site),
+  faqSchema(d.faqs),
+  breadcrumbSchema(crumbs.map((c) => ({ name: c.name, url: site + c.href }))),
+];
+const facts: [string, string][] = [
+  [T('svc_sessions'), d.sessions],
+  [T('svc_downtime'), d.downtime],
+  [T('svc_results'), d.results],
+  [T('svc_price'), d.price ?? T('svc_price_ask')],
+];
+---
+<Base {lang} title={d.metaTitle} description={d.description} {jsonLd} waService={d.title}>
+  <Breadcrumbs items={crumbs} />
+  <Hero {lang} compact eyebrow={T('nav_services')} title={d.title} sub={d.description} service={d.title} />
+  <Summary {lang} text={d.summary} />
+
+  <section class="container-x mt-14 grid gap-10 lg:grid-cols-[2fr_1fr]">
+    <div>
+      <div class="grid gap-8 sm:grid-cols-2">
+        <div>
+          <h2 class="font-display text-2xl text-olive">{T('svc_for')}</h2>
+          <ul class="mt-3 space-y-2 text-ink/85">{d.forWho.map((x) => <li class="flex gap-2"><span class="text-gold">●</span><span>{x}</span></li>)}</ul>
+        </div>
+        {d.notFor.length > 0 && (
+          <div>
+            <h2 class="font-display text-2xl text-olive">{T('svc_notfor')}</h2>
+            <ul class="mt-3 space-y-2 text-ink/85">{d.notFor.map((x) => <li class="flex gap-2"><span class="text-olive/40">●</span><span>{x}</span></li>)}</ul>
+          </div>
+        )}
+      </div>
+
+      <h2 class="font-display mt-12 text-2xl text-olive">{T('svc_session')}</h2>
+      <ol class="mt-3 space-y-3">
+        {d.session.map((x, i) => <li class="flex gap-3"><span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-olive text-sm font-semibold text-cream">{i + 1}</span><span class="text-ink/85">{x}</span></li>)}
+      </ol>
+
+      <div class="prose-clinic mt-10"><Content /></div>
+    </div>
+
+    <aside class="space-y-5">
+      {facts.map(([h, v]) => (
+        <div class="rounded-2xl border border-olive/10 bg-white/60 p-5">
+          <p class="eyebrow">{h}</p>
+          <p class="mt-2 text-ink/85">{v}</p>
+        </div>
+      ))}
+    </aside>
+  </section>
+
+  <section class="container-x mt-16">
+    <h2 class="font-display text-3xl text-olive">{T('results_title')}</h2>
+    <div class="mt-6"><BeforeAfter {lang} service={d.slug} /></div>
+  </section>
+
+  <FAQ {lang} faqs={d.faqs} title={T('svc_faq')} />
+
+  {related.length > 0 && (
+    <section class="container-x mt-16">
+      <h2 class="font-display text-2xl text-olive">{T('svc_related')}</h2>
+      <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+        {related.map((g) => <li><a href={localizePath(`guide/${g.data.slug}`, lang)} class="block rounded-xl border border-olive/10 p-4 hover:border-gold"><span class="font-semibold text-olive">{g.data.title}</span><br/><span class="text-sm text-ink/70">{g.data.description}</span></a></li>)}
+      </ul>
+    </section>
+  )}
+
+  <CtaBand {lang} service={d.title} />
+</Base>

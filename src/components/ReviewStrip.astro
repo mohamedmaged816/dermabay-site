@@ -1,0 +1,31 @@
+---
+import type { Lang } from '@/i18n/utils';
+import { t } from '@/i18n/ui';
+import { clinic } from '@/data/clinic';
+import { reviews } from '@/data/reviews';
+const { lang, limit = 3 } = Astro.props as { lang: Lang; limit?: number };
+const T = t(lang);
+const shown = reviews.slice(0, limit);
+---
+<section class="container-x mt-20">
+  <div class="flex flex-wrap items-end justify-between gap-4">
+    <div>
+      <h2 class="font-display text-3xl text-olive">{T('reviews_title')}</h2>
+      <p class="mt-1 text-ink/70">{T('reviews_sub')}{clinic.rating && <span dir="ltr"> · {clinic.rating.value.toFixed(1)} ★ ({clinic.rating.count})</span>}</p>
+    </div>
+    <a href={clinic.mapsUrl} target="_blank" rel="noopener" class="btn-ghost">{T('reviews_cta')}</a>
+  </div>
+  {shown.length > 0 ? (
+    <div class="mt-6 grid gap-4 md:grid-cols-3">
+      {shown.map((r) => (
+        <figure class="rounded-2xl border border-olive/10 bg-white/60 p-5" lang={r.lang} dir={r.lang === 'ar' ? 'rtl' : 'ltr'}>
+          {r.rating && <div class="text-gold" aria-label={`${r.rating} stars`}>{'★'.repeat(r.rating)}</div>}
+          <blockquote class="mt-2 leading-relaxed text-ink/85">{r.text}</blockquote>
+          <figcaption class="mt-3 text-sm font-semibold text-olive">{r.author}</figcaption>
+        </figure>
+      ))}
+    </div>
+  ) : (
+    <p class="mt-6 text-ink/70">{T('reviews_empty')}</p>
+  )}
+</section>

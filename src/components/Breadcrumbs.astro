@@ -1,0 +1,13 @@
+---
+const { items } = Astro.props as { items: { name: string; href: string }[] };
+---
+<nav aria-label="Breadcrumb" class="container-x pt-6 text-sm text-ink/60">
+  <ol class="flex flex-wrap items-center gap-2">
+    {items.map((it, i) => (
+      <li class="flex items-center gap-2">
+        {i < items.length - 1 ? <a href={it.href} class="hover:text-olive">{it.name}</a> : <span aria-current="page" class="text-olive">{it.name}</span>}
+        {i < items.length - 1 && <span aria-hidden="true">/</span>}
+      </li>
+    ))}
+  </ol>
+</nav>

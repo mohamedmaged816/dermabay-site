@@ -1,0 +1,44 @@
+---
+import Base from '@/layouts/Base.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { langPaths, localizePath, type Lang } from '@/i18n/utils';
+import { t } from '@/i18n/ui';
+import { clinic } from '@/data/clinic';
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props as { lang: Lang };
+const T = t(lang);
+const title = T('privacy_title') as string;
+const description = lang === 'ar' ? 'إزاي ديرما باي بتتعامل مع بياناتك على الموقع وواتساب: تحليلات مجمّعة، مفيش نماذج، وصور بموافقة مكتوبة.' : 'How DermaBay handles your data on this website and on WhatsApp: aggregated analytics, no forms, photos only with written consent.';
+const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, { name: title, href: localizePath('privacy', lang) }];
+---
+<Base {lang} {title} {description} noindex>
+  <Breadcrumbs items={crumbs} />
+  <article class="container-x prose-clinic max-w-3xl py-10">
+    <h1 class="font-display text-4xl text-olive">{title}</h1>
+    {lang === 'ar' ? (
+      <>
+        <p>الموقع ده ملك {clinic.name}. مفيش أي نماذج على الموقع بتجمع بياناتك؛ التواصل كله بيتم على واتساب أو التليفون.</p>
+        <h2>إيه اللي بنجمعه</h2>
+        <p>بنستخدم Google Analytics وMeta Pixel عشان نعرف عدد الزوار والصفحات اللي بيزوروها وعدد الضغطات على زرار واتساب. البيانات دي مجمّعة ومش بتعرّفك شخصياً.</p>
+        <h2>واتساب</h2>
+        <p>لما تبعتلنا على واتساب، رسايلك بتتخزن عند واتساب وعندنا عشان نقدر نتابع حجزك. مش بنشارك رقمك أو رسايلك مع أي طرف تالت.</p>
+        <h2>الصور الطبية</h2>
+        <p>أي صورة قبل وبعد على الموقع منشورة بموافقة مكتوبة من صاحبها، وتقدر تطلب حذفها في أي وقت.</p>
+        <h2>تواصل</h2>
+        <p>لأي سؤال عن بياناتك، كلمنا على <span dir="ltr">{clinic.phoneDisplay}</span>.</p>
+      </>
+    ) : (
+      <>
+        <p>This website is owned by {clinic.name}. There are no forms on this site that collect your data; all contact happens on WhatsApp or by phone.</p>
+        <h2>What we collect</h2>
+        <p>We use Google Analytics and the Meta Pixel to count visitors, the pages they view and clicks on the WhatsApp button. This data is aggregated and does not identify you personally.</p>
+        <h2>WhatsApp</h2>
+        <p>When you message us on WhatsApp, your messages are stored by WhatsApp and by us so we can follow up on your booking. We never share your number or messages with third parties.</p>
+        <h2>Medical photos</h2>
+        <p>Any before and after photo on this site is published with the written consent of the person shown, who can ask for it to be removed at any time.</p>
+        <h2>Contact</h2>
+        <p>For any question about your data, message us on <span dir="ltr">{clinic.phoneDisplay}</span>.</p>
+      </>
+    )}
+  </article>
+</Base>

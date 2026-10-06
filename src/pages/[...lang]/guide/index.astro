@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import Hero from '@/components/Hero.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { langPaths, localizePath, type Lang } from '@/i18n/utils';
+import { t } from '@/i18n/ui';
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props as { lang: Lang };
+const T = t(lang);
+const guides = (await getCollection('guide', (e) => e.data.lang === lang)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const title = lang === 'ar' ? 'دليل البشرة: إجابات من دكتور جلدية' : 'Skin Guide: straight answers from a dermatology clinic';
+const description = lang === 'ar' ? 'مقالات قصيرة بتجاوب على أسئلة الناس الحقيقية عن الليزر والتصبغات وحب الشباب وتساقط الشعر، من عيادة ديرما باي نيو جيزة.' : 'Short articles answering real questions about laser, pigmentation, acne and hair loss, from DermaBay clinic in New Giza.';
+const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, { name: T('nav_guide'), href: localizePath('guide', lang) }];
+const fmt = new Intl.DateTimeFormat(lang === 'ar' ? 'ar-EG' : 'en-GB', { dateStyle: 'medium' });
+---
+<Base {lang} {title} {description}>
+  <Breadcrumbs items={crumbs} />
+  <Hero {lang} compact title={T('guide_title')} sub={T('guide_sub')} />
+  <section class="container-x grid gap-5 md:grid-cols-2">
+    {guides.map((g) => (
+      <a href={localizePath(`guide/${g.data.slug}`, lang)} class="rounded-2xl border border-olive/10 bg-white/60 p-6 hover:border-gold">
+        <p class="text-xs text-ink/50">{fmt.format(g.data.date)}</p>
+        <h2 class="font-display mt-1 text-2xl text-olive">{g.data.title}</h2>
+        <p class="mt-2 text-ink/75">{g.data.description}</p>
+      </a>
+    ))}
+  </section>
+  <CtaBand {lang} />
+</Base>

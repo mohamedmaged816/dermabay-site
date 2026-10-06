@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import Hero from '@/components/Hero.astro';
+import ServiceCard from '@/components/ServiceCard.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { langPaths, localizePath, type Lang } from '@/i18n/utils';
+import { t } from '@/i18n/ui';
+import { breadcrumbSchema } from '@/lib/schema';
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props as { lang: Lang };
+const T = t(lang);
+const site = Astro.site!.toString().replace(/\/$/, '');
+const services = (await getCollection('services', (e) => e.data.lang === lang)).sort((a, b) => a.data.order - b.data.order);
+const title = lang === 'ar' ? 'خدمات العيادة: ليزر، بشرة، شعر' : 'Services: laser, skin and hair treatments';
+const description = lang === 'ar' ? 'كل علاجات ديرما باي في نيو جيزة: إزالة الشعر بالليزر، الفراكشنال، التصبغات، السكين بوستر، حب الشباب وتساقط الشعر.' : 'All DermaBay treatments in New Giza: laser hair removal, fractional laser, pigmentation, skin boosters, acne and hair loss.';
+const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, { name: T('nav_services'), href: localizePath('services', lang) }];
+---
+<Base {lang} {title} {description} jsonLd={[breadcrumbSchema(crumbs.map((c) => ({ name: c.name, url: site + c.href })))]}>
+  <Breadcrumbs items={crumbs} />
+  <Hero {lang} compact title={T('home_services_title')} sub={T('home_services_sub')} />
+  <section class="container-x grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    {services.map((s) => <ServiceCard {lang} slug={s.data.slug} title={s.data.title} description={s.data.description} icon={s.data.icon} />)}
+  </section>
+  <CtaBand {lang} />
+</Base>

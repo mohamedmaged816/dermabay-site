@@ -1,0 +1,51 @@
+---
+import '@/styles/theme.css';
+import Seo from '@/components/Seo.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import { dirOf, type Lang } from '@/i18n/utils';
+import { clinicSchema } from '@/lib/schema';
+
+interface Props { lang: Lang; title: string; description: string; jsonLd?: Record<string, any>[]; noindex?: boolean; waService?: string; }
+const { lang, title, description, jsonLd = [], noindex = false, waService } = Astro.props;
+const site = Astro.site!.toString().replace(/\/$/, '');
+const GA = import.meta.env.PUBLIC_GA_ID as string | undefined;
+const PIXEL = import.meta.env.PUBLIC_META_PIXEL_ID as string | undefined;
+---
+<!doctype html>
+<html lang={lang} dir={dirOf(lang)}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#3E4939" />
+    <Seo {lang} {title} {description} jsonLd={[clinicSchema(site, lang), ...jsonLd]} {noindex} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {GA && <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA}`}></script>}
+    {GA && <script is:inline define:vars={{ GA }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);} window.gtag = gtag;
+      gtag('js', new Date()); gtag('config', GA, { anonymize_ip: true });
+    </script>}
+    {PIXEL && <script is:inline define:vars={{ PIXEL }}>
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', PIXEL); fbq('track', 'PageView');
+    </script>}
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Header {lang} />
+    <main class="flex-1"><slot /></main>
+    <Footer {lang} />
+    <WhatsAppButton {lang} service={waService} floating />
+    <script is:inline>
+      document.addEventListener('click', function (e) {
+        var a = e.target && e.target.closest ? e.target.closest('a[data-wa]') : null;
+        if (!a) return;
+        var payload = { service: a.getAttribute('data-wa') || 'general', page: location.pathname, lang: document.documentElement.lang };
+        if (window.gtag) window.gtag('event', 'whatsapp_click', payload);
+        if (window.fbq) window.fbq('track', 'Contact', payload);
+      });
+    </script>
+  </body>
+</html>

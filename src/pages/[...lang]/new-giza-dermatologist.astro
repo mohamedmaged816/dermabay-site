@@ -1,0 +1,56 @@
+---
+import Base from '@/layouts/Base.astro';
+import Hero from '@/components/Hero.astro';
+import Summary from '@/components/Summary.astro';
+import Map from '@/components/Map.astro';
+import FAQ from '@/components/FAQ.astro';
+import ReviewStrip from '@/components/ReviewStrip.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { langPaths, localizePath, type Lang } from '@/i18n/utils';
+import { t } from '@/i18n/ui';
+import { clinic } from '@/data/clinic';
+import { breadcrumbSchema, faqSchema } from '@/lib/schema';
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props as { lang: Lang };
+const T = t(lang);
+const site = Astro.site!.toString().replace(/\/$/, '');
+const addr = clinic.address[lang];
+const title = lang === 'ar' ? 'دكتور جلدية في نيو جيزة | عيادة ديرما باي ميديتاون' : 'Dermatologist in New Giza | DermaBay Clinic at Meditown';
+const description = lang === 'ar'
+  ? 'بتدور على دكتور جلدية في نيو جيزة أو الشيخ زايد أو 6 أكتوبر؟ ديرما باي في ميديتاون، نيو جيزة هيلث بارك، مبنى 2 عيادة 203. ركنة سهلة وحجز على واتساب.'
+  : 'Looking for a dermatologist in New Giza, Sheikh Zayed or 6th of October? DermaBay is at Meditown, NewGiza Health Park, Building 2, Clinic 203. Easy parking, WhatsApp booking.';
+const summary = lang === 'ar'
+  ? `عيادة ديرما باي في ميديتاون، نيو جيزة هيلث بارك، مبنى 2، عيادة 203، على طريق مصر إسكندرية الصحراوي. ${clinic.hoursText.ar} التليفون ${clinic.phoneDisplay}.`
+  : `DermaBay Clinic is inside Meditown at NewGiza Health Park, Building 2, Clinic 203, off the Cairo–Alexandria Desert Road. ${clinic.hoursText.en} Phone ${clinic.phoneDisplay}.`;
+const faqs = lang === 'ar' ? [
+  { q: 'فين بالظبط عيادة ديرما باي؟', a: 'جوه ميديتاون في نيو جيزة هيلث بارك، مبنى 2، عيادة 203. ادخل من بوابة نيو جيزة على الصحراوي واتبع لافتات Meditown.' },
+  { q: 'فيه ركنة؟', a: 'آه، ميديتاون فيها جراج وركنة واسعة قدام المباني. غالباً مش بتحتاج أكتر من دقيقتين.' },
+  { q: 'بتخدموا الشيخ زايد و6 أكتوبر؟', a: 'طبعاً. العيادة على بعد 10 لـ 15 دقيقة بالعربية من الشيخ زايد و6 أكتوبر وبالم هيلز.' },
+  { q: 'لازم أحجز قبلها؟', a: 'الأفضل تحجز على واتساب عشان نضمنلك معاد وما تستناش. بنرد في خلال ساعة في مواعيد العيادة.' },
+  { q: 'بتقبلوا كروت؟', a: 'بنقبل كاش وكروت. اسأل على واتساب لو عايز تعرف خيارات التقسيط الحالية.' },
+] : [
+  { q: 'Where exactly is DermaBay?', a: 'Inside Meditown at NewGiza Health Park, Building 2, Clinic 203. Enter NewGiza from the Cairo–Alexandria Desert Road and follow the Meditown signs.' },
+  { q: 'Is there parking?', a: 'Yes. Meditown has a garage and open parking in front of the buildings. It rarely takes more than two minutes.' },
+  { q: 'Do you serve Sheikh Zayed and 6th of October?', a: 'Yes. The clinic is a 10 to 15 minute drive from Sheikh Zayed, 6th of October and Palm Hills.' },
+  { q: 'Do I need to book?', a: 'Please book on WhatsApp so you have a confirmed slot and no waiting. We reply within the hour during clinic time.' },
+  { q: 'Do you take cards?', a: 'We take cash and cards. Ask on WhatsApp about current instalment options.' },
+];
+const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, { name: T('nav_location'), href: localizePath('new-giza-dermatologist', lang) }];
+---
+<Base {lang} {title} {description} jsonLd={[faqSchema(faqs), breadcrumbSchema(crumbs.map((c) => ({ name: c.name, url: site + c.href })))]}>
+  <Breadcrumbs items={crumbs} />
+  <Hero {lang} compact eyebrow={T('location_eyebrow')} title={lang === 'ar' ? 'عيادة جلدية وليزر في قلب نيو جيزة' : 'A dermatology and laser clinic in the heart of New Giza'} sub={description} secondaryHref={clinic.mapsUrl} secondaryLabel={T('directions')} />
+  <Summary {lang} text={summary} />
+  <section class="container-x mt-14 grid gap-8 lg:grid-cols-2">
+    <Map {lang} />
+    <div class="space-y-6">
+      <div><p class="eyebrow">{T('contact_address')}</p><p class="mt-2 text-lg">{addr.line1}<br/>{addr.line2}<br/>{addr.city}, {addr.region}</p></div>
+      <div><p class="eyebrow">{T('contact_hours')}</p><p class="mt-2">{clinic.hoursText[lang]}</p></div>
+      <div><p class="eyebrow">{T('footer_areas')}</p><p class="mt-2">{clinic.areasServed[lang].join(' · ')}</p></div>
+    </div>
+  </section>
+  <ReviewStrip {lang} />
+  <FAQ {lang} {faqs} />
+  <CtaBand {lang} />
+</Base>

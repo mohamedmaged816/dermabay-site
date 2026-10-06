@@ -1,0 +1,31 @@
+---
+import Base from '@/layouts/Base.astro';
+import Hero from '@/components/Hero.astro';
+import Map from '@/components/Map.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { langPaths, localizePath, type Lang } from '@/i18n/utils';
+import { t } from '@/i18n/ui';
+import { clinic } from '@/data/clinic';
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props as { lang: Lang };
+const T = t(lang);
+const addr = clinic.address[lang];
+const title = lang === 'ar' ? 'تواصل مع ديرما باي' : 'Contact DermaBay';
+const description = lang === 'ar' ? `عيادة ديرما باي، ميديتاون نيو جيزة، مبنى 2 عيادة 203. واتساب وتليفون ${clinic.phoneDisplay}. احجز استشارتك.` : `DermaBay Clinic, Meditown New Giza, Building 2, Clinic 203. WhatsApp and phone ${clinic.phoneDisplay}. Book your consultation.`;
+const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, { name: T('nav_contact'), href: localizePath('contact', lang) }];
+---
+<Base {lang} {title} {description}>
+  <Breadcrumbs items={crumbs} />
+  <Hero {lang} compact title={T('contact_title')} sub={T('cta_sub')} secondaryHref={`tel:${clinic.phoneE164}`} secondaryLabel={`${T('call')} ${clinic.phoneDisplay}`} />
+  <section class="container-x grid gap-8 lg:grid-cols-2">
+    <div class="space-y-6">
+      <div><p class="eyebrow">{T('contact_address')}</p><p class="mt-2 text-lg">{addr.line1}<br/>{addr.line2}<br/>{addr.city}, {addr.region}, {addr.country}</p></div>
+      <div><p class="eyebrow">{T('contact_phone')}</p><p class="mt-2 text-lg" dir="ltr"><a href={`tel:${clinic.phoneE164}`} class="hover:underline">{clinic.phoneDisplay}</a></p></div>
+      <div><p class="eyebrow">{T('contact_hours')}</p><p class="mt-2">{clinic.hoursText[lang]}</p></div>
+      <div><p class="eyebrow">Instagram</p><p class="mt-2"><a href={clinic.instagram} target="_blank" rel="noopener" class="hover:underline">@dermabay.eg</a></p></div>
+    </div>
+    <Map {lang} />
+  </section>
+  <CtaBand {lang} />
+</Base>
