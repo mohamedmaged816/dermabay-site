@@ -2,7 +2,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 
 const FAMILIES = [
-  'Amiri:wght@400;700',
+  'Amiri:wght@400',
   'Cairo:wght@400;600;700',
   'Cormorant+Garamond:wght@500;600',
 ];
