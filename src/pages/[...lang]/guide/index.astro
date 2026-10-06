@@ -21,7 +21,7 @@ const fmt = new Intl.DateTimeFormat(lang === 'ar' ? 'ar-EG' : 'en-GB', { dateSty
   <section class="container-x grid gap-5 md:grid-cols-2">
     {guides.map((g) => (
       <a href={localizePath(`guide/${g.data.slug}`, lang)} class="rounded-2xl border border-olive/10 bg-white/60 p-6 hover:border-gold">
-        <p class="text-xs text-ink/50">{fmt.format(g.data.date)}</p>
+        <p class="text-xs text-ink/70">{fmt.format(g.data.date)}</p>
         <h2 class="font-display mt-1 text-2xl text-olive">{g.data.title}</h2>
         <p class="mt-2 text-ink/75">{g.data.description}</p>
       </a>

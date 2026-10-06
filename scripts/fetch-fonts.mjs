@@ -24,6 +24,6 @@ for (const m of css.matchAll(urlRe)) {
   rewritten = rewritten.replace(remote, `/fonts/${name}`);
   count++;
 }
-out += rewritten;
+out += rewritten.includes('font-display') ? rewritten : rewritten.replaceAll('@font-face {', '@font-face {\n  font-display: swap;');
 await writeFile('src/styles/fonts.css', out);
 console.log(`fonts: downloaded ${count} files, wrote src/styles/fonts.css`);
