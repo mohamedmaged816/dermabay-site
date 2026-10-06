@@ -1,0 +1,18 @@
+import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
+import tailwindcss from '@tailwindcss/vite';
+
+const site = process.env.SITE_URL ?? 'https://dermabay.netlify.app';
+
+export default defineConfig({
+  site,
+  trailingSlash: 'always',
+  build: { format: 'directory' },
+  integrations: [
+    sitemap({
+      i18n: { defaultLocale: 'en', locales: { en: 'en', ar: 'ar-EG' } },
+      filter: (page) => !page.includes('/404'),
+    }),
+  ],
+  vite: { plugins: [tailwindcss()] },
+});

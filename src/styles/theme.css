@@ -1,0 +1,32 @@
+@import "tailwindcss";
+@import "./fonts.css";
+
+@theme {
+  --color-olive: #3E4939;
+  --color-olive-deep: #2C3429;
+  --color-olive-soft: #5C6A55;
+  --color-cream: #F6F1E6;
+  --color-cream-deep: #EDE4D2;
+  --color-gold: #C2A566;
+  --color-gold-deep: #A98B4D;
+  --color-ink: #1F241D;
+  --color-wa: #25D366;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-display-ar: "Amiri", "Cormorant Garamond", serif;
+  --font-body: "Cairo", system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { @apply bg-cream text-ink font-body antialiased; }
+.font-display { font-family: var(--font-display); }
+[dir="rtl"] .font-display { font-family: var(--font-display-ar); }
+.container-x { @apply mx-auto w-full max-w-6xl px-4 sm:px-6; }
+.btn-wa { @apply inline-flex items-center gap-2 rounded-full bg-olive px-6 py-3 font-semibold text-cream transition hover:bg-olive-deep; }
+.btn-ghost { @apply inline-flex items-center gap-2 rounded-full border border-olive/30 px-6 py-3 font-semibold text-olive transition hover:border-olive; }
+.eyebrow { @apply text-xs font-semibold uppercase tracking-[0.2em] text-gold-deep; }
+[dir="rtl"] .eyebrow { letter-spacing: 0; }
+.prose-clinic h2 { @apply font-display mt-10 mb-3 text-2xl text-olive sm:text-3xl; }
+.prose-clinic h3 { @apply mt-6 mb-2 text-lg font-semibold text-olive; }
+.prose-clinic p, .prose-clinic li { @apply leading-relaxed text-ink/90; }
+.prose-clinic ul { @apply my-3 list-disc ps-6; }
+.prose-clinic a { @apply text-olive underline decoration-gold; }
