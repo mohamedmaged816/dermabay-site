@@ -6,10 +6,11 @@
   "scripts": {
     "dev": "astro dev",
     "prebuild": "node scripts/write-redirects.mjs",
-    "build": "astro build && node scripts/check-build.mjs && node scripts/og-images.mjs",
+    "build": "astro build && node scripts/check-build.mjs",
     "preview": "astro preview",
     "test": "vitest run",
-    "fonts": "node scripts/fetch-fonts.mjs"
+    "fonts": "node scripts/fetch-fonts.mjs",
+    "og": "node scripts/og-images.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

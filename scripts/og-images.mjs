@@ -1,4 +1,4 @@
-import { readdir, readFile, mkdir, writeFile, rm } from 'node:fs/promises';
+import { readdir, readFile, mkdir, writeFile, rm, copyFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
@@ -7,9 +7,11 @@ const run = promisify(execFile);
 const CHROME = process.env.CHROME_BIN ?? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const ROOT = new URL('../', import.meta.url).pathname;
 const DIST = join(ROOT, 'dist');
-const OUT = join(DIST, 'og');
+const OUT = join(ROOT, 'public', 'og');
+const DIST_OUT = join(DIST, 'og');
 const TMP = join(ROOT, '.astro', 'og-tmp');
 await mkdir(OUT, { recursive: true });
+await mkdir(DIST_OUT, { recursive: true });
 await mkdir(TMP, { recursive: true });
 
 const fontsCss = (await readFile(join(ROOT, 'src/styles/fonts.css'), 'utf8')).replaceAll('/fonts/', `file://${join(ROOT, 'public/fonts')}/`);
@@ -59,7 +61,8 @@ h1{font-family:${lang === 'ar' ? "'Amiri'" : "'Cormorant Garamond'"},serif;font-
   await writeFile(tmpHtml, page);
   const outPng = join(OUT, ogName(route));
   await run(CHROME, ['--headless=new', '--disable-gpu', '--hide-scrollbars', '--force-device-scale-factor=1', '--no-first-run', '--no-default-browser-check', `--screenshot=${outPng}`, '--window-size=1200,630', `file://${tmpHtml}`], { timeout: 30000 });
+  await copyFile(outPng, join(DIST_OUT, ogName(route)));
   n++;
 }
 await rm(TMP, { recursive: true, force: true });
-console.log(`og: rendered ${n} images to dist/og/`);
+console.log(`og: rendered ${n} images to public/og/ (committed) and copied to dist/og/`);

@@ -1,4 +1,4 @@
-import { readdir, readFile } from 'node:fs/promises';
+import { readdir, readFile, access } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 
 const DIST = new URL('../dist/', import.meta.url).pathname;
@@ -39,7 +39,9 @@ for (const f of files) {
     catch { errors.push(`${route}: invalid JSON-LD`); }
   }
   if (!html.includes('data-wa=')) errors.push(`${route}: no WhatsApp CTA`);
-  if (!/<meta property="og:image" content="[^"]+\/og\/[^"]+\.png"/.test(html)) errors.push(`${route}: missing og:image`);
+  const ogm = html.match(/<meta property="og:image" content="[^"]+\/og\/([^"]+\.png)"/);
+  if (!ogm) errors.push(`${route}: missing og:image`);
+  else { try { await access(join(DIST, 'og', ogm[1])); } catch { errors.push(`${route}: og image ${ogm[1]} not found — run \`npm run og\``); } }
 }
 
 const must = ['/', '/ar/', '/services/', '/ar/services/', '/new-giza-dermatologist/', '/ar/new-giza-dermatologist/', '/guide/', '/ar/guide/', '/offers/', '/ar/offers/', '/about/', '/ar/about/', '/contact/', '/ar/contact/', '/results/', '/ar/results/', '/reviews/', '/ar/reviews/'];
