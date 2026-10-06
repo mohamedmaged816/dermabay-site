@@ -3,9 +3,11 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 const site = process.env.SITE_URL ?? 'https://dermabay.netlify.app';
+const base = process.env.BASE_PATH ?? '/';
 
 export default defineConfig({
   site,
+  base,
   trailingSlash: 'always',
   build: { format: 'directory', inlineStylesheets: 'always' },
   integrations: [

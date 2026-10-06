@@ -1,5 +1,5 @@
 ---
-import { alternatePath, type Lang } from '@/i18n/utils';
+import { alternatePath, stripBase, withBase, type Lang } from '@/i18n/utils';
 import { ogImageName } from '@/lib/og';
 import { clinic } from '@/data/clinic';
 
@@ -10,7 +10,7 @@ const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : Astro.url.p
 const canonical = `${site}${path}`;
 const enUrl = `${site}${alternatePath(path, 'en')}`;
 const arUrl = `${site}${alternatePath(path, 'ar')}`;
-const og = `${site}/og/${ogImageName(path)}`;
+const og = `${site}${withBase('/og/' + ogImageName(stripBase(path)))}`;
 const fullTitle = title.includes(clinic.shortName) || title.includes(clinic.nameAr) ? title : `${title} | ${lang === 'ar' ? clinic.nameAr : clinic.shortName}`;
 ---
 <title>{fullTitle}</title>

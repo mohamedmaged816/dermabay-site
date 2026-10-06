@@ -1,6 +1,14 @@
 export const LANGS = ['en', 'ar'] as const;
 export type Lang = (typeof LANGS)[number];
 export const DEFAULT_LANG: Lang = 'en';
+/** Site base path without trailing slash ('' for root). Set by Astro from `base`; '' under tests. */
+export const BASE: string = ((import.meta as any).env?.BASE_URL ?? '/').replace(/\/+$/, '');
+export function withBase(path: string): string {
+  return BASE + (path.startsWith('/') ? path : `/${path}`);
+}
+export function stripBase(path: string): string {
+  return BASE && path.startsWith(BASE + '/') ? path.slice(BASE.length) : path;
+}
 
 export function langPaths() {
   return [
@@ -17,12 +25,12 @@ function normalize(path: string): string {
 
 export function localizePath(path: string, lang: Lang): string {
   const p = normalize(path);
-  if (lang === 'en') return p;
-  return p === '/' ? '/ar/' : `/ar${p}`;
+  const local = lang === 'en' ? p : p === '/' ? '/ar/' : `/ar${p}`;
+  return withBase(local);
 }
 
 export function stripLang(path: string): string {
-  const p = normalize(path);
+  const p = normalize(stripBase(path));
   if (p === '/ar/') return '/';
   if (p.startsWith('/ar/')) return p.slice(3);
   return p;

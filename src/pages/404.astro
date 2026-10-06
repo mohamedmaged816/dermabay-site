@@ -1,6 +1,7 @@
 ---
 import Base from '@/layouts/Base.astro';
 import { t } from '@/i18n/ui';
+import { localizePath } from '@/i18n/utils';
 const T = t('en'); const A = t('ar');
 ---
 <Base lang="en" title={T('notfound_title')} description={`${T('notfound_sub')} DermaBay dermatology and laser clinic, New Giza.`} noindex>
@@ -9,8 +10,8 @@ const T = t('en'); const A = t('ar');
     <p class="mt-3 text-ink/70">{T('notfound_sub')}</p>
     <p class="mt-6 font-display text-3xl text-olive" lang="ar" dir="rtl">{A('notfound_title')}</p>
     <div class="mt-8 flex justify-center gap-3">
-      <a href="/" class="btn-wa">{T('notfound_home')}</a>
-      <a href="/ar/" class="btn-ghost" lang="ar">{A('notfound_home')}</a>
+      <a href={localizePath('/', 'en')} class="btn-wa">{T('notfound_home')}</a>
+      <a href={localizePath('/', 'ar')} class="btn-ghost" lang="ar">{A('notfound_home')}</a>
     </div>
   </section>
 </Base>

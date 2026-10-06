@@ -15,7 +15,7 @@ async function walk(dir, out = []) {
 
 const files = await walk(DIST);
 const routes = new Set(files.map((f) => '/' + relative(DIST, f).replace(/index\.html$/, '')));
-const skip = new Set(['/404/']);
+const skip = new Set(['/404/', '/review-us/', '/ar/review-us/', '/map/', '/ig/']);
 
 for (const f of files) {
   const route = '/' + relative(DIST, f).replace(/index\.html$/, '');

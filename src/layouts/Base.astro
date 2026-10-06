@@ -4,7 +4,7 @@ import Seo from '@/components/Seo.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
-import { dirOf, type Lang } from '@/i18n/utils';
+import { dirOf, withBase, type Lang } from '@/i18n/utils';
 import { clinicSchema } from '@/lib/schema';
 
 interface Props { lang: Lang; title: string; description: string; jsonLd?: Record<string, any>[]; noindex?: boolean; waService?: string; }
@@ -18,10 +18,10 @@ const PIXEL = import.meta.env.PUBLIC_META_PIXEL_ID as string | undefined;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
     <meta name="theme-color" content="#3E4939" />
     <Seo {lang} {title} {description} jsonLd={[clinicSchema(site, lang), ...jsonLd]} {noindex} />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="sitemap" href={withBase('/sitemap-index.xml')} />
     {GA && <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA}`}></script>}
     {GA && <script is:inline define:vars={{ GA }}>
       window.dataLayer = window.dataLayer || [];

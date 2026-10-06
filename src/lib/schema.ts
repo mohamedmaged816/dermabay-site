@@ -1,5 +1,5 @@
 import { clinic } from '@/data/clinic';
-import type { Lang } from '@/i18n/utils';
+import { withBase, type Lang } from '@/i18n/utils';
 
 export function clinicSchema(site: string, lang: Lang) {
   const s: Record<string, any> = {
@@ -8,10 +8,10 @@ export function clinicSchema(site: string, lang: Lang) {
     '@id': `${site}/#clinic`,
     name: clinic.name,
     alternateName: clinic.nameAr,
-    url: lang === 'ar' ? `${site}/ar/` : `${site}/`,
+    url: `${site}${withBase(lang === 'ar' ? '/ar/' : '/')}`,
     telephone: clinic.phoneE164,
     medicalSpecialty: 'Dermatology',
-    image: `${site}/og/home.png`,
+    image: `${site}${withBase('/og/home.png')}`,
     priceRange: 'EGP',
     address: { '@type': 'PostalAddress', ...clinic.address.schema },
     areaServed: clinic.areasServed.en.map((name) => ({ '@type': 'Place', name })),
