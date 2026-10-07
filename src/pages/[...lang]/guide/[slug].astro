@@ -39,7 +39,7 @@ const fmt = new Intl.DateTimeFormat(lang === 'ar' ? 'ar-EG' : 'en-GB', { dateSty
     <Leaves opacity={0.45} />
     <div class="container-x relative max-w-3xl">
       <p class="label">{T('nav_guide')} · {fmt.format(d.date)}</p>
-      <h1 class="font-display mt-5 text-4xl leading-[1.02] text-cream sm:text-6xl">{d.title}</h1>
+      <h1 class="font-display mt-4 text-[2.1rem] leading-[1.08] text-cream sm:mt-5 sm:text-6xl sm:leading-[1.02]">{d.title}</h1>
     </div>
   </section>
   <Summary {lang} text={d.summary} />

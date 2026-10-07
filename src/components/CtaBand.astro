@@ -9,12 +9,12 @@ const { lang, service } = Astro.props as { lang: Lang; service?: string };
 const T = t(lang);
 ---
 <section class="container-x mt-28">
-  <div class="relative overflow-hidden rounded-[36px] bg-sand px-7 py-16 text-ink sm:px-14">
+  <div class="relative overflow-hidden rounded-[28px] bg-sand px-6 py-10 text-ink sm:rounded-[36px] sm:px-14 sm:py-16">
     <Leaves opacity={0.18} flip />
     <div class="relative grid items-center gap-12 md:grid-cols-[1fr_auto]">
       <div>
         <p class="label-ink">{T('book_whatsapp')}</p>
-        <h2 class="font-display mt-5 text-5xl text-forest sm:text-6xl">{T('cta_title')}</h2>
+        <h2 class="font-display mt-4 text-4xl text-forest sm:text-6xl">{T('cta_title')}</h2>
         <p class="mt-5 max-w-md leading-[1.8] text-ink/75">{T('cta_sub')}</p>
         <div class="mt-9 flex flex-wrap gap-3">
           <WhatsAppButton {lang} {service} tone="forest" />

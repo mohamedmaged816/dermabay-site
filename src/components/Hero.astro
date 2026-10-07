@@ -8,28 +8,28 @@ interface Props { lang: Lang; eyebrow?: string; title: string; sub?: string; ser
 const { lang, eyebrow, title, sub, service, secondaryHref, secondaryLabel, compact = false, wordmark = false, image, imageAlt = '' } = Astro.props;
 const showArch = wordmark || !!image;
 ---
-<section class={`relative overflow-hidden ${compact ? 'pb-14 pt-10' : 'min-h-[calc(100svh-76px)] pb-28 pt-14 sm:pb-32 sm:pt-20 flex items-center'}`}>
+<section class={`relative overflow-hidden ${compact ? 'pb-10 pt-6 sm:pb-14 sm:pt-10' : 'pb-12 pt-8 sm:min-h-[calc(100svh-76px)] sm:pb-32 sm:pt-20 sm:flex sm:items-center'}`}>
   <Leaves opacity={0.6} />
   {!compact && <div class="cue hidden sm:block" aria-hidden="true"></div>}
   <div class="container-x relative w-full">
-    <div class={`grid items-center gap-12 ${showArch ? 'lg:grid-cols-[1.2fr_1fr]' : ''}`}>
+    <div class={`grid items-center gap-8 sm:gap-12 ${showArch ? 'lg:grid-cols-[1.2fr_1fr]' : ''}`}>
       <div class="hero-in max-w-3xl">
-        {eyebrow && <p class="label">{eyebrow}</p>}
-        <h1 class={`font-display words mt-6 text-cream ${compact ? 'text-[2.6rem] leading-[1.05] sm:text-6xl' : 'text-[3.4rem] leading-[0.98] sm:text-[5.6rem]'}`}>{title.split(' ').map((w, i) => <><span class="w" style={`--i:${i}`}>{w}</span>{' '}</>)}</h1>
-        {sub && <p class="mt-8 max-w-xl text-base leading-[1.85] text-cream/75 sm:text-lg">{sub}</p>}
-        <div class="mt-10 flex flex-wrap items-center gap-3">
+        {eyebrow && <p class="label line-clamp-1">{eyebrow}</p>}
+        <h1 class={`font-display words mt-4 text-cream sm:mt-6 ${compact ? 'text-[2.1rem] leading-[1.08] sm:text-6xl' : 'text-[2.75rem] leading-[1.02] sm:text-[5.6rem] sm:leading-[0.98]'}`}>{title.split(' ').map((w, i) => <><span class="w" style={`--i:${i}`}>{w}</span>{' '}</>)}</h1>
+        {sub && <p class="mt-5 max-w-xl text-[15px] leading-[1.75] text-cream/75 sm:mt-8 sm:text-lg sm:leading-[1.85]">{sub}</p>}
+        <div class="mt-7 flex flex-wrap items-center gap-2.5 sm:mt-10 sm:gap-3">
           <WhatsAppButton {lang} {service} />
           {secondaryHref && <a href={secondaryHref} class="btn-outline">{secondaryLabel}</a>}
         </div>
       </div>
       {showArch && (
         <div class={`${image ? 'flex' : 'hidden lg:flex'} justify-center lg:justify-end`}>
-          <div class={`arch relative overflow-hidden border border-sand/30 bg-forest-deep/70 shadow-[0_40px_80px_-30px_rgba(0,0,0,.6)] ${image ? 'h-[420px] w-[300px] sm:h-[500px] sm:w-[360px]' : 'flex h-[460px] w-[340px] items-center justify-center'}`}>
+          <div class={`arch relative overflow-hidden border border-sand/30 bg-forest-deep/70 shadow-[0_40px_80px_-30px_rgba(0,0,0,.6)] ${image ? 'h-[300px] w-[230px] sm:h-[500px] sm:w-[360px]' : 'flex h-[460px] w-[340px] items-center justify-center'}`}>
             {image && <Photo name={image} alt={imageAlt} priority class="absolute inset-0 h-full w-full object-cover" width={1200} height={1500} />}
             {image && <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/90 via-forest-deep/20 to-forest-deep/10"></div>}
             <div class="absolute inset-3 arch border border-sand/20"></div>
             <div class="beam" aria-hidden="true"></div>
-            {wordmark && <Logo variant="stacked" class={`text-sand [&>svg]:block [&>svg]:h-auto [&>svg]:w-full ${image ? 'absolute bottom-9 left-1/2 block w-[120px] -translate-x-1/2 sm:w-[140px] drop-shadow-[0_6px_24px_rgba(0,0,0,.5)]' : 'relative w-[200px]'}`} />}
+            {wordmark && <Logo variant="stacked" class={`text-sand [&>svg]:block [&>svg]:h-auto [&>svg]:w-full ${image ? 'absolute bottom-6 left-1/2 block w-[90px] -translate-x-1/2 sm:bottom-9 sm:w-[140px] drop-shadow-[0_6px_24px_rgba(0,0,0,.5)]' : 'relative w-[200px]'}`} />}
           </div>
         </div>
       )}

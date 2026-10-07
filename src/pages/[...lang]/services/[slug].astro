@@ -51,7 +51,7 @@ const facts: [string, string][] = [
   <Summary {lang} text={d.summary} />
 
   <section class="mt-16 bg-cream text-ink">
-    <div class="container-x grid gap-12 py-16 lg:grid-cols-[1fr_340px]">
+    <div class="container-x grid gap-10 py-10 sm:py-16 lg:grid-cols-[1fr_340px]">
       <div>
         <div class="grid gap-10 sm:grid-cols-2">
           <div>
@@ -88,7 +88,7 @@ const facts: [string, string][] = [
 
   <section class="container-x mt-24">
     <p class="label">{T('nav_results')}</p>
-    <h2 class="font-display mt-3 text-4xl text-cream">{T('results_title')}</h2>
+    <h2 class="font-display mt-3 text-3xl text-cream sm:text-4xl">{T('results_title')}</h2>
     <div class="mt-8"><BeforeAfter {lang} service={d.slug} /></div>
   </section>
 

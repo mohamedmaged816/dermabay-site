@@ -9,10 +9,10 @@ const addr = clinic.address[lang];
 const year = new Date().getFullYear();
 ---
 <footer class="mt-32 border-t border-cream/10">
-  <div class="container-x py-16">
+  <div class="container-x py-10 sm:py-16">
     <Logo variant="horizontal" class="block w-full max-w-[720px] text-cream [&>svg]:block [&>svg]:h-auto [&>svg]:w-full" />
     <p class="mt-4 label">{lang === 'ar' ? 'عيادة تجميل · نيو جيزة' : 'Aesthetic Clinic · New Giza'}</p>
-    <div class="mt-14 grid gap-12 md:grid-cols-3">
+    <div class="mt-10 grid gap-8 sm:mt-14 sm:gap-12 md:grid-cols-3">
       <address class="not-italic">
         <p class="label">{T('contact_address')}</p>
         <p class="mt-3 leading-relaxed text-cream/85">{addr.line1}<br/>{addr.line2}<br/>{addr.city}, {addr.region}</p>

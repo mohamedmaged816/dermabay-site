@@ -11,7 +11,7 @@ const shown = reviews.slice(0, limit);
   <div class="flex flex-wrap items-end justify-between gap-6">
     <div>
       <p class="label">Google</p>
-      <h2 class="font-display mt-3 text-4xl text-cream">{T('reviews_title')}</h2>
+      <h2 class="font-display mt-3 text-3xl text-cream sm:text-4xl">{T('reviews_title')}</h2>
       <p class="mt-2 text-cream/60">{T('reviews_sub')}{clinic.rating && <span dir="ltr" class="text-gold"> · {clinic.rating.value.toFixed(1)} ★ ({clinic.rating.count})</span>}</p>
     </div>
     <a href={clinic.mapsUrl} target="_blank" rel="noopener" class="btn-outline">{T('reviews_cta')}</a>
