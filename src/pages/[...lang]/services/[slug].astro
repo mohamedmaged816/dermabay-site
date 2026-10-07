@@ -36,6 +36,8 @@ const jsonLd = [
   faqSchema(d.faqs),
   breadcrumbSchema(crumbs.map((c) => ({ name: c.name, url: site + c.href }))),
 ];
+const heroImage = ({ 'laser-hair-removal': 'handpiece-portrait', 'fractional-laser-scars': 'device-portrait', 'laser-skin-rejuvenation': 'device-portrait', 'pigmentation-melasma': 'device-portrait' } as Record<string, string>)[d.slug] ?? 'room-portrait';
+const heroAlt = lang === 'ar' ? `${d.title} في عيادة ديرما باي` : `${d.title} at DermaBay`;
 const facts: [string, string][] = [
   [T('svc_sessions'), d.sessions],
   [T('svc_downtime'), d.downtime],
@@ -45,7 +47,7 @@ const facts: [string, string][] = [
 ---
 <Base {lang} title={d.metaTitle} description={d.description} {jsonLd} waService={d.title}>
   <Breadcrumbs items={crumbs} />
-  <Hero {lang} compact eyebrow={`${T('nav_services')} · ${String(d.order).padStart(2, '0')}`} title={d.title} sub={d.description} service={d.title} />
+  <Hero {lang} compact image={heroImage} imageAlt={heroAlt} eyebrow={`${T('nav_services')} · ${String(d.order).padStart(2, '0')}`} title={d.title} sub={d.description} service={d.title} />
   <Summary {lang} text={d.summary} />
 
   <section class="mt-16 bg-cream text-ink">

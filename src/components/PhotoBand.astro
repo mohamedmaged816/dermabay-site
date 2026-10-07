@@ -1,0 +1,20 @@
+---
+import type { Lang } from '@/i18n/utils';
+import Photo from './Photo.astro';
+import { clinic } from '@/data/clinic';
+const { lang, name = 'room-wide', label, title } = Astro.props as { lang: Lang; name?: string; label?: string; title?: string };
+const l = label ?? (lang === 'ar' ? 'العيادة · ميديتاون، نيو جيزة' : 'The clinic · Meditown, New Giza');
+const t = title ?? (lang === 'ar' ? 'غرف علاج هادية، أجهزة حديثة، وتعقيم بين كل عميل.' : 'Quiet treatment rooms, current-generation devices, sterilised between every patient.');
+---
+<section class="container-x mt-28">
+  <div class="relative overflow-hidden rounded-[36px] border border-sand/20">
+    <Photo {name} alt={lang === 'ar' ? 'غرفة علاج في ديرما باي' : 'A DermaBay treatment room'} class="h-[380px] w-full object-cover sm:h-[520px]" width={1800} height={1392} />
+    <div class="absolute inset-0 bg-gradient-to-t from-forest/95 via-forest/30 to-transparent"></div>
+    <div class="beam" aria-hidden="true" style="animation-duration: 11s"></div>
+    <div class="absolute inset-x-0 bottom-0 p-7 sm:p-12">
+      <p class="label">{l}</p>
+      <p class="font-display mt-3 max-w-2xl text-3xl leading-tight text-cream sm:text-5xl">{t}</p>
+      <p class="mt-4 text-sm text-cream/70">{clinic.address[lang].line1} · {clinic.address[lang].line2}</p>
+    </div>
+  </div>
+</section>

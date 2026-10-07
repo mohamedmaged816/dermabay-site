@@ -12,6 +12,7 @@ import Marquee from '@/components/Marquee.astro';
 import InstagramStrip from '@/components/InstagramStrip.astro';
 import StatementPlate from '@/components/StatementPlate.astro';
 import ConcernFinder from '@/components/ConcernFinder.astro';
+import PhotoBand from '@/components/PhotoBand.astro';
 import { langPaths, localizePath, type Lang } from '@/i18n/utils';
 import { t } from '@/i18n/ui';
 import { clinic } from '@/data/clinic';
@@ -30,7 +31,7 @@ const description = lang === 'ar'
   : 'The first skin & hair clinic in New Giza, Meditown. Laser hair removal, pigmentation, skin boosters and medical dermatology. Book on WhatsApp.';
 ---
 <Base {lang} {title} {description}>
-  <Hero {lang} wordmark eyebrow={T('home_eyebrow')} title={T('home_h1')} sub={T('home_sub')} secondaryHref={localizePath('services', lang)} secondaryLabel={T('see_all_services')} />
+  <Hero {lang} wordmark image="device-portrait" imageAlt={lang === 'ar' ? 'جهاز الليزر في عيادة ديرما باي' : 'The laser platform at DermaBay'} eyebrow={T('home_eyebrow')} title={T('home_h1')} sub={T('home_sub')} secondaryHref={localizePath('services', lang)} secondaryLabel={T('see_all_services')} />
   <Marquee items={services.map((s) => s.data.title)} />
   <StatementPlate {lang} />
   <div class="mt-24"><Summary {lang} text={summary} /></div>
@@ -77,6 +78,8 @@ const description = lang === 'ar'
       ))}
     </div>
   </section>
+
+  <PhotoBand {lang} />
 
   <ReviewStrip {lang} />
 

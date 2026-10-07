@@ -17,7 +17,7 @@ const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, {
 ---
 <Base {lang} {title} {description}>
   <Breadcrumbs items={crumbs} />
-  <Hero {lang} compact eyebrow={T('nav_contact')} title={T('contact_title')} sub={T('cta_sub')} secondaryHref={`tel:${clinic.phoneE164}`} secondaryLabel={`${T('call')} ${clinic.phoneDisplay}`} />
+  <Hero {lang} compact image="room-portrait" imageAlt={lang === 'ar' ? 'غرفة علاج في ديرما باي' : 'A DermaBay treatment room'} eyebrow={T('nav_contact')} title={T('contact_title')} sub={T('cta_sub')} secondaryHref={`tel:${clinic.phoneE164}`} secondaryLabel={`${T('call')} ${clinic.phoneDisplay}`} />
   <section class="container-x grid gap-10 lg:grid-cols-2">
     <div class="grid content-start gap-8">
       <div><p class="label">{T('contact_address')}</p><p class="font-display mt-3 text-2xl leading-snug text-cream">{addr.line1}<br/>{addr.line2}<br/>{addr.city}, {addr.region}, {addr.country}</p></div>

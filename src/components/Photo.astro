@@ -1,0 +1,10 @@
+---
+/** Brand-graded clinic photo from public/photos (webp + jpg). */
+import { withBase } from '@/i18n/utils';
+interface Props { name: string; alt: string; class?: string; priority?: boolean; width?: number; height?: number; }
+const { name, alt, class: cls = '', priority = false, width, height } = Astro.props;
+---
+<picture>
+  <source srcset={withBase(`/photos/${name}.webp`)} type="image/webp" />
+  <img src={withBase(`/photos/${name}.jpg`)} alt={alt} class={cls} loading={priority ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : 'auto'} decoding={priority ? 'sync' : 'async'} width={width} height={height} />
+</picture>

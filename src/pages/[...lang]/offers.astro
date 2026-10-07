@@ -17,7 +17,7 @@ const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, {
 ---
 <Base {lang} {title} {description} waService={offer.title[lang]}>
   <Breadcrumbs items={crumbs} />
-  <Hero {lang} compact eyebrow={T('nav_offers')} title={T('offers_title')} sub={T('offers_sub')} service={offer.title[lang]} />
+  <Hero {lang} compact image="handpiece-portrait" imageAlt={lang === 'ar' ? 'جهاز الليزر ونضارة الحماية' : 'Laser handpiece and protective goggles'} eyebrow={T('nav_offers')} title={T('offers_title')} sub={T('offers_sub')} service={offer.title[lang]} />
   {offer.active && (
     <section class="container-x">
       <div class="panel-sand grid items-center gap-10 overflow-hidden p-8 sm:p-14 md:grid-cols-[1fr_auto]">

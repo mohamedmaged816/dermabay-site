@@ -1,0 +1,62 @@
+"""Grade and crop the raw clinic photos into brand-toned web assets (public/photos/*.webp)."""
+from PIL import Image, ImageOps, ImageEnhance, ImageFilter, ImageDraw
+import os
+SRC = '/Users/MAGED/bay/brand/photos'
+OUT = 'public/photos'
+os.makedirs(OUT, exist_ok=True)
+
+def grade(im):
+    im = im.convert('RGB')
+    # desaturate towards a muted palette, then warm it towards sand/olive
+    im = ImageEnhance.Color(im).enhance(0.55)
+    r, g, b = im.split()
+    r = r.point(lambda v: min(255, int(v * 1.04 + 6)))
+    g = g.point(lambda v: min(255, int(v * 0.99 + 2)))
+    b = b.point(lambda v: int(v * 0.84))
+    im = Image.merge('RGB', (r, g, b))
+    im = ImageEnhance.Brightness(im).enhance(0.86)
+    im = ImageEnhance.Contrast(im).enhance(1.12)
+    # olive tint in the shadows via blend with brand forest
+    tint = Image.new('RGB', im.size, (45, 45, 35))
+    im = Image.blend(im, tint, 0.12)
+    # soft vignette
+    w, h = im.size
+    mask = Image.new('L', (w, h), 0)
+    d = ImageDraw.Draw(mask)
+    d.ellipse((-w * 0.25, -h * 0.25, w * 1.25, h * 1.25), fill=255)
+    mask = mask.filter(ImageFilter.GaussianBlur(min(w, h) * 0.25))
+    dark = ImageEnhance.Brightness(im).enhance(0.55)
+    im = Image.composite(im, dark, mask)
+    return im
+
+def crop_box(im, box_frac):
+    w, h = im.size
+    l, t, r, b = box_frac
+    return im.crop((int(l * w), int(t * h), int(r * w), int(b * h)))
+
+def save(im, name, width):
+    im = im.copy()
+    im.thumbnail((width, 10000))
+    im.save(f'{OUT}/{name}.webp', 'WEBP', quality=78, method=6)
+    im.save(f'{OUT}/{name}.jpg', 'JPEG', quality=80, optimize=True, progressive=True)
+    print(name, im.size, os.path.getsize(f'{OUT}/{name}.webp') // 1024, 'KB')
+
+A = ImageOps.exif_transpose(Image.open(f'{SRC}/PHOTO-2025-05-10-14-16-38 2.jpg'))   # handpiece + goggles
+B = ImageOps.exif_transpose(Image.open(f'{SRC}/PHOTO-2025-05-10-14-16-38 3.jpg'))   # device close-up
+C = ImageOps.exif_transpose(Image.open(f'{SRC}/PHOTO-2025-05-10-14-16-38.jpg'))     # treatment room
+
+# Portrait crops (3:4-ish) for arches, landscape crops for wide bands
+save(grade(crop_box(A, (0.04, 0.22, 0.96, 0.92))), 'handpiece-portrait', 1200)
+save(grade(crop_box(A, (0.0, 0.30, 1.0, 0.78))), 'handpiece-wide', 1600)
+save(grade(crop_box(B, (0.08, 0.10, 0.98, 0.95))), 'device-portrait', 1200)
+save(grade(crop_box(B, (0.0, 0.18, 1.0, 0.70))), 'device-wide', 1600)
+save(grade(crop_box(C, (0.08, 0.12, 0.98, 0.98))), 'room-portrait', 1200)
+save(grade(crop_box(C, (0.0, 0.28, 1.0, 0.86))), 'room-wide', 1800)
+
+# contact sheet for review
+names = ['handpiece-portrait', 'device-portrait', 'room-portrait', 'handpiece-wide', 'device-wide', 'room-wide']
+sheet = Image.new('RGB', (3 * 420, 2 * 420), (45, 45, 35))
+for i, n in enumerate(names):
+    t = Image.open(f'{OUT}/{n}.jpg'); t.thumbnail((400, 400))
+    sheet.paste(t, ((i % 3) * 420 + (420 - t.width) // 2, (i // 3) * 420 + (420 - t.height) // 2))
+sheet.save('/Users/MAGED/bay/brand/photos/graded-contact.jpg', quality=85)
