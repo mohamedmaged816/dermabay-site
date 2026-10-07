@@ -2,10 +2,10 @@
 const { items } = Astro.props as { items: { name: string; href: string }[] };
 ---
 <nav aria-label="Breadcrumb" class="container-x pt-8 text-[11px] uppercase tracking-[0.18em] text-cream/70">
-  <ol class="flex flex-wrap items-center gap-2.5">
+  <ol class="flex flex-wrap items-center gap-2.5 py-2">
     {items.map((it, i) => (
       <li class="flex items-center gap-2.5">
-        {i < items.length - 1 ? <a href={it.href} class="hover:text-cream">{it.name}</a> : <span aria-current="page" class="text-gold">{it.name}</span>}
+        {i < items.length - 1 ? <a href={it.href} class="inline-block py-2 hover:text-cream">{it.name}</a> : <span aria-current="page" class="text-gold">{it.name}</span>}
         {i < items.length - 1 && <span aria-hidden="true" class="text-cream/30">/</span>}
       </li>
     ))}
