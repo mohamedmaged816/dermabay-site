@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import { localizePath, type Lang } from '@/i18n/utils';
+import { t } from '@/i18n/ui';
+import WhatsAppButton from './WhatsAppButton.astro';
+const { lang } = Astro.props as { lang: Lang };
+const T = t(lang);
+const concerns = T('concerns') as [string, string][];
+const services = await getCollection('services', (e) => e.data.lang === lang);
+const bySlug = Object.fromEntries(services.map((s) => [s.data.slug, s.data]));
+const items = concerns.map(([label, slug], i) => ({ label, slug, i, svc: bySlug[slug] })).filter((x) => x.svc);
+---
+<section class="container-x mt-28" id="finder">
+  <div class="panel-sand overflow-hidden p-7 sm:p-12">
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.1fr]">
+      <div>
+        <p class="label-ink">{T('finder_label')}</p>
+        <h2 class="font-display mt-4 text-4xl text-forest sm:text-5xl">{T('finder_h2')}</h2>
+        <div class="mt-8 flex flex-wrap gap-2.5" role="tablist" aria-label={T('finder_h2')}>
+          {items.map((x) => (
+            <button type="button" role="tab" aria-selected={x.i === 0 ? 'true' : 'false'} aria-controls={`rec-${x.i}`} data-finder-chip={x.i} class="finder-chip min-h-[46px] rounded-full border border-forest/40 px-5 py-2.5 text-[14px] font-semibold text-forest transition hover:bg-forest/10 aria-selected:bg-forest aria-selected:text-cream">{x.label}</button>
+          ))}
+        </div>
+        <p class="mt-8 text-sm text-ink/80">{T('finder_note')}</p>
+      </div>
+      <div class="relative">
+        {items.map((x) => (
+          <div id={`rec-${x.i}`} role="tabpanel" data-finder-panel={x.i} class={`rounded-[24px] bg-cream p-7 sm:p-9 ${x.i === 0 ? '' : 'hidden'}`}>
+            <p class="label-ink">{T('finder_suggest')}</p>
+            <h3 class="font-display mt-3 text-3xl leading-tight text-forest sm:text-4xl">{x.svc.title}</h3>
+            <p class="mt-2 text-[12px] font-semibold uppercase tracking-[0.2em] text-terra-deep">{x.svc.sessions}</p>
+            <p class="mt-5 leading-[1.8] text-ink/85">{x.svc.summary}</p>
+            <div class="mt-7 flex flex-wrap items-center gap-3">
+              <WhatsAppButton {lang} service={x.svc.title} tone="forest" label={T('finder_book')} />
+              <a href={localizePath(`services/${x.slug}`, lang)} class="btn-outline-ink">{T('finder_more')}</a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+  <script is:inline>
+    (function () {
+      var root = document.getElementById('finder'); if (!root) return;
+      root.addEventListener('click', function (e) {
+        var chip = e.target && e.target.closest ? e.target.closest('[data-finder-chip]') : null; if (!chip) return;
+        var i = chip.getAttribute('data-finder-chip');
+        root.querySelectorAll('[data-finder-chip]').forEach(function (c) { c.setAttribute('aria-selected', c === chip ? 'true' : 'false'); });
+        root.querySelectorAll('[data-finder-panel]').forEach(function (p) { p.classList.toggle('hidden', p.getAttribute('data-finder-panel') !== i); });
+      });
+    })();
+  </script>
+</section>

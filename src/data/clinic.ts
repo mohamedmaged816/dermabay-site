@@ -2,7 +2,7 @@ export const clinic = {
   name: 'DermaBay Aesthetic Clinic',
   shortName: 'DermaBay',
   nameAr: 'ديرما باي',
-  tagline: { en: 'The first skin & hair clinic in New Giza', ar: 'أول عيادة جلدية وشعر في نيو جيزة' },
+  tagline: { en: 'Glow better, live better. The first skin & hair clinic in New Giza.', ar: 'نضارة أحسن، حياة أحسن. أول عيادة جلدية وشعر في نيو جيزة.' },
   phoneDisplay: '01288909990',
   phoneE164: '+201288909990',
   whatsapp: '+201288909990',

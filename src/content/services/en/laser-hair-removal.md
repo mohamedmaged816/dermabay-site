@@ -4,8 +4,8 @@ slug: laser-hair-removal
 order: 1
 title: Laser Hair Removal
 metaTitle: Laser Hair Removal in New Giza | DermaBay
-description: Medical-grade laser hair removal in New Giza, Meditown. Dermatologist-supervised, safe for Egyptian skin tones, clear session plan and price before you start.
-summary: DermaBay offers dermatologist-supervised laser hair removal at Meditown, NewGiza Health Park. The device settings are chosen for your skin tone and hair type, most people need 6 to 8 sessions spaced 4 to 8 weeks apart, and you can book directly on WhatsApp.
+description: Mediostar laser hair removal in New Giza, Meditown. Dermatologist-supervised, safe for Egyptian skin tones, clear session plan and price before you start.
+summary: DermaBay offers dermatologist-supervised laser hair removal at Meditown, NewGiza Health Park. We use the Mediostar diode laser, with settings chosen for your skin tone and hair type; most people need 6 to 8 sessions spaced 4 to 8 weeks apart, and you can book directly on WhatsApp.
 icon: laser
 forWho:
   - Dark or coarse hair on the face, underarms, bikini line, arms, legs or back
@@ -42,6 +42,8 @@ related:
 ---
 
 ## Why people choose DermaBay for laser hair removal
+
+We work with the Mediostar diode laser, a platform built for fast, low-discomfort sessions across all skin types, including darker Egyptian skin. Speed matters: a full-leg session takes well under an hour.
 
 Laser hair removal is a medical procedure, so we treat it like one. Before the first session a clinician checks your skin type, medications and any history of pigmentation, then picks the settings and tests a patch. That is what keeps the treatment safe on Egyptian skin tones, where the wrong energy can cause dark marks.
 

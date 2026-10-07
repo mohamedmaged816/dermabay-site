@@ -10,6 +10,8 @@ import CtaBand from '@/components/CtaBand.astro';
 import Wordmark from '@/components/Wordmark.astro';
 import Marquee from '@/components/Marquee.astro';
 import InstagramStrip from '@/components/InstagramStrip.astro';
+import StatementPlate from '@/components/StatementPlate.astro';
+import ConcernFinder from '@/components/ConcernFinder.astro';
 import { langPaths, localizePath, type Lang } from '@/i18n/utils';
 import { t } from '@/i18n/ui';
 import { clinic } from '@/data/clinic';
@@ -30,7 +32,9 @@ const description = lang === 'ar'
 <Base {lang} {title} {description}>
   <Hero {lang} wordmark eyebrow={T('home_eyebrow')} title={T('home_h1')} sub={T('home_sub')} secondaryHref={localizePath('services', lang)} secondaryLabel={T('see_all_services')} />
   <Marquee items={services.map((s) => s.data.title)} />
-  <div class="mt-16"><Summary {lang} text={summary} /></div>
+  <StatementPlate {lang} />
+  <div class="mt-24"><Summary {lang} text={summary} /></div>
+  <ConcernFinder {lang} />
 
   <section class="container-x mt-28">
     <div class="flex flex-wrap items-end justify-between gap-6">

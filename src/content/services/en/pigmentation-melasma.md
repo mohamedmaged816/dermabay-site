@@ -5,7 +5,7 @@ order: 4
 title: Pigmentation & Melasma Treatment
 metaTitle: Melasma & Pigmentation Treatment in New Giza | DermaBay
 description: Dermatologist-led treatment for melasma, sun spots and dark marks in New Giza. Medical creams plus in-clinic sessions, planned over 3 to 6 months for lasting control.
-summary: DermaBay treats melasma, sun spots and post-acne dark marks with a dermatologist-led plan that combines prescription creams, strict sun protection and in-clinic sessions such as peels or gentle laser. Plans run 3 to 6 months. Melasma is controlled rather than cured, so maintenance matters.
+summary: DermaBay treats melasma, sun spots and post-acne dark marks with a dermatologist-led plan that combines prescription creams, strict sun protection and in-clinic sessions such as peels or gentle, low-energy passes of the Tetra Pro laser. Plans run 3 to 6 months. Melasma is controlled rather than cured, so maintenance matters.
 icon: sun
 forWho:
   - Melasma on the cheeks, forehead or upper lip, often after pregnancy or hormonal treatment

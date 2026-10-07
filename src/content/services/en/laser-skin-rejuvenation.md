@@ -5,7 +5,7 @@ order: 8
 title: Laser Skin Rejuvenation
 metaTitle: Laser Skin Rejuvenation in New Giza | DermaBay
 description: Gentle laser skin rejuvenation in New Giza for dull tone, redness, pores and fine lines. Light downtime, 3 to 4 sessions, settings chosen for Egyptian skin.
-summary: Laser skin rejuvenation at DermaBay uses gentle, non-ablative laser passes to even out skin tone, tighten pores and soften fine lines with only a day or two of pinkness. Most people do 3 to 4 sessions a month apart, then a maintenance session every 4 to 6 months. It is the lighter alternative to fractional laser.
+summary: Laser skin rejuvenation at DermaBay uses gentle, low-density passes of the Tetra Pro CO₂ laser to even out skin tone, tighten pores and soften fine lines with only a day or two of pinkness. Most people do 3 to 4 sessions a month apart, then a maintenance session every 4 to 6 months. It is the lighter alternative to fractional laser.
 icon: sparkle
 forWho:
   - Dull or uneven tone and early sun damage

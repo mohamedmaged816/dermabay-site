@@ -5,7 +5,7 @@ order: 2
 title: Fractional Laser for Scars & Texture
 metaTitle: Fractional Laser for Acne Scars in New Giza | DermaBay
 description: Fractional laser (Tetra Pro) for acne scars, pores and uneven texture in New Giza. Settings adjusted for Egyptian skin, 3 to 5 sessions, clear downtime plan.
-summary: DermaBay treats acne scars, enlarged pores and rough texture with fractional laser at Meditown, New Giza. Most people need 3 to 5 sessions about 4 to 6 weeks apart, with 3 to 5 days of redness and flaking after each one. Settings are tuned for darker skin to avoid marks, and the plan and price are agreed before the first session.
+summary: DermaBay treats acne scars, enlarged pores and rough texture with the Tetra Pro fractional CO₂ laser at Meditown, New Giza. Most people need 3 to 5 sessions about 4 to 6 weeks apart, with 3 to 5 days of redness and flaking after each one. Settings are tuned for darker skin to avoid marks, and the plan and price are agreed before the first session.
 icon: scar
 forWho:
   - "Acne scars that make-up doesn't cover: rolling, boxcar and shallow ice-pick types"
