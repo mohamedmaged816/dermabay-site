@@ -2,7 +2,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 
 const FAMILIES = [
-  'Amiri:wght@400',
+  'Reem+Kufi:wght@400;500;600',
   'Cairo:wght@400;600;700',
   'Italiana',
   'Quicksand:wght@400;500;600;700',
@@ -25,6 +25,8 @@ for (const m of css.matchAll(urlRe)) {
   rewritten = rewritten.replace(remote, `/fonts/${name}`);
   count++;
 }
+// Display faces use `optional` so a late load never shifts the headline; they are preloaded per language in Base.astro.
+rewritten = rewritten.split('@font-face').map((b, i) => (i > 0 && /font-family: '(Reem Kufi|Italiana)'/.test(b)) ? b.replace(/font-display: swap/, 'font-display: optional') : b).join('@font-face');
 out += rewritten.includes('font-display') ? rewritten : rewritten.replaceAll('@font-face {', '@font-face {\n  font-display: swap;');
 await writeFile('src/styles/fonts.css', out);
 // Manifest so the layout can preload the primary face per language.

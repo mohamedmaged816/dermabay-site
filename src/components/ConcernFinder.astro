@@ -39,15 +39,4 @@ const items = concerns.map(([label, slug], i) => ({ label, slug, i, svc: bySlug[
       </div>
     </div>
   </div>
-  <script is:inline>
-    (function () {
-      var root = document.getElementById('finder'); if (!root) return;
-      root.addEventListener('click', function (e) {
-        var chip = e.target && e.target.closest ? e.target.closest('[data-finder-chip]') : null; if (!chip) return;
-        var i = chip.getAttribute('data-finder-chip');
-        root.querySelectorAll('[data-finder-chip]').forEach(function (c) { c.setAttribute('aria-selected', c === chip ? 'true' : 'false'); });
-        root.querySelectorAll('[data-finder-panel]').forEach(function (p) { p.classList.toggle('hidden', p.getAttribute('data-finder-panel') !== i); });
-      });
-    })();
-  </script>
 </section>

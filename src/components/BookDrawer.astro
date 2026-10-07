@@ -1,0 +1,35 @@
+---
+import type { Lang } from '@/i18n/utils';
+import { t } from '@/i18n/ui';
+import { clinic } from '@/data/clinic';
+const { lang, service } = Astro.props as { lang: Lang; service?: string };
+const T = t(lang);
+const ar = lang === 'ar';
+const slots: [string, string][] = ar
+  ? [['morning', 'الصبح'], ['afternoon', 'بعد الضهر'], ['evening', 'بالليل']]
+  : [['morning', 'Morning'], ['afternoon', 'Afternoon'], ['evening', 'Evening']];
+const title = ar ? 'احجز استشارتك' : 'Book your consultation';
+const sub = ar ? 'اختار الوقت اللي يناسبك وهنكمل على واتساب.' : 'Pick a time of day that suits you and we continue on WhatsApp.';
+const go = ar ? 'كمّل على واتساب' : 'Continue on WhatsApp';
+const close = ar ? 'إغلاق' : 'Close';
+---
+<dialog class="drawer" id="book" data-phone={clinic.whatsapp} data-lang={lang} data-service={service ?? ''} aria-labelledby="book-title">
+  <form method="dialog" class="drawer-panel">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <p class="label-ink">{T('book_whatsapp')}</p>
+        <h2 id="book-title" class="font-display mt-2 text-3xl text-forest">{title}</h2>
+        <p class="mt-2 text-sm text-ink/70">{sub}</p>
+      </div>
+      <button type="submit" class="rounded-full border border-forest/30 p-2.5 text-forest" aria-label={close}><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3l10 10M13 3L3 13"/></svg></button>
+    </div>
+    {service && <p class="mt-5 rounded-2xl bg-sand px-4 py-3 text-sm font-semibold text-forest">{service}</p>}
+    <div class="mt-5 flex flex-wrap gap-2" role="group" aria-label={title}>
+      {slots.map(([k, label], i) => <button type="button" class="slot" data-slot={k} data-slot-label={label} aria-pressed={i === 0 ? 'true' : 'false'}>{label}</button>)}
+    </div>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a href="#" data-book-go target="_blank" rel="noopener" data-wa={service ?? 'general'} class="btn-terra">{go}</a>
+      <a href={`tel:${clinic.phoneE164}`} class="btn-outline-ink" dir="ltr">{T('call')} {clinic.phoneDisplay}</a>
+    </div>
+  </form>
+</dialog>

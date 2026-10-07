@@ -25,7 +25,7 @@
   --color-cream-deep: #d4c7b4;
 
   --font-display: "Italiana", "Didot", "Times New Roman", serif;
-  --font-display-ar: "Amiri", "Italiana", serif;
+  --font-display-ar: "Reem Kufi", "Italiana", sans-serif;
   --font-body: "Quicksand", system-ui, sans-serif;
   --font-body-ar: "Cairo", "Quicksand", system-ui, sans-serif;
 }
@@ -35,7 +35,8 @@ body { @apply bg-forest text-cream font-body antialiased; font-feature-settings:
 [dir="rtl"] body, [dir="rtl"] { font-family: var(--font-body-ar); }
 .font-display { font-family: var(--font-display); font-weight: 400; letter-spacing: 0.005em; }
 [dir="rtl"] .font-display { font-family: var(--font-display-ar); font-weight: 400; letter-spacing: 0; }
-[dir="rtl"] h1.font-display, [dir="rtl"] h2.font-display, [dir="rtl"] h3.font-display { line-height: 1.22 !important; }
+[dir="rtl"] h1.font-display, [dir="rtl"] h2.font-display, [dir="rtl"] h3.font-display { line-height: 1.3 !important; }
+[dir="rtl"] .font-display { font-weight: 500; }
 
 @utility container-x { @apply mx-auto w-full max-w-6xl px-5 sm:px-8; }
 
@@ -104,3 +105,51 @@ body { @apply bg-forest text-cream font-body antialiased; font-feature-settings:
 @keyframes marquee-rtl { to { transform: translateX(50%) } }
 
 details > summary::-webkit-details-marker { display: none; }
+
+/* ===== Design moves ===== */
+/* Word-by-word headline entrance */
+.words > .w { display: inline-block; opacity: 0; transform: translateY(0.35em) rotate(1deg); animation: word .9s cubic-bezier(.2,.7,.1,1) forwards; animation-delay: calc(var(--i) * 90ms + 120ms); }
+@keyframes word { to { opacity: 1; transform: none } }
+/* Scroll cue */
+.cue { position: absolute; bottom: 28px; left: 50%; width: 1px; height: 56px; background: linear-gradient(to bottom, transparent, var(--color-sand)); transform: translateX(-50%); opacity: .7; overflow: hidden; }
+.cue::after { content: ''; position: absolute; inset: -56px 0 auto 0; height: 56px; background: var(--color-forest); animation: cue 2.2s ease-in-out infinite; }
+@keyframes cue { to { transform: translateY(112px) } }
+/* Cursor spotlight on the dark field */
+.spot { position: fixed; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 30%), rgba(212,199,180,.085), transparent 60%); transition: opacity .4s; }
+@media (hover: none) { .spot { display: none } }
+/* Topographic texture */
+.topo { position: absolute; inset: -20%; pointer-events: none; opacity: .14; color: var(--color-sand); animation: topo 60s linear infinite alternate; }
+@keyframes topo { to { transform: translate3d(-3%, 2%, 0) } }
+/* Magnetic buttons */
+.btn { will-change: transform; transition: transform .25s cubic-bezier(.2,.7,.2,1), background-color .3s, color .3s, border-color .3s; }
+/* Chips fill from the centre */
+.finder-chip { position: relative; isolation: isolate; overflow: hidden; }
+.finder-chip::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--color-forest); border-radius: inherit; transform: scale(0); transition: transform .35s cubic-bezier(.2,.7,.2,1); }
+.finder-chip[aria-selected="true"]::before { transform: scale(1.05); }
+.finder-chip[aria-selected="true"] { background: transparent !important; }
+/* Arch card tilt */
+.panel.arch { transform-origin: 50% 100%; transition: transform .5s cubic-bezier(.2,.7,.2,1), background-color .3s; }
+.panel.arch:hover { transform: translateY(-6px) rotate(-1.2deg); }
+/* Treatment index */
+.tx-row { display: grid; grid-template-columns: 56px 1fr auto; align-items: center; gap: 24px; padding: 26px 0; border-top: 1px solid rgb(255 251 247 / .12); color: var(--color-cream); text-decoration: none; transition: padding-inline-start .35s, color .35s; }
+.tx-row:last-child { border-bottom: 1px solid rgb(255 251 247 / .12); }
+.tx-row:hover, .tx-row.is-active { padding-inline-start: 18px; color: var(--color-sand); }
+.tx-row .tx-arrow { transition: transform .35s; }
+.tx-row:hover .tx-arrow, .tx-row.is-active .tx-arrow { transform: translateX(8px); }
+[dir="rtl"] .tx-row:hover .tx-arrow, [dir="rtl"] .tx-row.is-active .tx-arrow { transform: translateX(-8px) scaleX(-1); }
+[dir="rtl"] .tx-arrow { transform: scaleX(-1); }
+.tx-preview { position: sticky; top: 110px; }
+.tx-pane { position: absolute; inset: 0; opacity: 0; transform: scale(.985); transition: opacity .45s, transform .45s; }
+.tx-pane.is-active { opacity: 1; transform: none; }
+/* Mobile sticky action bar */
+.actionbar { position: fixed; inset-inline: 0; bottom: 0; z-index: 50; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: rgb(35 35 28 / .92); backdrop-filter: blur(12px); border-top: 1px solid rgb(255 251 247 / .1); }
+@media (min-width: 640px) { .actionbar { display: none } }
+/* Booking drawer */
+dialog.drawer { border: 0; padding: 0; background: transparent; max-width: none; width: 100%; height: 100%; max-height: none; margin: 0; }
+dialog.drawer::backdrop { background: rgb(35 35 28 / .72); backdrop-filter: blur(6px); }
+.drawer-panel { position: fixed; inset-inline: 0; bottom: 0; margin: 0 auto; max-width: 560px; border-radius: 32px 32px 0 0; background: var(--color-cream); color: var(--color-ink); padding: 28px 24px calc(24px + env(safe-area-inset-bottom)); transform: translateY(24px); opacity: 0; transition: transform .4s cubic-bezier(.2,.7,.2,1), opacity .3s; }
+dialog.drawer[open] .drawer-panel { transform: none; opacity: 1; }
+@media (min-width: 640px) { .drawer-panel { bottom: auto; top: 50%; transform: translateY(calc(-50% + 16px)); border-radius: 32px; } dialog.drawer[open] .drawer-panel { transform: translateY(-50%); } }
+.slot { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 10px 18px; border-radius: 999px; border: 1px solid rgb(45 45 35 / .35); font-weight: 600; font-size: 14px; cursor: pointer; background: transparent; color: var(--color-forest); }
+.slot[aria-pressed="true"] { background: var(--color-forest); color: var(--color-cream); }
+@media (prefers-reduced-motion: reduce) { .words > .w { animation: none; opacity: 1; transform: none } .cue::after, .topo { animation: none } .spot { display: none } }

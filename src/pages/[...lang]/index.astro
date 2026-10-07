@@ -13,6 +13,7 @@ import InstagramStrip from '@/components/InstagramStrip.astro';
 import StatementPlate from '@/components/StatementPlate.astro';
 import ConcernFinder from '@/components/ConcernFinder.astro';
 import PhotoBand from '@/components/PhotoBand.astro';
+import TreatmentIndex from '@/components/TreatmentIndex.astro';
 import { langPaths, localizePath, type Lang } from '@/i18n/utils';
 import { t } from '@/i18n/ui';
 import { clinic } from '@/data/clinic';
@@ -37,19 +38,7 @@ const description = lang === 'ar'
   <div class="mt-24"><Summary {lang} text={summary} /></div>
   <ConcernFinder {lang} />
 
-  <section class="container-x mt-28">
-    <div class="flex flex-wrap items-end justify-between gap-6">
-      <div>
-        <p class="label">{T('nav_services')}</p>
-        <h2 class="font-display mt-3 text-4xl text-cream sm:text-5xl">{T('home_services_title')}</h2>
-      </div>
-      <p class="max-w-sm text-cream/60">{T('home_services_sub')}</p>
-    </div>
-    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-      {services.slice(0, 4).map((s, i) => <ServiceCard {lang} index={i + 1} slug={s.data.slug} title={s.data.title} description={s.data.description} icon={s.data.icon} />)}
-    </div>
-    <div class="mt-8"><a href={localizePath('services', lang)} class="btn-outline">{T('see_all_services')}</a></div>
-  </section>
+  <TreatmentIndex {lang} />
 
   {offer.active && (
     <section class="container-x mt-28">
@@ -71,7 +60,7 @@ const description = lang === 'ar'
     <div class="mt-8 grid gap-px overflow-hidden rounded-[28px] border border-cream/10 bg-cream/10 md:grid-cols-3">
       {(T('home_why') as [string, string][]).map(([h, p], i) => (
         <div class="bg-forest p-8">
-          <span class="font-display text-6xl text-sand">{String(i + 1).padStart(2, '0')}</span>
+          <span class="font-display text-6xl text-sand" data-count={i + 1}>00</span>
           <h3 class="font-display mt-6 text-2xl text-cream">{h}</h3>
           <p class="mt-3 leading-relaxed text-cream/65">{p}</p>
         </div>

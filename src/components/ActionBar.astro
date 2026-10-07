@@ -1,0 +1,11 @@
+---
+import type { Lang } from '@/i18n/utils';
+import { t } from '@/i18n/ui';
+import { clinic } from '@/data/clinic';
+const { lang } = Astro.props as { lang: Lang };
+const T = t(lang);
+---
+<div class="actionbar" role="region" aria-label={T('book_whatsapp')}>
+  <button type="button" data-book-open class="btn-terra justify-center !py-3.5">{T('book_whatsapp')}</button>
+  <a href={`tel:${clinic.phoneE164}`} class="btn-outline justify-center !py-3.5" dir="ltr">{T('call')}</a>
+</div>

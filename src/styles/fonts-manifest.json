@@ -1,29 +1,5 @@
 [
  {
-  "fam": "Amiri",
-  "weight": 400,
-  "style": "normal",
-  "url": "/fonts/202e96cd7287.woff2",
-  "latin": false,
-  "arabic": true
- },
- {
-  "fam": "Amiri",
-  "weight": 400,
-  "style": "normal",
-  "url": "/fonts/5ed9bd83f2a7.woff2",
-  "latin": false,
-  "arabic": false
- },
- {
-  "fam": "Amiri",
-  "weight": 400,
-  "style": "normal",
-  "url": "/fonts/967a6925cf99.woff2",
-  "latin": true,
-  "arabic": false
- },
- {
   "fam": "Cairo",
   "weight": 400,
   "style": "normal",
@@ -196,6 +172,102 @@
   "weight": 700,
   "style": "normal",
   "url": "/fonts/422bee69c5e1.woff2",
+  "latin": true,
+  "arabic": false
+ },
+ {
+  "fam": "Reem Kufi",
+  "weight": 400,
+  "style": "normal",
+  "url": "/fonts/0a500c1d3e7b.woff2",
+  "latin": false,
+  "arabic": true
+ },
+ {
+  "fam": "Reem Kufi",
+  "weight": 400,
+  "style": "normal",
+  "url": "/fonts/911b0f93c920.woff2",
+  "latin": false,
+  "arabic": false
+ },
+ {
+  "fam": "Reem Kufi",
+  "weight": 400,
+  "style": "normal",
+  "url": "/fonts/64b0e1a6b717.woff2",
+  "latin": false,
+  "arabic": false
+ },
+ {
+  "fam": "Reem Kufi",
+  "weight": 400,
+  "style": "normal",
+  "url": "/fonts/df5424e9f79d.woff2",
+  "latin": true,
+  "arabic": false
+ },
+ {
+  "fam": "Reem Kufi",
+  "weight": 500,
+  "style": "normal",
+  "url": "/fonts/0a500c1d3e7b.woff2",
+  "latin": false,
+  "arabic": true
+ },
+ {
+  "fam": "Reem Kufi",
+  "weight": 500,
+  "style": "normal",
+  "url": "/fonts/911b0f93c920.woff2",
+  "latin": false,
+  "arabic": false
+ },
+ {
+  "fam": "Reem Kufi",
+  "weight": 500,
+  "style": "normal",
+  "url": "/fonts/64b0e1a6b717.woff2",
+  "latin": false,
+  "arabic": false
+ },
+ {
+  "fam": "Reem Kufi",
+  "weight": 500,
+  "style": "normal",
+  "url": "/fonts/df5424e9f79d.woff2",
+  "latin": true,
+  "arabic": false
+ },
+ {
+  "fam": "Reem Kufi",
+  "weight": 600,
+  "style": "normal",
+  "url": "/fonts/0a500c1d3e7b.woff2",
+  "latin": false,
+  "arabic": true
+ },
+ {
+  "fam": "Reem Kufi",
+  "weight": 600,
+  "style": "normal",
+  "url": "/fonts/911b0f93c920.woff2",
+  "latin": false,
+  "arabic": false
+ },
+ {
+  "fam": "Reem Kufi",
+  "weight": 600,
+  "style": "normal",
+  "url": "/fonts/64b0e1a6b717.woff2",
+  "latin": false,
+  "arabic": false
+ },
+ {
+  "fam": "Reem Kufi",
+  "weight": 600,
+  "style": "normal",
+  "url": "/fonts/df5424e9f79d.woff2",
   "latin": true,
   "arabic": false
  }
