@@ -2,26 +2,26 @@
 import type { Lang } from '@/i18n/utils';
 import { t } from '@/i18n/ui';
 import WhatsAppButton from './WhatsAppButton.astro';
-import Wordmark from './Wordmark.astro';
+import Logo from './Logo.astro';
 import Leaves from './Leaves.astro';
 import { clinic } from '@/data/clinic';
 const { lang, service } = Astro.props as { lang: Lang; service?: string };
 const T = t(lang);
 ---
-<section class="container-x mt-24">
-  <div class="relative overflow-hidden rounded-[36px] border border-cream/10 bg-forest-deep px-7 py-14 sm:px-14">
-    <Leaves opacity={0.5} flip />
-    <div class="relative grid items-center gap-10 md:grid-cols-[1fr_auto]">
+<section class="container-x mt-28">
+  <div class="relative overflow-hidden rounded-[36px] bg-sand px-7 py-16 text-ink sm:px-14">
+    <Leaves opacity={0.18} flip />
+    <div class="relative grid items-center gap-12 md:grid-cols-[1fr_auto]">
       <div>
-        <p class="label">{T('book_whatsapp')}</p>
-        <h2 class="font-display mt-4 text-4xl text-cream sm:text-5xl">{T('cta_title')}</h2>
-        <p class="mt-4 max-w-md leading-relaxed text-cream/70">{T('cta_sub')}</p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <WhatsAppButton {lang} {service} />
-          <a href={`tel:${clinic.phoneE164}`} class="btn-outline" dir="ltr">{T('call')} {clinic.phoneDisplay}</a>
+        <p class="label-ink">{T('book_whatsapp')}</p>
+        <h2 class="font-display mt-5 text-5xl text-forest sm:text-6xl">{T('cta_title')}</h2>
+        <p class="mt-5 max-w-md leading-[1.8] text-ink/75">{T('cta_sub')}</p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <WhatsAppButton {lang} {service} tone="forest" />
+          <a href={`tel:${clinic.phoneE164}`} class="btn-outline-ink" dir="ltr">{T('call')} {clinic.phoneDisplay}</a>
         </div>
       </div>
-      <Wordmark size={6} tone="cream" class="hidden opacity-90 md:block" />
+      <Logo variant="stacked" class="hidden w-[180px] text-terra md:block [&>svg]:block [&>svg]:h-auto [&>svg]:w-full" />
     </div>
   </div>
 </section>

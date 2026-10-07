@@ -1,0 +1,27 @@
+---
+import type { Lang } from '@/i18n/utils';
+import { withBase } from '@/i18n/utils';
+import { clinic } from '@/data/clinic';
+const { lang } = Astro.props as { lang: Lang };
+const tiles = ['post-1', 'post-3', 'post-6', 'post-7', 'post-5', 'post-8'];
+const title = lang === 'ar' ? 'من إنستجرام' : 'On the grid';
+const sub = lang === 'ar' ? 'تابعنا @dermabay.eg لنتايج ونصايح جديدة كل أسبوع.' : 'Follow @dermabay.eg for new results and tips every week.';
+---
+<section class="container-x mt-28">
+  <div class="flex flex-wrap items-end justify-between gap-6">
+    <div>
+      <p class="label">Instagram</p>
+      <h2 class="font-display mt-3 text-4xl text-cream sm:text-5xl">{title}</h2>
+      <p class="mt-3 max-w-md text-cream/65">{sub}</p>
+    </div>
+    <a href={clinic.instagram} target="_blank" rel="noopener" class="btn-outline">@dermabay.eg</a>
+  </div>
+  <div class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+    {tiles.map((t, i) => (
+      <a href={clinic.instagram} target="_blank" rel="noopener" aria-label={lang === 'ar' ? 'افتح إنستجرام ديرما باي' : 'Open DermaBay on Instagram'} class={`group relative block overflow-hidden ${i % 2 === 0 ? 'arch' : 'rounded-[28px]'} ${i % 2 === 0 ? 'lg:translate-y-6' : ''}`}>
+        <img src={withBase(`/ig/${t}.jpg`)} alt="" loading="lazy" width="512" height="640" class="aspect-[4/5] w-full object-cover transition duration-700 group-hover:scale-105" />
+        <span class="absolute inset-0 bg-forest/0 transition group-hover:bg-forest/20"></span>
+      </a>
+    ))}
+  </div>
+</section>

@@ -8,6 +8,8 @@ import ReviewStrip from '@/components/ReviewStrip.astro';
 import Map from '@/components/Map.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import Wordmark from '@/components/Wordmark.astro';
+import Marquee from '@/components/Marquee.astro';
+import InstagramStrip from '@/components/InstagramStrip.astro';
 import { langPaths, localizePath, type Lang } from '@/i18n/utils';
 import { t } from '@/i18n/ui';
 import { clinic } from '@/data/clinic';
@@ -27,7 +29,8 @@ const description = lang === 'ar'
 ---
 <Base {lang} {title} {description}>
   <Hero {lang} wordmark eyebrow={T('home_eyebrow')} title={T('home_h1')} sub={T('home_sub')} secondaryHref={localizePath('services', lang)} secondaryLabel={T('see_all_services')} />
-  <Summary {lang} text={summary} />
+  <Marquee items={services.map((s) => s.data.title)} />
+  <div class="mt-16"><Summary {lang} text={summary} /></div>
 
   <section class="container-x mt-28">
     <div class="flex flex-wrap items-end justify-between gap-6">
@@ -63,7 +66,7 @@ const description = lang === 'ar'
     <div class="mt-8 grid gap-px overflow-hidden rounded-[28px] border border-cream/10 bg-cream/10 md:grid-cols-3">
       {(T('home_why') as [string, string][]).map(([h, p], i) => (
         <div class="bg-forest p-8">
-          <span class="font-display text-5xl text-gold">{String(i + 1).padStart(2, '0')}</span>
+          <span class="font-display text-6xl text-sand">{String(i + 1).padStart(2, '0')}</span>
           <h3 class="font-display mt-6 text-2xl text-cream">{h}</h3>
           <p class="mt-3 leading-relaxed text-cream/65">{p}</p>
         </div>
@@ -92,6 +95,8 @@ const description = lang === 'ar'
       </div>
     </section>
   )}
+
+  <InstagramStrip {lang} />
 
   <section class="container-x mt-28 grid items-center gap-10 lg:grid-cols-[auto_1fr]">
     <div class="flex items-end gap-6">

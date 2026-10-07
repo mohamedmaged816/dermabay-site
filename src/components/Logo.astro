@@ -1,0 +1,7 @@
+---
+/** The real DermaBay wordmark (Tan Pearl), extracted from the brand guidelines as vector paths. Inherits `color`. */
+import stacked from '@/assets/logo-stacked.svg?raw';
+import horizontal from '@/assets/logo-horizontal.svg?raw';
+const { variant = 'stacked', class: cls = '' } = Astro.props as { variant?: 'stacked' | 'horizontal'; class?: string };
+---
+<span class={`inline-block ${cls}`} dir="ltr" set:html={variant === 'stacked' ? stacked : horizontal} />

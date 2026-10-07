@@ -4,8 +4,8 @@ import { createHash } from 'node:crypto';
 const FAMILIES = [
   'Amiri:wght@400',
   'Cairo:wght@400;600;700',
-  'Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400',
-  'Jost:wght@400;500;600',
+  'Italiana',
+  'Quicksand:wght@400;500;600;700',
 ];
 const cssUrl = `https://fonts.googleapis.com/css2?${FAMILIES.map((f) => `family=${f}`).join('&')}&display=swap`;
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';

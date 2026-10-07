@@ -1,8 +1,7 @@
 ---
-/** The stacked DER / MA / BAY wordmark from the brand. `size` is the font-size in rem. */
-const { size = 3, class: cls = '', tone = 'cream' } = Astro.props as { size?: number; class?: string; tone?: 'cream' | 'forest' | 'gold' };
-const color = tone === 'cream' ? 'text-cream' : tone === 'gold' ? 'text-gold' : 'text-forest';
+/** Backwards-compatible wrapper: renders the real stacked logo. `size` is roughly the former type size in rem. */
+import Logo from './Logo.astro';
+const { size = 3, class: cls = '', tone = 'cream' } = Astro.props as { size?: number; class?: string; tone?: 'cream' | 'forest' | 'gold' | 'sand' | 'terra' };
+const color = { cream: 'text-cream', forest: 'text-forest', gold: 'text-sand', sand: 'text-sand', terra: 'text-terra' }[tone] ?? 'text-cream';
 ---
-<span class={`inline-block select-none font-display uppercase leading-[0.86] tracking-[0.08em] ${color} ${cls}`} style={`font-family: var(--font-display); font-size:${size}rem`} aria-label="DermaBay" dir="ltr">
-  <span class="block">Der</span><span class="block">Ma</span><span class="block">Bay</span>
-</span>
+<span class={`inline-block ${color} ${cls}`} style={`width:${(size * 2.3).toFixed(1)}rem`}><Logo variant="stacked" class="block w-full [&>svg]:block [&>svg]:h-auto [&>svg]:w-full" /></span>

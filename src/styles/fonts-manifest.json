@@ -24,134 +24,6 @@
   "arabic": false
  },
  {
-  "fam": "Bodoni Moda",
-  "weight": 400,
-  "style": "italic",
-  "url": "/fonts/0b8162a469f1.woff2",
-  "latin": false,
-  "arabic": false
- },
- {
-  "fam": "Bodoni Moda",
-  "weight": 400,
-  "style": "italic",
-  "url": "/fonts/af37664c616a.woff2",
-  "latin": false,
-  "arabic": false
- },
- {
-  "fam": "Bodoni Moda",
-  "weight": 400,
-  "style": "italic",
-  "url": "/fonts/56cdd37aff5a.woff2",
-  "latin": false,
-  "arabic": false
- },
- {
-  "fam": "Bodoni Moda",
-  "weight": 400,
-  "style": "italic",
-  "url": "/fonts/76c1c51d952f.woff2",
-  "latin": true,
-  "arabic": false
- },
- {
-  "fam": "Bodoni Moda",
-  "weight": 400,
-  "style": "normal",
-  "url": "/fonts/8a89cf296a0d.woff2",
-  "latin": false,
-  "arabic": false
- },
- {
-  "fam": "Bodoni Moda",
-  "weight": 400,
-  "style": "normal",
-  "url": "/fonts/2be84f4babbf.woff2",
-  "latin": false,
-  "arabic": false
- },
- {
-  "fam": "Bodoni Moda",
-  "weight": 400,
-  "style": "normal",
-  "url": "/fonts/d906e4481979.woff2",
-  "latin": false,
-  "arabic": false
- },
- {
-  "fam": "Bodoni Moda",
-  "weight": 400,
-  "style": "normal",
-  "url": "/fonts/5a076727285c.woff2",
-  "latin": true,
-  "arabic": false
- },
- {
-  "fam": "Bodoni Moda",
-  "weight": 500,
-  "style": "normal",
-  "url": "/fonts/8a89cf296a0d.woff2",
-  "latin": false,
-  "arabic": false
- },
- {
-  "fam": "Bodoni Moda",
-  "weight": 500,
-  "style": "normal",
-  "url": "/fonts/2be84f4babbf.woff2",
-  "latin": false,
-  "arabic": false
- },
- {
-  "fam": "Bodoni Moda",
-  "weight": 500,
-  "style": "normal",
-  "url": "/fonts/d906e4481979.woff2",
-  "latin": false,
-  "arabic": false
- },
- {
-  "fam": "Bodoni Moda",
-  "weight": 500,
-  "style": "normal",
-  "url": "/fonts/5a076727285c.woff2",
-  "latin": true,
-  "arabic": false
- },
- {
-  "fam": "Bodoni Moda",
-  "weight": 600,
-  "style": "normal",
-  "url": "/fonts/8a89cf296a0d.woff2",
-  "latin": false,
-  "arabic": false
- },
- {
-  "fam": "Bodoni Moda",
-  "weight": 600,
-  "style": "normal",
-  "url": "/fonts/2be84f4babbf.woff2",
-  "latin": false,
-  "arabic": false
- },
- {
-  "fam": "Bodoni Moda",
-  "weight": 600,
-  "style": "normal",
-  "url": "/fonts/d906e4481979.woff2",
-  "latin": false,
-  "arabic": false
- },
- {
-  "fam": "Bodoni Moda",
-  "weight": 600,
-  "style": "normal",
-  "url": "/fonts/5a076727285c.woff2",
-  "latin": true,
-  "arabic": false
- },
- {
   "fam": "Cairo",
   "weight": 400,
   "style": "normal",
@@ -224,74 +96,106 @@
   "arabic": false
  },
  {
-  "fam": "Jost",
+  "fam": "Italiana",
   "weight": 400,
   "style": "normal",
-  "url": "/fonts/466e9f696cbb.woff2",
-  "latin": false,
-  "arabic": false
- },
- {
-  "fam": "Jost",
-  "weight": 400,
-  "style": "normal",
-  "url": "/fonts/920dcbe80d5d.woff2",
-  "latin": false,
-  "arabic": false
- },
- {
-  "fam": "Jost",
-  "weight": 400,
-  "style": "normal",
-  "url": "/fonts/0428ef9c9930.woff2",
+  "url": "/fonts/ce917ad2e503.woff2",
   "latin": true,
   "arabic": false
  },
  {
-  "fam": "Jost",
-  "weight": 500,
+  "fam": "Quicksand",
+  "weight": 400,
   "style": "normal",
-  "url": "/fonts/466e9f696cbb.woff2",
+  "url": "/fonts/8c18ec0bb69c.woff2",
   "latin": false,
   "arabic": false
  },
  {
-  "fam": "Jost",
-  "weight": 500,
+  "fam": "Quicksand",
+  "weight": 400,
   "style": "normal",
-  "url": "/fonts/920dcbe80d5d.woff2",
+  "url": "/fonts/db92d2802bf7.woff2",
   "latin": false,
   "arabic": false
  },
  {
-  "fam": "Jost",
-  "weight": 500,
+  "fam": "Quicksand",
+  "weight": 400,
   "style": "normal",
-  "url": "/fonts/0428ef9c9930.woff2",
+  "url": "/fonts/422bee69c5e1.woff2",
   "latin": true,
   "arabic": false
  },
  {
-  "fam": "Jost",
-  "weight": 600,
+  "fam": "Quicksand",
+  "weight": 500,
   "style": "normal",
-  "url": "/fonts/466e9f696cbb.woff2",
+  "url": "/fonts/8c18ec0bb69c.woff2",
   "latin": false,
   "arabic": false
  },
  {
-  "fam": "Jost",
-  "weight": 600,
+  "fam": "Quicksand",
+  "weight": 500,
   "style": "normal",
-  "url": "/fonts/920dcbe80d5d.woff2",
+  "url": "/fonts/db92d2802bf7.woff2",
   "latin": false,
   "arabic": false
  },
  {
-  "fam": "Jost",
+  "fam": "Quicksand",
+  "weight": 500,
+  "style": "normal",
+  "url": "/fonts/422bee69c5e1.woff2",
+  "latin": true,
+  "arabic": false
+ },
+ {
+  "fam": "Quicksand",
   "weight": 600,
   "style": "normal",
-  "url": "/fonts/0428ef9c9930.woff2",
+  "url": "/fonts/8c18ec0bb69c.woff2",
+  "latin": false,
+  "arabic": false
+ },
+ {
+  "fam": "Quicksand",
+  "weight": 600,
+  "style": "normal",
+  "url": "/fonts/db92d2802bf7.woff2",
+  "latin": false,
+  "arabic": false
+ },
+ {
+  "fam": "Quicksand",
+  "weight": 600,
+  "style": "normal",
+  "url": "/fonts/422bee69c5e1.woff2",
+  "latin": true,
+  "arabic": false
+ },
+ {
+  "fam": "Quicksand",
+  "weight": 700,
+  "style": "normal",
+  "url": "/fonts/8c18ec0bb69c.woff2",
+  "latin": false,
+  "arabic": false
+ },
+ {
+  "fam": "Quicksand",
+  "weight": 700,
+  "style": "normal",
+  "url": "/fonts/db92d2802bf7.woff2",
+  "latin": false,
+  "arabic": false
+ },
+ {
+  "fam": "Quicksand",
+  "weight": 700,
+  "style": "normal",
+  "url": "/fonts/422bee69c5e1.woff2",
   "latin": true,
   "arabic": false
  }

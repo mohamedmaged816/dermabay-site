@@ -6,7 +6,7 @@ export const clinic = {
   phoneDisplay: '01288909990',
   phoneE164: '+201288909990',
   whatsapp: '+201288909990',
-  email: '',
+  email: 'dermabayeg@gmail.com',
   instagram: 'https://www.instagram.com/dermabay.eg/',
   mapsUrl: 'https://www.google.com/maps/place/?q=place_id:ChIJxWWLVQBRWBQRnMqt68soZIE',
   reviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJxWWLVQBRWBQRnMqt68soZIE',

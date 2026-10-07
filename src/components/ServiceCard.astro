@@ -6,9 +6,9 @@ const { lang, slug, title, description, icon, index } = Astro.props as { lang: L
 <a href={localizePath(`services/${slug}`, lang)} class="group panel arch relative flex min-h-[360px] flex-col justify-end overflow-hidden p-7 pt-28 transition hover:-translate-y-1 hover:bg-paper">
   <span class="absolute inset-x-0 top-9 flex flex-col items-center gap-3 text-forest/80">
     <Icon name={icon} class="h-8 w-8" />
-    {index !== undefined && <span class="font-display text-lg text-gold-deep">{String(index).padStart(2, '0')}</span>}
+    {index !== undefined && <span class="font-display text-xl text-terra">{String(index).padStart(2, '0')}</span>}
   </span>
-  <h3 class="font-display text-[28px] leading-[1.05] text-forest">{title}</h3>
+  <h3 class="font-display text-[30px] leading-[1.05] text-forest">{title}</h3>
   <p class="mt-3 text-sm leading-relaxed text-ink/70">{description}</p>
   <span class="mt-5 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] text-gold-deep">
     <span class="h-px w-6 bg-gold-deep transition-all group-hover:w-10"></span>

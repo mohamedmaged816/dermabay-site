@@ -1,0 +1,9 @@
+---
+const { items } = Astro.props as { items: string[] };
+const row = [...items, ...items];
+---
+<div class="marquee border-y border-cream/10 py-5" aria-hidden="true">
+  <div class="marquee-track gap-10 px-5">
+    {row.map((x) => <span class="font-display whitespace-nowrap text-2xl text-cream/70 sm:text-3xl">{x}<span class="mx-10 inline-block h-1.5 w-1.5 -translate-y-2 rounded-full bg-terra"></span></span>)}
+  </div>
+</div>
