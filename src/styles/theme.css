@@ -170,3 +170,62 @@ dialog.drawer[open] .drawer-panel { transform: none; opacity: 1; }
   .label, .label-ink { letter-spacing: .22em; font-size: 10px }
   footer .max-w-\[720px\] { max-width: 100% }
 }
+
+/* ===== Aesthetic pass ===== */
+/* Warm, slowly moving light on the dark field */
+.glow { position: fixed; inset: -20%; z-index: 0; pointer-events: none; background:
+  radial-gradient(60% 50% at 70% 110%, rgba(124,116,88,.28), transparent 70%),
+  radial-gradient(45% 40% at 10% -10%, rgba(134,71,40,.14), transparent 70%);
+  animation: glow 36s ease-in-out infinite alternate; }
+@keyframes glow { to { transform: translate3d(4%, -3%, 0) scale(1.06) } }
+main, header, footer { position: relative; z-index: 1; }
+
+/* Brushed brass */
+:root { --brass: linear-gradient(100deg, #7d6a43 0%, #d9c79e 28%, #a58c5d 52%, #e6d6b2 74%, #8a7449 100%); }
+.hairline-gold { background: var(--brass) !important; }
+.brass-ring { position: relative; }
+.brass-ring::before { content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1px; background: var(--brass); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; pointer-events: none; z-index: 2; opacity: .9; }
+.beam { background: var(--brass); box-shadow: 0 0 18px 4px rgba(217,199,158,.45), 0 0 70px 18px rgba(134,71,40,.3); }
+
+/* Masks */
+@utility pill { border-radius: 999px; }
+@utility arch { border-radius: 999px 999px 28px 28px; }
+
+/* Slower, calmer motion */
+.reveal { transition-duration: 1.5s; }
+.words > .w { animation-duration: 1.3s; animation-delay: calc(var(--i) * 110ms + 150ms); }
+.btn { transition-duration: .55s; }
+.tx-row, .tx-row .tx-arrow, .tx-pane, .finder-chip::before, .panel.arch { transition-duration: .6s; }
+.hero-in > * { animation-duration: 1.4s; }
+
+/* Parallax layers */
+[data-parallax] { will-change: transform; }
+
+/* Labels in the display voice */
+.label, .label-ink { font-family: var(--font-display); font-weight: 400; font-size: 13px; letter-spacing: .26em; }
+[dir="rtl"] .label, [dir="rtl"] .label-ink { font-family: var(--font-display-ar); font-weight: 500; letter-spacing: .04em; font-size: 13px; }
+
+/* Oversized type divider */
+.bigtype { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.bigtype-track { display: flex; width: max-content; animation: bigtype 70s linear infinite; }
+[dir="rtl"] .bigtype-track { animation-name: bigtype-rtl; }
+@keyframes bigtype { to { transform: translateX(-50%) } }
+@keyframes bigtype-rtl { to { transform: translateX(50%) } }
+.bigtype span { font-family: var(--font-display); font-size: clamp(5rem, 14vw, 11rem); line-height: 1; white-space: nowrap; color: rgb(255 251 247 / .92); padding-inline: .35em; }
+[dir="rtl"] .bigtype span { font-family: var(--font-display-ar); font-weight: 500; }
+
+/* Ornamental numerals behind treatment rows */
+.tx-row { position: relative; }
+.tx-row::before { content: attr(data-num); position: absolute; inset-inline-start: -8px; top: 50%; transform: translateY(-52%); font-family: var(--font-display); font-size: 150px; line-height: 1; color: rgb(255 251 247 / .045); pointer-events: none; }
+
+/* Framed (hairline) summary instead of a filled card */
+.frame { border: 1px solid rgb(212 199 180 / .35); border-radius: 28px; }
+
+/* Custom cursor (desktop, hover devices) */
+.cursor { position: fixed; left: 0; top: 0; z-index: 90; width: 26px; height: 26px; margin: -13px 0 0 -13px; border: 1px solid rgb(212 199 180 / .9); border-radius: 999px; pointer-events: none; transform: translate3d(var(--cx, -100px), var(--cy, -100px), 0) scale(var(--cs, 1)); transition: transform .12s linear, background-color .3s, border-color .3s; mix-blend-mode: difference; display: none; }
+html.has-cursor .cursor { display: block; }
+html.has-cursor .cursor.is-link { --cs: 1.9; border-color: rgb(212 199 180 / .5); background: rgb(212 199 180 / .08); }
+html.has-cursor .cursor.is-cta { --cs: 2.2; background: rgb(134 71 40 / .55); border-color: transparent; mix-blend-mode: normal; }
+html.has-cursor, html.has-cursor a, html.has-cursor button, html.has-cursor summary { cursor: none; }
+@media (prefers-reduced-motion: reduce) { .glow, .bigtype-track { animation: none } .cursor { display: none !important } }
+@media (max-width: 639.98px) { .tx-row::before { font-size: 84px } .label, .label-ink { font-size: 11px } }

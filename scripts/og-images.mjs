@@ -14,8 +14,8 @@ await mkdir(OUT, { recursive: true });
 await mkdir(DIST_OUT, { recursive: true });
 await mkdir(TMP, { recursive: true });
 
-const LOGO = await readFile(join(ROOT, 'src/assets/logo-stacked.svg'), 'utf8');
-const fontsCss = (await readFile(join(ROOT, 'src/styles/fonts.css'), 'utf8')).replaceAll('/fonts/', `file://${join(ROOT, 'public/fonts')}/`);
+const LOGO = await readFile(join(ROOT, 'src/assets/logo-horizontal.svg'), 'utf8');
+const fontsCss = (await readFile(join(ROOT, 'src/styles/fonts.css'), 'utf8')).replaceAll('/fonts/', `file://${join(ROOT, 'public/fonts')}/`).replaceAll('font-display: optional', 'font-display: block').replaceAll('font-display: swap', 'font-display: block');
 
 function ogName(route) {
   const t = route.replace(/^\/+|\/+$/g, '');
@@ -45,18 +45,18 @@ for (const f of files) {
   const page = `<!doctype html><html lang="${lang}" dir="${lang === 'ar' ? 'rtl' : 'ltr'}"><head><meta charset="utf-8"><style>
 ${fontsCss}
 html,body{margin:0;width:1200px;height:630px;overflow:hidden}
-body{background:#2d2d23;color:#fffbf7;font-family:${lang === 'ar' ? "'Cairo'" : "'Quicksand'"},system-ui,sans-serif;position:relative}
+body{background:#864728;color:#fffbf7;font-family:${lang === 'ar' ? "'Cairo'" : "'Quicksand'"},system-ui,sans-serif;position:relative}
 .leaf{position:absolute;right:-140px;top:-120px;width:720px;height:720px;opacity:.6;filter:blur(1.5px)}
 [dir=rtl] .leaf{right:auto;left:-140px;transform:scaleX(-1)}
 .wrap{position:absolute;inset:0;padding:64px 80px;display:flex;flex-direction:column;justify-content:space-between}
-.eyebrow{font-size:17px;letter-spacing:${lang === 'ar' ? '0' : '.3em'};text-transform:uppercase;color:#d4c7b4;font-weight:600}
-h1{font-family:${lang === 'ar' ? "'Amiri'" : "'Italiana'"},serif;font-weight:400;font-size:${title.length > 50 ? 62 : 80}px;line-height:1.02;margin:0;max-width:780px;color:#fffbf7}
-.logo{position:absolute;${lang === 'ar' ? 'left' : 'right'}:84px;bottom:64px;width:150px;color:#d4c7b4}
+.eyebrow{font-family:${lang === 'ar' ? "'Cairo'" : "'Italiana'"},serif;font-size:19px;letter-spacing:${lang === 'ar' ? '0' : '.28em'};text-transform:uppercase;color:#f0dcc8;font-weight:400}
+h1{font-family:${lang === 'ar' ? "'Reem Kufi'" : "'Italiana'"},serif;font-weight:${lang === 'ar' ? 500 : 400};font-weight:400;font-size:${title.length > 50 ? 62 : 80}px;line-height:1.02;margin:0;max-width:780px;color:#fffbf7}
+.logo{position:absolute;${lang === 'ar' ? 'right' : 'left'}:80px;top:56px;width:300px;color:#d4c7b4}
 .logo svg{width:100%;height:auto;display:block}
-.foot{display:flex;gap:28px;font-size:17px;color:rgba(255,251,247,.65);letter-spacing:.04em;font-weight:600}
+.foot{display:flex;gap:28px;font-size:17px;color:rgba(255,251,247,.75);letter-spacing:.04em;font-weight:600}
 </style></head><body>
-<svg class="leaf" viewBox="0 0 400 600" fill="#23231c"><path d="M300 40c-70 10-120 70-130 150 20-10 40-30 55-55-5 45-25 80-55 105 30 0 60-15 85-40-10 45-35 80-70 100 40 5 75-10 100-40 0 45-20 85-55 110 45-5 80-30 100-70 10 40 0 80-25 110 55-25 90-80 95-150 20 30 30 60 30 95 25-60 20-130-15-185-20-30-50-55-85-70 10-25 25-45 45-60-30-10-50-10-75 0z"/><path d="M40 600c20-120 70-220 150-300-60 20-110 60-150 110 30-70 80-130 150-170-70 10-130 40-180 90 40-60 100-110 170-140-80 0-150 30-200 80 50-60 120-100 200-110-20 10-30 30-30 50-60 60-100 140-110 240z" opacity=".8"/></svg>
-<div class="wrap"><div><div class="eyebrow">${esc(eyebrow)}</div><h1 style="margin-top:28px">${esc(title)}</h1></div>
+<svg class="leaf" viewBox="0 0 400 600" fill="#6e3a1f"><path d="M300 40c-70 10-120 70-130 150 20-10 40-30 55-55-5 45-25 80-55 105 30 0 60-15 85-40-10 45-35 80-70 100 40 5 75-10 100-40 0 45-20 85-55 110 45-5 80-30 100-70 10 40 0 80-25 110 55-25 90-80 95-150 20 30 30 60 30 95 25-60 20-130-15-185-20-30-50-55-85-70 10-25 25-45 45-60-30-10-50-10-75 0z"/><path d="M40 600c20-120 70-220 150-300-60 20-110 60-150 110 30-70 80-130 150-170-70 10-130 40-180 90 40-60 100-110 170-140-80 0-150 30-200 80 50-60 120-100 200-110-20 10-30 30-30 50-60 60-100 140-110 240z" opacity=".8"/></svg>
+<div class="wrap"><div style="margin-top:96px"><div class="eyebrow">${esc(eyebrow)}</div><h1 style="margin-top:22px">${esc(title)}</h1></div>
 <div class="foot"><span>Meditown · NewGiza Health Park</span><span dir="ltr">WhatsApp 01288909990</span></div></div>
 <div class="logo">${LOGO}</div>
 </body></html>`;

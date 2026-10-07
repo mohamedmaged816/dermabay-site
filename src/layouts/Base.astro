@@ -44,7 +44,9 @@ const preload = (lang === 'ar' ? [pick('Reem Kufi', 'arabic'), pick('Cairo', 'ar
     </script>}
   </head>
   <body class="min-h-screen flex flex-col pb-[76px] sm:pb-0">
+    <div class="glow" aria-hidden="true"></div>
     <div class="spot" aria-hidden="true"></div>
+    <div class="cursor" aria-hidden="true"></div>
     <Header {lang} />
     <main class="flex-1"><slot /></main>
     <Footer {lang} />
@@ -69,10 +71,34 @@ const preload = (lang === 'ar' ? [pick('Reem Kufi', 'arabic'), pick('Cairo', 'ar
             var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { requestAnimationFrame(step); io.disconnect(); } }); io.observe(el);
           });
         }
-        function init() { initReveal(); initCounters(); }
+        var pxEls = [];
+        function initParallax() {
+          pxEls = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
+          if (reduced || !matchMedia('(hover: hover)').matches) { pxEls.forEach(function (el) { el.style.transform = ''; }); pxEls = []; }
+        }
+        function onScroll() {
+          if (!pxEls.length) return;
+          var vh = innerHeight;
+          pxEls.forEach(function (el) {
+            var r = el.getBoundingClientRect(); if (r.bottom < -200 || r.top > vh + 200) return;
+            var f = parseFloat(el.getAttribute('data-parallax')) || 0.1; var c = (r.top + r.height / 2) - vh / 2;
+            el.style.transform = 'translate3d(0,' + (-c * f).toFixed(1) + 'px,0)';
+          });
+        }
+        var ticking = false;
+        addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { onScroll(); ticking = false; }); } }, { passive: true });
+        function init() { initReveal(); initCounters(); initParallax(); onScroll(); }
         document.addEventListener('astro:page-load', init);
         if (!window.__dbBound) {
           window.__dbBound = true;
+          // custom cursor
+          if (matchMedia('(hover: hover) and (pointer: fine)').matches && !reduced) {
+            document.documentElement.classList.add('has-cursor');
+            var cur = document.querySelector('.cursor'); var cx = -100, cy = -100, tx = -100, ty = -100;
+            document.addEventListener('pointermove', function (e) { tx = e.clientX; ty = e.clientY; var t = e.target && e.target.closest ? e.target : null; var cta = t && t.closest('[data-wa],[data-book-open],.btn-terra'); var link = t && t.closest('a,button,summary,[data-finder-chip]'); cur.classList.toggle('is-cta', !!cta); cur.classList.toggle('is-link', !!link && !cta); }, { passive: true });
+            (function loop() { cx += (tx - cx) * 0.22; cy += (ty - cy) * 0.22; cur.style.setProperty('--cx', cx.toFixed(1) + 'px'); cur.style.setProperty('--cy', cy.toFixed(1) + 'px'); requestAnimationFrame(loop); })();
+            document.addEventListener('astro:after-swap', function () { cur = document.querySelector('.cursor'); });
+          }
           // spotlight
           if (matchMedia('(hover: hover)').matches && !reduced) {
             document.addEventListener('pointermove', function (e) { document.documentElement.style.setProperty('--mx', e.clientX + 'px'); document.documentElement.style.setProperty('--my', e.clientY + 'px'); }, { passive: true });

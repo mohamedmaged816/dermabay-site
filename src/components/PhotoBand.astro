@@ -6,9 +6,9 @@ const { lang, name = 'room-wide', label, title } = Astro.props as { lang: Lang; 
 const l = label ?? (lang === 'ar' ? 'العيادة · ميديتاون، نيو جيزة' : 'The clinic · Meditown, New Giza');
 const t = title ?? (lang === 'ar' ? 'غرف علاج هادية، أجهزة حديثة، وتعقيم بين كل عميل.' : 'Quiet treatment rooms, current-generation devices, sterilised between every patient.');
 ---
-<section class="container-x mt-28">
-  <div class="relative overflow-hidden rounded-[36px] border border-sand/20">
-    <Photo {name} alt={lang === 'ar' ? 'غرفة علاج في ديرما باي' : 'A DermaBay treatment room'} class="h-[300px] w-full object-cover sm:h-[520px]" width={1800} height={1392} />
+<section class="container-x mt-28 lg:!pe-0 lg:!max-w-[calc(72rem+((100vw-72rem)/2))] lg:!me-0">
+  <div class="brass-ring relative overflow-hidden rounded-[36px] lg:rounded-e-none">
+    <div class="h-[300px] sm:h-[560px]"><div class="-my-[10%] h-[120%]" data-parallax="0.1"><Photo {name} alt={lang === 'ar' ? 'غرفة علاج في ديرما باي' : 'A DermaBay treatment room'} class="h-full w-full object-cover" width={1800} height={1392} /></div></div>
     <div class="absolute inset-0 bg-gradient-to-t from-forest/95 via-forest/30 to-transparent"></div>
     <div class="beam" aria-hidden="true" style="animation-duration: 11s"></div>
     <div class="absolute inset-x-0 bottom-0 p-5 sm:p-12">

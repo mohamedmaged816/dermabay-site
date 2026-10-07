@@ -1,0 +1,11 @@
+---
+import type { Lang } from '@/i18n/utils';
+const { lang, text } = Astro.props as { lang: Lang; text?: string };
+const line = text ?? (lang === 'ar' ? 'نضارة أحسن، حياة أحسن' : 'Glow better, live better');
+const row = [line, line, line, line];
+---
+<section class="bigtype relative mt-24 border-y border-cream/10 py-10 sm:py-14" aria-hidden="true">
+  <div class="bigtype-track items-center">
+    {row.map((t) => <><span>{t}</span><span class="!text-terra !text-[.35em] !px-0 self-center" style="font-family: var(--font-body)">●</span></>)}
+  </div>
+</section>

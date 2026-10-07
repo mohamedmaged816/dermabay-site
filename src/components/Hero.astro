@@ -4,12 +4,15 @@ import WhatsAppButton from './WhatsAppButton.astro';
 import Leaves from './Leaves.astro';
 import Logo from './Logo.astro';
 import Photo from './Photo.astro';
-interface Props { lang: Lang; eyebrow?: string; title: string; sub?: string; service?: string; secondaryHref?: string; secondaryLabel?: string; compact?: boolean; wordmark?: boolean; image?: string; imageAlt?: string; }
-const { lang, eyebrow, title, sub, service, secondaryHref, secondaryLabel, compact = false, wordmark = false, image, imageAlt = '' } = Astro.props;
+interface Props { lang: Lang; eyebrow?: string; title: string; sub?: string; service?: string; secondaryHref?: string; secondaryLabel?: string; compact?: boolean; wordmark?: boolean; image?: string; imageAlt?: string; shape?: 'arch' | 'pill' | 'circle'; }
+const { lang, eyebrow, title, sub, service, secondaryHref, secondaryLabel, compact = false, wordmark = false, image, imageAlt = '', shape = 'arch' } = Astro.props;
+const shapeCls = shape === 'pill' ? 'pill' : shape === 'circle' ? 'rounded-full' : 'arch';
+const sizeCls = shape === 'circle' ? 'h-[260px] w-[260px] sm:h-[420px] sm:w-[420px]' : 'h-[300px] w-[230px] sm:h-[500px] sm:w-[360px]';
 const showArch = wordmark || !!image;
 ---
 <section class={`relative overflow-hidden ${compact ? 'pb-10 pt-6 sm:pb-14 sm:pt-10' : 'pb-12 pt-8 sm:min-h-[calc(100svh-76px)] sm:pb-32 sm:pt-20 sm:flex sm:items-center'}`}>
   <Leaves opacity={0.6} />
+  <div class="pointer-events-none absolute inset-0 blur-[18px] saturate-50" data-parallax="0.06" aria-hidden="true"><Leaves opacity={0.5} flip /></div>
   {!compact && <div class="cue hidden sm:block" aria-hidden="true"></div>}
   <div class="container-x relative w-full">
     <div class={`grid items-center gap-8 sm:gap-12 ${showArch ? 'lg:grid-cols-[1.2fr_1fr]' : ''}`}>
@@ -24,10 +27,10 @@ const showArch = wordmark || !!image;
       </div>
       {showArch && (
         <div class={`${image ? 'flex' : 'hidden lg:flex'} justify-center lg:justify-end`}>
-          <div class={`arch relative overflow-hidden border border-sand/30 bg-forest-deep/70 shadow-[0_40px_80px_-30px_rgba(0,0,0,.6)] ${image ? 'h-[300px] w-[230px] sm:h-[500px] sm:w-[360px]' : 'flex h-[460px] w-[340px] items-center justify-center'}`}>
-            {image && <Photo name={image} alt={imageAlt} priority class="absolute inset-0 h-full w-full object-cover" width={1200} height={1500} />}
+          <div class={`${shapeCls} brass-ring relative overflow-hidden bg-forest-deep/70 shadow-[0_40px_80px_-30px_rgba(0,0,0,.6)] ${image ? sizeCls : 'flex h-[460px] w-[340px] items-center justify-center'}`}>
+            {image && <div class="absolute -inset-y-[12%] inset-x-0" data-parallax="0.12"><Photo name={image} alt={imageAlt} priority class="h-full w-full object-cover" width={1200} height={1500} /></div>}
             {image && <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/90 via-forest-deep/20 to-forest-deep/10"></div>}
-            <div class="absolute inset-3 arch border border-sand/20"></div>
+            <div class={`absolute inset-3 ${shapeCls} border border-sand/20`}></div>
             <div class="beam" aria-hidden="true"></div>
             {wordmark && <Logo variant="stacked" class={`text-sand [&>svg]:block [&>svg]:h-auto [&>svg]:w-full ${image ? 'absolute bottom-6 left-1/2 block w-[90px] -translate-x-1/2 sm:bottom-9 sm:w-[140px] drop-shadow-[0_6px_24px_rgba(0,0,0,.5)]' : 'relative w-[200px]'}`} />}
           </div>

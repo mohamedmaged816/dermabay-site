@@ -20,9 +20,9 @@ const img = (slug: string) => ({ 'laser-hair-removal': 'handpiece-portrait', 'fr
       <p class="max-w-sm text-cream/65">{T('home_services_sub')}</p>
     </div>
     <div class="mt-10 grid gap-12 lg:grid-cols-[1.1fr_1fr]">
-      <div data-tx-list>
+      <div data-tx-list class="lg:-ms-[calc((100vw-72rem)/2)] lg:ps-[calc((100vw-72rem)/2)]">
         {services.map((s, i) => (
-          <a href={localizePath(`services/${s.data.slug}`, lang)} class={`tx-row ${i === 0 ? 'is-active' : ''}`} data-tx={i}>
+          <a href={localizePath(`services/${s.data.slug}`, lang)} class={`tx-row ${i === 0 ? 'is-active' : ''}`} data-tx={i} data-num={String(i + 1).padStart(2, '0')}>
             <span class="font-display text-2xl text-sand">{String(i + 1).padStart(2, '0')}</span>
             <span>
               <span class="font-display block text-[1.9rem] leading-[1.05] sm:text-[2.4rem]">{s.data.title}</span>
@@ -33,7 +33,7 @@ const img = (slug: string) => ({ 'laser-hair-removal': 'handpiece-portrait', 'fr
         ))}
       </div>
       <div class="tx-preview hidden lg:block">
-        <div class="relative aspect-[4/5] overflow-hidden rounded-[32px] border border-sand/20 bg-forest-deep">
+        <div class="brass-ring relative aspect-[4/5] overflow-hidden rounded-[32px] bg-forest-deep">
           {services.map((s, i) => (
             <div class={`tx-pane ${i === 0 ? 'is-active' : ''}`} data-tx-pane={i}>
               <Photo name={img(s.data.slug)} alt="" class="absolute inset-0 h-full w-full object-cover" width={1200} height={1500} />

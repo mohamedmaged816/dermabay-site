@@ -12,18 +12,18 @@ const year = new Date().getFullYear();
   <div class="container-x py-10 sm:py-16">
     <Logo variant="horizontal" class="block w-full max-w-[720px] text-cream [&>svg]:block [&>svg]:h-auto [&>svg]:w-full" />
     <p class="mt-4 label">{lang === 'ar' ? 'عيادة تجميل · نيو جيزة' : 'Aesthetic Clinic · New Giza'}</p>
-    <div class="mt-10 grid gap-8 sm:mt-14 sm:gap-12 md:grid-cols-3">
-      <address class="not-italic">
+    <div class="mt-10 grid gap-8 sm:mt-14 sm:gap-0 md:grid-cols-3 md:divide-x md:divide-sand/10 rtl:md:divide-x-reverse">
+      <address class="not-italic md:pe-10">
         <p class="label">{T('contact_address')}</p>
         <p class="mt-3 leading-relaxed text-cream/85">{addr.line1}<br/>{addr.line2}<br/>{addr.city}, {addr.region}</p>
       </address>
-      <div>
+      <div class="md:px-10">
         <p class="label">{T('contact_phone')}</p>
         <p class="mt-3"><a href={`tel:${clinic.phoneE164}`} class="font-display text-3xl text-cream hover:text-sand" dir="ltr">{clinic.phoneDisplay}</a></p>
         <p class="mt-2"><a href={`mailto:${clinic.email}`} class="text-cream/80 hover:text-sand">{clinic.email}</a></p>
         <p class="mt-3 text-sm text-cream/65">{clinic.hoursText[lang]}</p>
       </div>
-      <div>
+      <div class="md:ps-10">
         <p class="label">{T('footer_areas')}</p>
         <p class="mt-3 leading-relaxed text-cream/85">{clinic.areasServed[lang].join(' · ')}</p>
         <nav class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-cream/70">
@@ -35,5 +35,5 @@ const year = new Date().getFullYear();
       </div>
     </div>
   </div>
-  <div class="border-t border-cream/10 py-5 text-center text-[11px] uppercase tracking-[0.2em] text-cream/65">© {year} {clinic.name} · {T('footer_rights')}</div>
+  <div class="border-t border-cream/10 py-5 text-center text-[11px] uppercase tracking-[0.2em] text-cream/65"><span dir="ltr">Meditown, New Giza · {clinic.geo ? `${clinic.geo.lat.toFixed(2)}° N, ${clinic.geo.lng.toFixed(2)}° E` : ''}</span><span class="mx-3 text-sand">·</span>© {year} {clinic.name} · {T('footer_rights')}</div>
 </footer>

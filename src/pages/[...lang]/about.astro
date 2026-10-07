@@ -30,7 +30,7 @@ const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, {
 ---
 <Base {lang} {title} {description}>
   <Breadcrumbs items={crumbs} />
-  <Hero {lang} compact wordmark image="room-portrait" imageAlt={lang === 'ar' ? 'عيادة ديرما باي من الداخل' : 'Inside DermaBay clinic'} eyebrow={T('nav_about')} title={T('about_title')} sub={description} />
+  <Hero {lang} compact shape="pill" wordmark image="room-portrait" imageAlt={lang === 'ar' ? 'عيادة ديرما باي من الداخل' : 'Inside DermaBay clinic'} eyebrow={T('nav_about')} title={T('about_title')} sub={description} />
   <Summary {lang} text={summary} />
   <section class="container-x mt-16 grid gap-5 md:grid-cols-2">
     {blocks.map(([h, p], i) => (
