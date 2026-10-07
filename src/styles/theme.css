@@ -229,3 +229,30 @@ html.has-cursor .cursor.is-cta { --cs: 2.2; background: rgb(134 71 40 / .55); bo
 html.has-cursor, html.has-cursor a, html.has-cursor button, html.has-cursor summary { cursor: none; }
 @media (prefers-reduced-motion: reduce) { .glow, .bigtype-track { animation: none } .cursor { display: none !important } }
 @media (max-width: 639.98px) { .tx-row::before { font-size: 84px } .label, .label-ink { font-size: 11px } }
+
+
+/* Quiet serif labels (sentence case) */
+@utility label-quiet { font-family: var(--font-display); font-size: 17px; letter-spacing: .01em; text-transform: none; color: rgb(212 199 180 / .8); }
+[dir="rtl"] .label-quiet { font-family: var(--font-display-ar); font-weight: 500; font-size: 15px; }
+@utility label-quiet-ink { font-family: var(--font-display); font-size: 17px; letter-spacing: .01em; text-transform: none; color: rgb(110 58 31 / .9); }
+[dir="rtl"] .label-quiet-ink { font-family: var(--font-display-ar); font-weight: 500; font-size: 15px; }
+
+/* Motion dialled down by a third */
+.spot { background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 30%), rgba(212,199,180,.055), transparent 60%); }
+.glow { opacity: .75; animation-duration: 48s; }
+.marquee-track { animation-duration: 65s; }
+.bigtype-track { animation-duration: 95s; }
+.beam { animation-duration: 10s; }
+.panel.arch:hover { transform: translateY(-4px) rotate(-.8deg); }
+.tx-row:hover, .tx-row.is-active { padding-inline-start: 12px; }
+
+/* Treatment row with icon + body */
+.tx-row { grid-template-columns: 56px 1fr auto auto; }
+.tx-icon { width: 44px; height: 44px; color: var(--color-sand); opacity: .85; }
+.tx-row:hover .tx-icon, .tx-row.is-active .tx-icon { opacity: 1; }
+@media (max-width: 639.98px) { .tx-row { grid-template-columns: 36px 1fr auto; } .tx-icon { display: none } }
+
+/* Checkerboard */
+.checker { display: grid; grid-template-columns: 1fr 1fr; }
+.checker > * { min-height: 380px; }
+@media (max-width: 767.98px) { .checker { grid-template-columns: 1fr } .checker > * { min-height: 260px } .checker .order-last-m { order: 10 } }

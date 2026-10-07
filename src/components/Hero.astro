@@ -12,7 +12,7 @@ const showArch = wordmark || !!image;
 ---
 <section class={`relative overflow-hidden ${compact ? 'pb-10 pt-6 sm:pb-14 sm:pt-10' : 'pb-12 pt-8 sm:min-h-[calc(100svh-76px)] sm:pb-32 sm:pt-20 sm:flex sm:items-center'}`}>
   <Leaves opacity={0.6} />
-  <div class="pointer-events-none absolute inset-0 blur-[18px] saturate-50" data-parallax="0.06" aria-hidden="true"><Leaves opacity={0.5} flip /></div>
+  <div class="pointer-events-none absolute inset-0 blur-[18px] saturate-50" data-parallax="0.04" aria-hidden="true"><Leaves opacity={0.5} flip /></div>
   {!compact && <div class="cue hidden sm:block" aria-hidden="true"></div>}
   <div class="container-x relative w-full">
     <div class={`grid items-center gap-8 sm:gap-12 ${showArch ? 'lg:grid-cols-[1.2fr_1fr]' : ''}`}>
@@ -28,7 +28,7 @@ const showArch = wordmark || !!image;
       {showArch && (
         <div class={`${image ? 'flex' : 'hidden lg:flex'} justify-center lg:justify-end`}>
           <div class={`${shapeCls} brass-ring relative overflow-hidden bg-forest-deep/70 shadow-[0_40px_80px_-30px_rgba(0,0,0,.6)] ${image ? sizeCls : 'flex h-[460px] w-[340px] items-center justify-center'}`}>
-            {image && <div class="absolute -inset-y-[12%] inset-x-0" data-parallax="0.12"><Photo name={image} alt={imageAlt} priority class="h-full w-full object-cover" width={1200} height={1500} /></div>}
+            {image && <div class="absolute -inset-y-[12%] inset-x-0" data-parallax="0.08"><Photo name={image} alt={imageAlt} priority class="h-full w-full object-cover" width={1200} height={1500} /></div>}
             {image && <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/90 via-forest-deep/20 to-forest-deep/10"></div>}
             <div class={`absolute inset-3 ${shapeCls} border border-sand/20`}></div>
             <div class="beam" aria-hidden="true"></div>

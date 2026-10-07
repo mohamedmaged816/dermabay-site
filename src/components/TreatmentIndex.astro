@@ -4,6 +4,7 @@ import { localizePath, type Lang } from '@/i18n/utils';
 import { t } from '@/i18n/ui';
 import Photo from './Photo.astro';
 import Topo from './Topo.astro';
+import Icon from './Icon.astro';
 const { lang } = Astro.props as { lang: Lang };
 const T = t(lang);
 const services = (await getCollection('services', (e) => e.data.lang === lang)).sort((a, b) => a.data.order - b.data.order);
@@ -14,7 +15,7 @@ const img = (slug: string) => ({ 'laser-hair-removal': 'handpiece-portrait', 'fr
   <div class="container-x relative">
     <div class="flex flex-wrap items-end justify-between gap-6">
       <div>
-        <p class="label">{T('nav_services')}</p>
+        <p class="label-quiet">{T('nav_services')}</p>
         <h2 class="font-display mt-3 text-3xl text-cream sm:text-5xl">{T('home_services_title')}</h2>
       </div>
       <p class="max-w-sm text-cream/65">{T('home_services_sub')}</p>
@@ -24,10 +25,12 @@ const img = (slug: string) => ({ 'laser-hair-removal': 'handpiece-portrait', 'fr
         {services.map((s, i) => (
           <a href={localizePath(`services/${s.data.slug}`, lang)} class={`tx-row ${i === 0 ? 'is-active' : ''}`} data-tx={i} data-num={String(i + 1).padStart(2, '0')}>
             <span class="font-display text-2xl text-sand">{String(i + 1).padStart(2, '0')}</span>
-            <span>
+            <span class="min-w-0">
               <span class="font-display block text-[1.9rem] leading-[1.05] sm:text-[2.4rem]">{s.data.title}</span>
-              <span class="mt-1 block text-[11px] font-semibold uppercase tracking-[0.22em] text-cream/55">{s.data.sessions}</span>
+              <span class="mt-2 block max-w-xl text-[14px] leading-relaxed text-cream/65">{s.data.description}</span>
+              <span class="mt-1.5 block text-[12px] text-sand/80">{s.data.sessions}</span>
             </span>
+            <Icon name={s.data.icon} class="tx-icon hidden sm:block" />
             <svg class="tx-arrow h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
         ))}

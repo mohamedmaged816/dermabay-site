@@ -1,20 +1,32 @@
 ---
 import type { Lang } from '@/i18n/utils';
 import Photo from './Photo.astro';
+import Leaves from './Leaves.astro';
 import { clinic } from '@/data/clinic';
-const { lang, name = 'room-wide', label, title } = Astro.props as { lang: Lang; name?: string; label?: string; title?: string };
-const l = label ?? (lang === 'ar' ? 'العيادة · ميديتاون، نيو جيزة' : 'The clinic · Meditown, New Giza');
-const t = title ?? (lang === 'ar' ? 'غرف علاج هادية، أجهزة حديثة، وتعقيم بين كل عميل.' : 'Quiet treatment rooms, current-generation devices, sterilised between every patient.');
+const { lang } = Astro.props as { lang: Lang };
+const ar = lang === 'ar';
+const t1 = ar ? 'غرف علاج هادية، أجهزة حديثة، وتعقيم بين كل عميل.' : 'Quiet treatment rooms, current-generation devices, sterilised between every patient.';
+const l1 = ar ? 'العيادة' : 'The clinic';
+const t2 = ar ? 'ميديتاون، نيو جيزة هيلث بارك. مبنى 2، عيادة 203. ركنة سهلة، 10 لـ 15 دقيقة من الشيخ زايد و6 أكتوبر.' : 'Meditown, NewGiza Health Park. Building 2, Clinic 203. Easy parking, 10 to 15 minutes from Sheikh Zayed and 6th of October.';
+const l2 = ar ? 'الوصول' : 'Getting here';
 ---
-<section class="container-x mt-28 lg:!pe-0 lg:!max-w-[calc(72rem+((100vw-72rem)/2))] lg:!me-0">
-  <div class="brass-ring relative overflow-hidden rounded-[36px] lg:rounded-e-none">
-    <div class="h-[300px] sm:h-[560px]"><div class="-my-[10%] h-[120%]" data-parallax="0.1"><Photo {name} alt={lang === 'ar' ? 'غرفة علاج في ديرما باي' : 'A DermaBay treatment room'} class="h-full w-full object-cover" width={1800} height={1392} /></div></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-forest/95 via-forest/30 to-transparent"></div>
-    <div class="beam" aria-hidden="true" style="animation-duration: 11s"></div>
-    <div class="absolute inset-x-0 bottom-0 p-5 sm:p-12">
-      <p class="label">{l}</p>
-      <p class="font-display mt-2 max-w-2xl text-2xl leading-tight text-cream sm:text-5xl">{t}</p>
-      <p class="mt-4 text-sm text-cream/70">{clinic.address[lang].line1} · {clinic.address[lang].line2}</p>
+<section class="mt-28">
+  <div class="checker">
+    <div class="relative overflow-hidden">
+      <div class="absolute -inset-y-[8%] inset-x-0" data-parallax="0.07"><Photo name="room-wide" alt={ar ? 'غرفة علاج في ديرما باي' : 'A DermaBay treatment room'} class="h-full w-full object-cover" width={1800} height={1392} /></div>
+    </div>
+    <div class="relative flex flex-col justify-center overflow-hidden bg-terra px-8 py-14 text-cream sm:px-14">
+      <div class="pointer-events-none absolute inset-0 text-terra-deep"><Leaves opacity={0.3} flip /></div>
+      <p class="relative label-quiet !text-cream/80">{l1}</p>
+      <p class="relative font-display mt-4 max-w-md text-3xl leading-[1.15] sm:text-[2.6rem]">{t1}</p>
+    </div>
+    <div class="order-last-m relative flex flex-col justify-center bg-sand px-8 py-14 text-ink sm:px-14">
+      <p class="label-quiet-ink">{l2}</p>
+      <p class="font-display mt-4 max-w-md text-2xl leading-[1.2] text-forest sm:text-[2rem]">{t2}</p>
+      <a href={clinic.mapsUrl} target="_blank" rel="noopener" class="btn-outline-ink mt-8 self-start">{ar ? 'الاتجاهات' : 'Get directions'}</a>
+    </div>
+    <div class="relative overflow-hidden">
+      <div class="absolute -inset-y-[8%] inset-x-0" data-parallax="0.07"><Photo name="handpiece-wide" alt={ar ? 'جهاز الليزر ونضارة الحماية' : 'Laser handpiece and protective goggles'} class="h-full w-full object-cover" width={1600} height={1024} /></div>
     </div>
   </div>
 </section>
