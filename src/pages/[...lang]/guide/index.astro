@@ -17,13 +17,13 @@ const fmt = new Intl.DateTimeFormat(lang === 'ar' ? 'ar-EG' : 'en-GB', { dateSty
 ---
 <Base {lang} {title} {description}>
   <Breadcrumbs items={crumbs} />
-  <Hero {lang} compact title={T('guide_title')} sub={T('guide_sub')} />
+  <Hero {lang} compact eyebrow={T('nav_guide')} title={T('guide_title')} sub={T('guide_sub')} />
   <section class="container-x grid gap-5 md:grid-cols-2">
-    {guides.map((g) => (
-      <a href={localizePath(`guide/${g.data.slug}`, lang)} class="rounded-2xl border border-olive/10 bg-white/60 p-6 hover:border-gold">
-        <p class="text-xs text-ink/70">{fmt.format(g.data.date)}</p>
-        <h2 class="font-display mt-1 text-2xl text-olive">{g.data.title}</h2>
-        <p class="mt-2 text-ink/75">{g.data.description}</p>
+    {guides.map((g, i) => (
+      <a href={localizePath(`guide/${g.data.slug}`, lang)} class={`group ${i % 3 === 0 ? 'panel' : 'rounded-[28px] border border-cream/15 hover:border-gold'} p-8 transition`}>
+        <p class={`text-[11px] uppercase tracking-[0.2em] ${i % 3 === 0 ? 'text-gold-deep' : 'text-cream/70'}`}>{fmt.format(g.data.date)}</p>
+        <h2 class={`font-display mt-4 text-3xl leading-[1.08] ${i % 3 === 0 ? 'text-forest' : 'text-cream group-hover:text-gold'}`}>{g.data.title}</h2>
+        <p class={`mt-4 leading-relaxed ${i % 3 === 0 ? 'text-ink/70' : 'text-cream/60'}`}>{g.data.description}</p>
       </a>
     ))}
   </section>

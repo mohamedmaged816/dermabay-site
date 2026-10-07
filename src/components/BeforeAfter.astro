@@ -10,18 +10,18 @@ const items = results.filter((r) => !service || r.service === service);
 {items.length > 0 ? (
   <div class="grid gap-6 sm:grid-cols-2">
     {items.map((r) => (
-      <figure class="overflow-hidden rounded-2xl border border-olive/10 bg-white/60">
-        <div class="grid grid-cols-2">
-          <img src={r.before} alt={`${r.caption[lang]} – before`} loading="lazy" width="600" height="600" class="aspect-square w-full object-cover" />
-          <img src={r.after} alt={`${r.caption[lang]} – after`} loading="lazy" width="600" height="600" class="aspect-square w-full object-cover" />
+      <figure class="panel overflow-hidden">
+        <div class="grid grid-cols-2 gap-1 p-1">
+          <div class="relative"><img src={r.before} alt={`${r.caption[lang]} – before`} loading="lazy" width="600" height="600" class="aspect-[4/5] w-full rounded-[24px] object-cover" /><span class="absolute bottom-3 start-3 rounded-full bg-forest/80 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-cream">Before</span></div>
+          <div class="relative"><img src={r.after} alt={`${r.caption[lang]} – after`} loading="lazy" width="600" height="600" class="aspect-[4/5] w-full rounded-[24px] object-cover" /><span class="absolute bottom-3 start-3 rounded-full bg-gold px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-forest">After</span></div>
         </div>
-        <figcaption class="p-4 text-sm text-ink/80">{r.caption[lang]}</figcaption>
+        <figcaption class="px-6 pb-6 pt-3 text-sm text-ink/75">{r.caption[lang]}</figcaption>
       </figure>
     ))}
   </div>
 ) : (
-  <div class="rounded-2xl border border-dashed border-olive/30 p-8 text-center">
-    <p class="text-ink/70">{T('results_empty')}</p>
-    <a href={clinic.instagram} target="_blank" rel="noopener" class="btn-ghost mt-4">{T('results_ig')}</a>
+  <div class="arch flex flex-col items-center justify-center border border-dashed border-cream/25 px-8 pb-10 pt-20 text-center">
+    <p class="max-w-sm text-cream/70">{T('results_empty')}</p>
+    <a href={clinic.instagram} target="_blank" rel="noopener" class="btn-outline mt-6">{T('results_ig')}</a>
   </div>
 )}

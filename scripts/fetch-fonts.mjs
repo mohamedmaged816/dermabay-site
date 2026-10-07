@@ -4,7 +4,8 @@ import { createHash } from 'node:crypto';
 const FAMILIES = [
   'Amiri:wght@400',
   'Cairo:wght@400;600;700',
-  'Cormorant+Garamond:wght@500;600',
+  'Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400',
+  'Jost:wght@400;500;600',
 ];
 const cssUrl = `https://fonts.googleapis.com/css2?${FAMILIES.map((f) => `family=${f}`).join('&')}&display=swap`;
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
@@ -26,4 +27,15 @@ for (const m of css.matchAll(urlRe)) {
 }
 out += rewritten.includes('font-display') ? rewritten : rewritten.replaceAll('@font-face {', '@font-face {\n  font-display: swap;');
 await writeFile('src/styles/fonts.css', out);
+// Manifest so the layout can preload the primary face per language.
+const manifest = [];
+for (const block of out.split('@font-face').slice(1)) {
+  const fam = block.match(/font-family: '([^']+)'/)?.[1];
+  const weight = block.match(/font-weight: (\d+)/)?.[1];
+  const style = block.match(/font-style: (\w+)/)?.[1] ?? 'normal';
+  const url = block.match(/url\((\/fonts\/[^)]+)\)/)?.[1];
+  const range = block.match(/unicode-range: ([^;]+)/)?.[1] ?? '';
+  if (fam && url) manifest.push({ fam, weight: Number(weight), style, url, latin: range.includes('U+0000-00FF'), arabic: range.includes('U+0600-06FF') });
+}
+await writeFile('src/styles/fonts-manifest.json', JSON.stringify(manifest, null, 1));
 console.log(`fonts: downloaded ${count} files, wrote src/styles/fonts.css`);

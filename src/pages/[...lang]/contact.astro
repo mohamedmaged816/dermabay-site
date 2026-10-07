@@ -17,13 +17,16 @@ const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, {
 ---
 <Base {lang} {title} {description}>
   <Breadcrumbs items={crumbs} />
-  <Hero {lang} compact title={T('contact_title')} sub={T('cta_sub')} secondaryHref={`tel:${clinic.phoneE164}`} secondaryLabel={`${T('call')} ${clinic.phoneDisplay}`} />
-  <section class="container-x grid gap-8 lg:grid-cols-2">
-    <div class="space-y-6">
-      <div><p class="eyebrow">{T('contact_address')}</p><p class="mt-2 text-lg">{addr.line1}<br/>{addr.line2}<br/>{addr.city}, {addr.region}, {addr.country}</p></div>
-      <div><p class="eyebrow">{T('contact_phone')}</p><p class="mt-2 text-lg" dir="ltr"><a href={`tel:${clinic.phoneE164}`} class="hover:underline">{clinic.phoneDisplay}</a></p></div>
-      <div><p class="eyebrow">{T('contact_hours')}</p><p class="mt-2">{clinic.hoursText[lang]}</p></div>
-      <div><p class="eyebrow">Instagram</p><p class="mt-2"><a href={clinic.instagram} target="_blank" rel="noopener" class="hover:underline">@dermabay.eg</a></p></div>
+  <Hero {lang} compact eyebrow={T('nav_contact')} title={T('contact_title')} sub={T('cta_sub')} secondaryHref={`tel:${clinic.phoneE164}`} secondaryLabel={`${T('call')} ${clinic.phoneDisplay}`} />
+  <section class="container-x grid gap-10 lg:grid-cols-2">
+    <div class="grid content-start gap-8">
+      <div><p class="label">{T('contact_address')}</p><p class="font-display mt-3 text-2xl leading-snug text-cream">{addr.line1}<br/>{addr.line2}<br/>{addr.city}, {addr.region}, {addr.country}</p></div>
+      <div class="hairline"></div>
+      <div><p class="label">{T('contact_phone')}</p><p class="font-display mt-3 text-3xl text-cream" dir="ltr"><a href={`tel:${clinic.phoneE164}`} class="hover:text-gold">{clinic.phoneDisplay}</a></p></div>
+      <div class="hairline"></div>
+      <div><p class="label">{T('contact_hours')}</p><p class="mt-3 text-cream/80">{clinic.hoursText[lang]}</p></div>
+      <div class="hairline"></div>
+      <div><p class="label">Instagram</p><p class="mt-3"><a href={clinic.instagram} target="_blank" rel="noopener" class="text-cream hover:text-gold">@dermabay.eg</a></p></div>
     </div>
     <Map {lang} />
   </section>

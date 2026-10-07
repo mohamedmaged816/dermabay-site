@@ -6,12 +6,17 @@ import Footer from '@/components/Footer.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
 import { dirOf, withBase, type Lang } from '@/i18n/utils';
 import { clinicSchema } from '@/lib/schema';
+import manifest from '@/styles/fonts-manifest.json';
 
 interface Props { lang: Lang; title: string; description: string; jsonLd?: Record<string, any>[]; noindex?: boolean; waService?: string; }
 const { lang, title, description, jsonLd = [], noindex = false, waService } = Astro.props;
 const site = Astro.site!.toString().replace(/\/$/, '');
 const GA = import.meta.env.PUBLIC_GA_ID as string | undefined;
 const PIXEL = import.meta.env.PUBLIC_META_PIXEL_ID as string | undefined;
+type FontEntry = { fam: string; weight: number; style: string; url: string; latin: boolean; arabic: boolean };
+const faces = (manifest as FontEntry[]);
+const pick = (fam: string, script: 'latin' | 'arabic') => faces.find((f) => f.fam === fam && f.weight === 400 && f.style === 'normal' && f[script])?.url;
+const preload = (lang === 'ar' ? [pick('Amiri', 'arabic'), pick('Cairo', 'arabic')] : [pick('Bodoni Moda', 'latin'), pick('Jost', 'latin')]).filter(Boolean) as string[];
 ---
 <!doctype html>
 <html lang={lang} dir={dirOf(lang)}>
@@ -19,9 +24,10 @@ const PIXEL = import.meta.env.PUBLIC_META_PIXEL_ID as string | undefined;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
-    <meta name="theme-color" content="#3E4939" />
+    <meta name="theme-color" content="#2E3A2F" />
     <Seo {lang} {title} {description} jsonLd={[clinicSchema(site, lang), ...jsonLd]} {noindex} />
     <link rel="sitemap" href={withBase('/sitemap-index.xml')} />
+    {preload.map((u) => <link rel="preload" as="font" type="font/woff2" href={withBase(u)} crossorigin />)}
     {GA && <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA}`}></script>}
     {GA && <script is:inline define:vars={{ GA }}>
       window.dataLayer = window.dataLayer || [];

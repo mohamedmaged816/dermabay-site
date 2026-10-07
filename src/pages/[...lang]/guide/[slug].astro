@@ -5,6 +5,7 @@ import Summary from '@/components/Summary.astro';
 import FAQ from '@/components/FAQ.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Leaves from '@/components/Leaves.astro';
 import { localizePath, type Lang } from '@/i18n/utils';
 import { t } from '@/i18n/ui';
 import { articleSchema, breadcrumbSchema, faqSchema } from '@/lib/schema';
@@ -34,21 +35,29 @@ const fmt = new Intl.DateTimeFormat(lang === 'ar' ? 'ar-EG' : 'en-GB', { dateSty
 ---
 <Base {lang} title={d.title} description={d.description} {jsonLd} waService={service?.data.title}>
   <Breadcrumbs items={crumbs} />
-  <article class="container-x max-w-3xl pt-8">
-    <p class="eyebrow">{T('nav_guide')} · {fmt.format(d.date)}</p>
-    <h1 class="font-display mt-3 text-4xl leading-tight text-olive sm:text-5xl">{d.title}</h1>
-  </article>
-  <div class="mt-8"><Summary {lang} text={d.summary} /></div>
-  <article class="container-x prose-clinic mt-8 max-w-3xl"><Content /></article>
-  {service && (
-    <div class="container-x mt-10 max-w-3xl">
-      <a href={localizePath(`services/${service.data.slug}`, lang)} class="block rounded-2xl border border-gold bg-cream-deep/60 p-5 hover:shadow-md">
-        <p class="eyebrow">{T('nav_services')}</p>
-        <p class="font-display mt-1 text-2xl text-olive">{service.data.title}</p>
-        <p class="mt-1 text-sm text-ink/75">{service.data.description}</p>
-      </a>
+  <section class="relative overflow-hidden pb-14 pt-10">
+    <Leaves opacity={0.45} />
+    <div class="container-x relative max-w-3xl">
+      <p class="label">{T('nav_guide')} · {fmt.format(d.date)}</p>
+      <h1 class="font-display mt-5 text-4xl leading-[1.02] text-cream sm:text-6xl">{d.title}</h1>
     </div>
-  )}
+  </section>
+  <Summary {lang} text={d.summary} />
+  <section class="mt-12 bg-cream text-ink">
+    <article class="container-x prose-clinic max-w-3xl py-14"><Content /></article>
+    {service && (
+      <div class="container-x max-w-3xl pb-14">
+        <a href={localizePath(`services/${service.data.slug}`, lang)} class="flex items-center justify-between gap-6 rounded-[24px] bg-sand p-6 transition hover:bg-paper">
+          <div>
+            <p class="label-ink">{T('nav_services')}</p>
+            <p class="font-display mt-2 text-2xl text-forest">{service.data.title}</p>
+            <p class="mt-1 text-sm text-ink/70">{service.data.description}</p>
+          </div>
+          <span class="font-display text-3xl text-gold-deep" aria-hidden="true">→</span>
+        </a>
+      </div>
+    )}
+  </section>
   {d.faqs.length > 0 && <FAQ {lang} faqs={d.faqs} />}
   <CtaBand {lang} service={service?.data.title} />
 </Base>

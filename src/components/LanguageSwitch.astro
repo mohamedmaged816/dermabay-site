@@ -5,4 +5,4 @@ const { lang } = Astro.props as { lang: Lang };
 const target = otherLang(lang);
 const href = alternatePath(Astro.url.pathname, target);
 ---
-<a href={href} hreflang={target} lang={target} class="rounded-full border border-olive/30 px-3 py-1 text-sm font-semibold text-olive hover:border-olive">{t(lang)('lang_switch')}</a>
+<a href={href} hreflang={target} lang={target} class="rounded-full border border-cream/30 px-3.5 py-1.5 text-xs font-medium tracking-wide text-cream hover:border-cream">{t(lang)('lang_switch')}</a>

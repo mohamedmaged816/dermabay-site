@@ -15,7 +15,7 @@ const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, {
 ---
 <Base {lang} {title} {description}>
   <Breadcrumbs items={crumbs} />
-  <Hero {lang} compact title={T('results_title')} sub={T('results_sub')} />
+  <Hero {lang} compact eyebrow={T('nav_results')} title={T('results_title')} sub={T('results_sub')} />
   <section class="container-x"><BeforeAfter {lang} /></section>
   <CtaBand {lang} />
 </Base>

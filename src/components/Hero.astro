@@ -1,22 +1,31 @@
 ---
 import type { Lang } from '@/i18n/utils';
 import WhatsAppButton from './WhatsAppButton.astro';
-interface Props { lang: Lang; eyebrow?: string; title: string; sub?: string; service?: string; secondaryHref?: string; secondaryLabel?: string; compact?: boolean; }
-const { lang, eyebrow, title, sub, service, secondaryHref, secondaryLabel, compact = false } = Astro.props;
+import Leaves from './Leaves.astro';
+import Wordmark from './Wordmark.astro';
+interface Props { lang: Lang; eyebrow?: string; title: string; sub?: string; service?: string; secondaryHref?: string; secondaryLabel?: string; compact?: boolean; wordmark?: boolean; }
+const { lang, eyebrow, title, sub, service, secondaryHref, secondaryLabel, compact = false, wordmark = false } = Astro.props;
 ---
-<section class={`relative overflow-hidden ${compact ? 'py-14' : 'py-20 sm:py-28'}`}>
-  <svg class="pointer-events-none absolute -top-24 end-[-10%] h-[520px] w-[520px] opacity-40" viewBox="0 0 400 400" aria-hidden="true">
-    <path d="M20 320a180 180 0 0 1 360 0" fill="none" stroke="#C2A566" stroke-width="1.5"/>
-    <path d="M70 320a130 130 0 0 1 260 0" fill="none" stroke="#C2A566" stroke-width="1.5"/>
-    <path d="M120 320a80 80 0 0 1 160 0" fill="none" stroke="#3E4939" stroke-width="1.5"/>
-  </svg>
-  <div class="container-x relative max-w-3xl">
-    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-    <h1 class={`font-display mt-3 text-olive ${compact ? 'text-4xl sm:text-5xl' : 'text-5xl leading-[1.05] sm:text-6xl'}`}>{title}</h1>
-    {sub && <p class="mt-5 max-w-2xl text-lg leading-relaxed text-ink/80">{sub}</p>}
-    <div class="mt-8 flex flex-wrap gap-3">
-      <WhatsAppButton {lang} {service} />
-      {secondaryHref && <a href={secondaryHref} class="btn-ghost">{secondaryLabel}</a>}
+<section class={`relative overflow-hidden ${compact ? 'pb-14 pt-10' : 'pb-24 pt-16 sm:pb-32 sm:pt-24'}`}>
+  <Leaves opacity={0.55} />
+  <div class="container-x relative">
+    <div class={`grid items-end gap-10 ${wordmark ? 'lg:grid-cols-[1fr_auto]' : ''}`}>
+      <div class="max-w-3xl">
+        {eyebrow && <p class="label">{eyebrow}</p>}
+        <h1 class={`font-display mt-5 text-cream ${compact ? 'text-4xl leading-[1.05] sm:text-5xl' : 'text-5xl leading-[0.98] sm:text-7xl'}`}>{title}</h1>
+        {sub && <p class="mt-7 max-w-xl text-base leading-[1.8] text-cream/75 sm:text-lg">{sub}</p>}
+        <div class="mt-9 flex flex-wrap items-center gap-3">
+          <WhatsAppButton {lang} {service} />
+          {secondaryHref && <a href={secondaryHref} class="btn-outline">{secondaryLabel}</a>}
+        </div>
+      </div>
+      {wordmark && (
+        <div class="hidden lg:block">
+          <div class="arch flex h-[420px] w-[300px] items-end justify-center border border-cream/20 bg-forest-deep/60 pb-10 shadow-2xl">
+            <Wordmark size={5.2} tone="cream" />
+          </div>
+        </div>
+      )}
     </div>
   </div>
 </section>

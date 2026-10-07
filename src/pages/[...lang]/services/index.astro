@@ -19,9 +19,9 @@ const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, {
 ---
 <Base {lang} {title} {description} jsonLd={[breadcrumbSchema(crumbs.map((c) => ({ name: c.name, url: site + c.href })))]}>
   <Breadcrumbs items={crumbs} />
-  <Hero {lang} compact title={T('home_services_title')} sub={T('home_services_sub')} />
+  <Hero {lang} compact eyebrow={T('nav_services')} title={T('home_services_title')} sub={T('home_services_sub')} />
   <section class="container-x grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-    {services.map((s) => <ServiceCard {lang} slug={s.data.slug} title={s.data.title} description={s.data.description} icon={s.data.icon} />)}
+    {services.map((s, i) => <ServiceCard {lang} index={i + 1} slug={s.data.slug} title={s.data.title} description={s.data.description} icon={s.data.icon} />)}
   </section>
   <CtaBand {lang} />
 </Base>

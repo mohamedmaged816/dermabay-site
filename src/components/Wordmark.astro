@@ -1,0 +1,8 @@
+---
+/** The stacked DER / MA / BAY wordmark from the brand. `size` is the font-size in rem. */
+const { size = 3, class: cls = '', tone = 'cream' } = Astro.props as { size?: number; class?: string; tone?: 'cream' | 'forest' | 'gold' };
+const color = tone === 'cream' ? 'text-cream' : tone === 'gold' ? 'text-gold' : 'text-forest';
+---
+<span class={`inline-block select-none font-display uppercase leading-[0.86] tracking-[0.08em] ${color} ${cls}`} style={`font-family: var(--font-display); font-size:${size}rem`} aria-label="DermaBay" dir="ltr">
+  <span class="block">Der</span><span class="block">Ma</span><span class="block">Bay</span>
+</span>

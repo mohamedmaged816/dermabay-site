@@ -13,8 +13,9 @@ const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, {
 ---
 <Base {lang} {title} {description} noindex>
   <Breadcrumbs items={crumbs} />
-  <article class="container-x prose-clinic max-w-3xl py-10">
-    <h1 class="font-display text-4xl text-olive">{title}</h1>
+  <div class="container-x max-w-3xl pb-10 pt-10"><h1 class="font-display text-5xl text-cream">{title}</h1></div>
+  <section class="bg-cream text-ink">
+  <article class="container-x prose-clinic max-w-3xl py-12">
     {lang === 'ar' ? (
       <>
         <p>الموقع ده ملك {clinic.name}. مفيش أي نماذج على الموقع بتجمع بياناتك؛ التواصل كله بيتم على واتساب أو التليفون.</p>
@@ -41,4 +42,5 @@ const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, {
       </>
     )}
   </article>
+  </section>
 </Base>

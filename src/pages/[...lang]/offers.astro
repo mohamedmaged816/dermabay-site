@@ -4,6 +4,7 @@ import Hero from '@/components/Hero.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import Wordmark from '@/components/Wordmark.astro';
 import { langPaths, localizePath, type Lang } from '@/i18n/utils';
 import { t } from '@/i18n/ui';
 import { offer } from '@/data/offers';
@@ -16,14 +17,18 @@ const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, {
 ---
 <Base {lang} {title} {description} waService={offer.title[lang]}>
   <Breadcrumbs items={crumbs} />
-  <Hero {lang} compact title={T('offers_title')} sub={T('offers_sub')} service={offer.title[lang]} />
+  <Hero {lang} compact eyebrow={T('nav_offers')} title={T('offers_title')} sub={T('offers_sub')} service={offer.title[lang]} />
   {offer.active && (
     <section class="container-x">
-      <div class="rounded-3xl border border-gold bg-cream-deep/70 p-8 sm:p-12">
-        <h2 class="font-display text-3xl text-olive sm:text-4xl">{offer.title[lang]}</h2>
-        <p class="mt-4 max-w-2xl text-lg text-ink/85">{offer.body[lang]}</p>
-        <p class="mt-4 text-sm text-ink/70">{offer.terms[lang]}</p>
-        <div class="mt-6"><WhatsAppButton {lang} service={offer.title[lang]} /></div>
+      <div class="panel-sand grid items-center gap-10 overflow-hidden p-8 sm:p-14 md:grid-cols-[1fr_auto]">
+        <div>
+          <p class="label-ink">{T('offers_title')}</p>
+          <h2 class="font-display mt-4 text-4xl text-forest sm:text-6xl">{offer.title[lang]}</h2>
+          <p class="mt-6 max-w-2xl text-lg leading-[1.75] text-ink/85">{offer.body[lang]}</p>
+          <p class="mt-5 text-sm text-ink/55">{offer.terms[lang]}</p>
+          <div class="mt-8"><WhatsAppButton {lang} service={offer.title[lang]} tone="forest" /></div>
+        </div>
+        <Wordmark size={5} tone="forest" class="hidden opacity-20 md:block" />
       </div>
     </section>
   )}

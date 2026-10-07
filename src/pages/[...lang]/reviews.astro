@@ -16,7 +16,7 @@ const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, {
 ---
 <Base {lang} {title} {description}>
   <Breadcrumbs items={crumbs} />
-  <Hero {lang} compact title={T('reviews_title')} sub={T('reviews_sub')} secondaryHref={clinic.reviewUrl} secondaryLabel={T('review_us')} />
+  <Hero {lang} compact eyebrow="Google" title={T('reviews_title')} sub={T('reviews_sub')} secondaryHref={clinic.reviewUrl} secondaryLabel={T('review_us')} />
   <ReviewStrip {lang} limit={12} />
   <CtaBand {lang} />
 </Base>

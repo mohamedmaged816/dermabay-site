@@ -4,6 +4,7 @@ import Hero from '@/components/Hero.astro';
 import Summary from '@/components/Summary.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Wordmark from '@/components/Wordmark.astro';
 import { langPaths, localizePath, type Lang } from '@/i18n/utils';
 import { t } from '@/i18n/ui';
 export const getStaticPaths = langPaths;
@@ -29,10 +30,17 @@ const crumbs = [{ name: T('breadcrumb_home'), href: localizePath('/', lang) }, {
 ---
 <Base {lang} {title} {description}>
   <Breadcrumbs items={crumbs} />
-  <Hero {lang} compact title={T('about_title')} sub={description} />
+  <Hero {lang} compact wordmark eyebrow={T('nav_about')} title={T('about_title')} sub={description} />
   <Summary {lang} text={summary} />
-  <section class="container-x mt-14 grid gap-6 md:grid-cols-2">
-    {blocks.map(([h, p]) => <div class="rounded-2xl border border-olive/10 bg-white/60 p-6"><h2 class="font-display text-2xl text-olive">{h}</h2><p class="mt-2 leading-relaxed text-ink/80">{p}</p></div>)}
+  <section class="container-x mt-16 grid gap-5 md:grid-cols-2">
+    {blocks.map(([h, p], i) => (
+      <div class={`rounded-[28px] p-8 ${i % 2 === 0 ? 'panel' : 'border border-cream/15'}`}>
+        <span class={`font-display text-4xl ${i % 2 === 0 ? 'text-gold-deep' : 'text-gold'}`}>{String(i + 1).padStart(2, '0')}</span>
+        <h2 class={`font-display mt-5 text-3xl ${i % 2 === 0 ? 'text-forest' : 'text-cream'}`}>{h}</h2>
+        <p class={`mt-3 leading-[1.75] ${i % 2 === 0 ? 'text-ink/80' : 'text-cream/65'}`}>{p}</p>
+      </div>
+    ))}
   </section>
+  <div class="container-x mt-24 flex justify-center"><Wordmark size={7} tone="cream" class="opacity-15" /></div>
   <CtaBand {lang} />
 </Base>

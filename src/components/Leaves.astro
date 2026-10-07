@@ -1,0 +1,15 @@
+---
+/** Soft tropical-leaf shadows, the texture behind most DermaBay tiles. Purely decorative. */
+const { class: cls = '', opacity = 0.35, flip = false } = Astro.props as { class?: string; opacity?: number; flip?: boolean };
+---
+<div class={`pointer-events-none absolute inset-0 overflow-hidden ${cls}`} aria-hidden="true" style={`opacity:${opacity}`}>
+  <svg class={`absolute -top-24 ${flip ? 'start-[-12%]' : 'end-[-12%]'} h-[140%] w-auto blur-[1.5px]`} viewBox="0 0 400 600" fill="currentColor" style={flip ? 'transform:scaleX(-1)' : ''}>
+    <!-- monstera -->
+    <path class="text-forest-deep" d="M300 40c-70 10-120 70-130 150 20-10 40-30 55-55-5 45-25 80-55 105 30 0 60-15 85-40-10 45-35 80-70 100 40 5 75-10 100-40 0 45-20 85-55 110 45-5 80-30 100-70 10 40 0 80-25 110 55-25 90-80 95-150 20 30 30 60 30 95 25-60 20-130-15-185-20-30-50-55-85-70 10-25 25-45 45-60-30-10-50-10-75 0z"/>
+    <!-- palm frond -->
+    <path class="text-forest-deep" d="M40 600c20-120 70-220 150-300-60 20-110 60-150 110 30-70 80-130 150-170-70 10-130 40-180 90 40-60 100-110 170-140-80 0-150 30-200 80 50-60 120-100 200-110-20 10-30 30-30 50-60 60-100 140-110 240z" opacity=".8"/>
+  </svg>
+  <svg class={`absolute -bottom-32 ${flip ? 'end-[-10%]' : 'start-[-10%]'} h-[90%] w-auto blur-[2px]`} viewBox="0 0 400 400" fill="currentColor" style={flip ? '' : 'transform:scaleX(-1)'}>
+    <path class="text-forest-deep" d="M380 380c-10-90-50-170-120-230 40 10 80 30 110 60-30-60-80-110-140-140 50 5 100 25 140 55-40-50-100-85-170-100 60-10 120 0 170 30-50-40-120-60-190-50 70-30 150-30 220 0-20-5-40-5-60 0 90 40 160 110 190 200 10 30 15 60 15 90z" opacity=".9"/>
+  </svg>
+</div>

@@ -7,6 +7,7 @@ import FAQ from '@/components/FAQ.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import BeforeAfter from '@/components/BeforeAfter.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
 import { localizePath, type Lang } from '@/i18n/utils';
 import { t } from '@/i18n/ui';
 import { breadcrumbSchema, faqSchema, procedureSchema } from '@/lib/schema';
@@ -44,54 +45,58 @@ const facts: [string, string][] = [
 ---
 <Base {lang} title={d.metaTitle} description={d.description} {jsonLd} waService={d.title}>
   <Breadcrumbs items={crumbs} />
-  <Hero {lang} compact eyebrow={T('nav_services')} title={d.title} sub={d.description} service={d.title} />
+  <Hero {lang} compact eyebrow={`${T('nav_services')} · ${String(d.order).padStart(2, '0')}`} title={d.title} sub={d.description} service={d.title} />
   <Summary {lang} text={d.summary} />
 
-  <section class="container-x mt-14 grid gap-10 lg:grid-cols-[2fr_1fr]">
-    <div>
-      <div class="grid gap-8 sm:grid-cols-2">
-        <div>
-          <h2 class="font-display text-2xl text-olive">{T('svc_for')}</h2>
-          <ul class="mt-3 space-y-2 text-ink/85">{d.forWho.map((x) => <li class="flex gap-2"><span class="text-gold">●</span><span>{x}</span></li>)}</ul>
-        </div>
-        {d.notFor.length > 0 && (
+  <section class="mt-16 bg-cream text-ink">
+    <div class="container-x grid gap-12 py-16 lg:grid-cols-[1fr_340px]">
+      <div>
+        <div class="grid gap-10 sm:grid-cols-2">
           <div>
-            <h2 class="font-display text-2xl text-olive">{T('svc_notfor')}</h2>
-            <ul class="mt-3 space-y-2 text-ink/85">{d.notFor.map((x) => <li class="flex gap-2"><span class="text-olive/40">●</span><span>{x}</span></li>)}</ul>
+            <p class="label-ink">{T('svc_for')}</p>
+            <ul class="mt-4 space-y-3">{d.forWho.map((x) => <li class="flex gap-3 leading-relaxed text-ink/85"><span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-deep"></span><span>{x}</span></li>)}</ul>
           </div>
-        )}
+          {d.notFor.length > 0 && (
+            <div>
+              <p class="label-ink">{T('svc_notfor')}</p>
+              <ul class="mt-4 space-y-3">{d.notFor.map((x) => <li class="flex gap-3 leading-relaxed text-ink/70"><span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full border border-forest/40"></span><span>{x}</span></li>)}</ul>
+            </div>
+          )}
+        </div>
+
+        <p class="label-ink mt-14">{T('svc_session')}</p>
+        <ol class="mt-5 divide-y divide-forest/10 border-y border-forest/10">
+          {d.session.map((x, i) => <li class="flex gap-5 py-4"><span class="font-display text-2xl leading-none text-gold-deep">{String(i + 1).padStart(2, '0')}</span><span class="leading-relaxed text-ink/85">{x}</span></li>)}
+        </ol>
+
+        <div class="prose-clinic mt-6"><Content /></div>
       </div>
 
-      <h2 class="font-display mt-12 text-2xl text-olive">{T('svc_session')}</h2>
-      <ol class="mt-3 space-y-3">
-        {d.session.map((x, i) => <li class="flex gap-3"><span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-olive text-sm font-semibold text-cream">{i + 1}</span><span class="text-ink/85">{x}</span></li>)}
-      </ol>
-
-      <div class="prose-clinic mt-10"><Content /></div>
+      <aside class="space-y-4 lg:sticky lg:top-24 lg:self-start">
+        {facts.map(([h, v]) => (
+          <div class="rounded-[24px] bg-sand p-6">
+            <p class="label-ink">{h}</p>
+            <p class="mt-2 leading-relaxed text-ink/85">{v}</p>
+          </div>
+        ))}
+        <div class="pt-2"><WhatsAppButton {lang} service={d.title} tone="forest" /></div>
+      </aside>
     </div>
-
-    <aside class="space-y-5">
-      {facts.map(([h, v]) => (
-        <div class="rounded-2xl border border-olive/10 bg-white/60 p-5">
-          <p class="eyebrow">{h}</p>
-          <p class="mt-2 text-ink/85">{v}</p>
-        </div>
-      ))}
-    </aside>
   </section>
 
-  <section class="container-x mt-16">
-    <h2 class="font-display text-3xl text-olive">{T('results_title')}</h2>
-    <div class="mt-6"><BeforeAfter {lang} service={d.slug} /></div>
+  <section class="container-x mt-24">
+    <p class="label">{T('nav_results')}</p>
+    <h2 class="font-display mt-3 text-4xl text-cream">{T('results_title')}</h2>
+    <div class="mt-8"><BeforeAfter {lang} service={d.slug} /></div>
   </section>
 
   <FAQ {lang} faqs={d.faqs} title={T('svc_faq')} />
 
   {related.length > 0 && (
-    <section class="container-x mt-16">
-      <h2 class="font-display text-2xl text-olive">{T('svc_related')}</h2>
-      <ul class="mt-4 grid gap-3 sm:grid-cols-2">
-        {related.map((g) => <li><a href={localizePath(`guide/${g.data.slug}`, lang)} class="block rounded-xl border border-olive/10 p-4 hover:border-gold"><span class="font-semibold text-olive">{g.data.title}</span><br/><span class="text-sm text-ink/70">{g.data.description}</span></a></li>)}
+    <section class="container-x mt-24">
+      <p class="label">{T('svc_related')}</p>
+      <ul class="mt-6 grid gap-4 sm:grid-cols-2">
+        {related.map((g) => <li><a href={localizePath(`guide/${g.data.slug}`, lang)} class="group block rounded-[24px] border border-cream/15 p-6 transition hover:border-gold"><span class="font-display text-xl leading-tight text-cream group-hover:text-gold">{g.data.title}</span><br/><span class="mt-2 block text-sm text-cream/60">{g.data.description}</span></a></li>)}
       </ul>
     </section>
   )}
