@@ -31,7 +31,6 @@ const showArch = wordmark || !!image;
             {image && <div class="absolute -inset-y-[12%] inset-x-0" data-parallax="0.08"><Photo name={image} alt={imageAlt} priority class="h-full w-full object-cover" width={1200} height={1500} /></div>}
             {image && <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/90 via-forest-deep/20 to-forest-deep/10"></div>}
             <div class={`absolute inset-3 ${shapeCls} border border-sand/20`}></div>
-            <div class="beam" aria-hidden="true"></div>
             {wordmark && <Logo variant="stacked" class={`text-sand [&>svg]:block [&>svg]:h-auto [&>svg]:w-full ${image ? 'absolute bottom-6 left-1/2 block w-[90px] -translate-x-1/2 sm:bottom-9 sm:w-[140px] drop-shadow-[0_6px_24px_rgba(0,0,0,.5)]' : 'relative w-[200px]'}`} />}
           </div>
         </div>

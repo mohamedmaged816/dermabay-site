@@ -93,10 +93,6 @@ body { @apply bg-forest text-cream font-body antialiased; font-feature-settings:
 @keyframes rise { from { opacity: 0; transform: translateY(24px) } to { opacity: 1; transform: none } }
 @media (prefers-reduced-motion: reduce) { .reveal, .hero-in > * { opacity: 1 !important; clip-path: none !important; transform: none !important; animation: none !important; transition: none !important } .marquee-track { animation: none !important } }
 
-/* Laser beam scanning the logo in the hero arch */
-.beam { position: absolute; left: -8%; right: -8%; height: 2px; top: 4%; background: #E9A27E; box-shadow: 0 0 18px 4px rgba(233,162,126,.55), 0 0 70px 18px rgba(134,71,40,.35); animation: beam 7s ease-in-out infinite; }
-@keyframes beam { 0% { top: 4% } 50% { top: 94% } 100% { top: 4% } }
-@media (prefers-reduced-motion: reduce) { .beam { animation: none; top: 50%; opacity: .5 } }
 
 /* Marquee */
 .marquee { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
@@ -185,7 +181,6 @@ main, header, footer { position: relative; z-index: 1; }
 .hairline-gold { background: var(--brass) !important; }
 .brass-ring { position: relative; }
 .brass-ring::before { content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1px; background: var(--brass); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; pointer-events: none; z-index: 2; opacity: .9; }
-.beam { background: var(--brass); box-shadow: 0 0 18px 4px rgba(217,199,158,.45), 0 0 70px 18px rgba(134,71,40,.3); }
 
 /* Masks */
 @utility pill { border-radius: 999px; }
@@ -242,7 +237,6 @@ html.has-cursor, html.has-cursor a, html.has-cursor button, html.has-cursor summ
 .glow { opacity: .75; animation-duration: 48s; }
 .marquee-track { animation-duration: 65s; }
 .bigtype-track { animation-duration: 95s; }
-.beam { animation-duration: 10s; }
 .panel.arch:hover { transform: translateY(-4px) rotate(-.8deg); }
 .tx-row:hover, .tx-row.is-active { padding-inline-start: 12px; }
 
